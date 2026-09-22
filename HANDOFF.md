@@ -251,6 +251,35 @@ Global config remains `raymund.bermudes@gdslinkasia.com`, so **work repositories
 *GitHub → Settings → Emails*. It turns this from a local convention into an enforced guarantee, and
 protects against a future clone that lacks the repo-local override.
 
+#### Two GitHub accounts exist on this machine — know which one you are using
+
+| Account | Role |
+|---|---|
+| **`rrcreations69`** | **Personal. Owns this portfolio** — the repo, the pushes and the commits. |
+| `rrbermudesgdslink` | Work account. **Not to be used for this project.** |
+
+**Confirmed 2026-09-22:** the portfolio belongs to `rrcreations69`.
+
+**The trap.** Windows Credential Manager held a stored credential for **`rrbermudesgdslink`** under
+`git:https://github.com` while the repo and the commit identity both pointed at `rrcreations69`.
+Git would have authenticated as the work account against the personal account's repo and failed with
+a permission error that looks like a broken auth setup rather than a wrong-account problem.
+
+**If a push fails with a permission error, check the account before anything else:**
+
+```powershell
+cmdkey /list | Select-String github        # which account is stored?
+cmdkey /delete:LegacyGeneric:target=git:https://github.com   # clear it
+```
+
+Then sign in again as `rrcreations69`. **Sign out of GitHub in the browser first**, or use a private
+window — an active browser session for the work account will silently re-authenticate as that
+account and the problem recurs.
+
+**History is clean.** All commits to date are authored by
+`28356582+rrcreations69@users.noreply.github.com`; no `gdslink` address appears anywhere in the
+history, as author or committer. Verified, not assumed. No rewrite is needed.
+
 ### 5.3 The `docs/` path discrepancy
 
 `CLAUDE.md` refers to `docs/PRD-Progress-Tracker.xlsx` and `docs/PHASE-1-DISCOVERY.md`.
