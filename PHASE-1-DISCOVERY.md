@@ -1,7 +1,7 @@
 # Phase 1 — Discovery & Architecture Report
 
 **Project:** Professional Portfolio Website
-**Owner:** Raymund Ryan Bermudes, Jr.
+**Owner:** Raymund Ryan Bermudes
 **Positioning:** Solution Analyst & Android Developer
 **Report date:** 22 September 2026
 **Source of truth:** `Raymund_Portfolio_PRD_Progress_Tracker.xlsx` (15 sheets, read in full)

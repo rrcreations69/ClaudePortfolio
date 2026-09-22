@@ -1,6 +1,6 @@
 # Raymund Bermudes — Portfolio
 
-Portfolio site for **Raymund Ryan Bermudes, Jr.** — Solution Analyst & Android Developer.
+Portfolio site for **Raymund Ryan Bermudes** — Solution Analyst & Android Developer.
 
 > **This repository is private, and must stay private.** See decision **D14** in
 > [`HANDOFF.md`](HANDOFF.md). The planning documents name client engagements that publish at

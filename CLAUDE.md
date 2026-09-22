@@ -4,7 +4,7 @@ Operating instructions for Claude Code on this repository. Read this before doin
 
 ## What this is
 
-A production portfolio website for **Raymund Ryan Bermudes, Jr.**, positioned as a **Solution Analyst & Android Developer** — specifically, someone who spans *Requirement → Analysis → Design → Development → Testing → UAT → Release → Support*, not someone who only writes Android code.
+A production portfolio website for **Raymund Ryan Bermudes**, positioned as a **Solution Analyst & Android Developer** — specifically, someone who spans *Requirement → Analysis → Design → Development → Testing → UAT → Release → Support*, not someone who only writes Android code.
 
 Audience: recruiters, hiring managers, technical leads, potential clients. It is a real professional artefact, not a template exercise.
 
