@@ -7,14 +7,15 @@ Its job is to answer, in under a minute: what is true right now, what is blocked
 PRD workbook, or it did not change. Do not let this file drift — a stale handoff is worse than none.
 
 - **Last updated:** 2026-09-22
-- **Updated by:** Claude Code (session 2 — blockers cleared, first commit)
-- **Phase:** Phase 1 complete. **CHUNK 01 ready to start.**
-- **Build state:** nothing built. No `package.json`, no `src/`, no dependencies.
-- **Repo:** initialised, `main`, 1 commit (`ad51196`). No remote yet — must be **private** (D14).
+- **Updated by:** Claude Code (session 2 — blockers cleared, CHUNK 01 scaffolded)
+- **Phase:** **CHUNK 01 In Progress** — foundation and headers done, deploy outstanding.
+- **Build state:** Astro 7.3.3 scaffolded. `astro check` and `astro build` both clean.
+  Output is **zero JavaScript, 2,387 bytes**.
+- **Repo:** `main`, 4 commits, tip `b1f806c`. **No remote yet** — must be **private** (D14).
 
 ---
 
-## 1. Blockers — nothing scaffolds until these clear
+## 1. Blockers — all clear
 
 | # | Blocker | Status | Owner | Detail |
 |---|---|---|---|---|
@@ -25,11 +26,11 @@ PRD workbook, or it did not change. Do not let this file drift — a stale hando
 | ~~B3~~ | ~~Decisions D1–D4 unconfirmed~~ | **CLOSED 2026-09-22** | — | D1–D14 all settled. See §3. |
 | ~~B4~~ | ~~D5 — confidentiality tiers unconfirmed~~ | **CLOSED 2026-09-22** | — | Confirmed by Raymund as proposed. See §3 and §3.1. |
 
-**No blockers remain. CHUNK 01 is ready to start.**
+**No blockers remain. CHUNK 01 is scaffolded and building; only the deploy is outstanding.**
 
-Outstanding inputs are not blockers — they are things Raymund supplies when the relevant chunk
-arrives: an empty **private** GitHub repo and a Vercel account (CHUNK 01), the dedicated email
-address (CHUNK 11), and the CHUNK 00 content register (§7).
+Outstanding inputs are things Raymund supplies when the relevant chunk arrives: the **private**
+GitHub repo URL and a Vercel account (CHUNK 01 — the only thing holding CHUNK 01 open), the
+dedicated email address (CHUNK 11), and the CHUNK 00 content register (§7).
 
 ---
 
@@ -57,8 +58,10 @@ and it did not materialise:
 
 **Nothing about this machine blocks npm.** Node 24 LTS clears the >=22 floor.
 
-`[VERIFY INFORMATION]` — still confirm the current stable Astro major and its actual Node floor at
-install time. Do not assume "Astro 7" or "Node 22".
+**Astro version — VERIFIED 2026-09-22, no longer an assumption.** Checked against the registry, not
+recalled: `astro@latest` is **7.3.3** (so the discovery report's "Astro 7" was correct), and its
+declared `engines.node` is **`>=22.12.0`** — a tighter floor than the ">=22" the report assumed.
+Installed Node v24.19.0 clears it. Tailwind CSS 4 resolves to **4.3.3** for CHUNK 02.
 
 ---
 
@@ -264,6 +267,49 @@ the convention is fixed before any code or script references it. Not yet actione
 
 ---
 
+### 5.4 CHUNK 01 — what is done, what is not
+
+**Done and verified 2026-09-22:**
+
+| Item | Detail |
+|---|---|
+| Astro | **7.3.3** — the current stable major, checked against the registry. `latest` dist-tag, not assumed |
+| Node floor | Astro requires `>=22.12.0`; installed Node is **v24.19.0**. Recorded in `engines` |
+| TypeScript | `astro/tsconfigs/strict`, plus `@astrojs/check` so `astro check` actually runs |
+| Output | `output: 'static'`. **No adapter** — there is no server surface and Vercel detects Astro's static build |
+| Security headers | `vercel.json`: CSP, HSTS (2yr, preload), `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options`, COOP, CORP, `X-DNS-Prefetch-Control`, plus immutable caching for `/_astro/*` |
+| Telemetry | Astro's anonymous build telemetry **disabled**, consistent with the zero third-party posture |
+| Scripts | `dev`, `build`, `check`, `verify` (= check + build), `preview` |
+| Verification | `astro check`: 0 errors, 0 warnings, 0 hints. `astro build`: clean. **Zero JS files in `dist/`.** 2,387 bytes total. Dev server runs; page renders at 375px and 1440px with no console errors |
+
+**Deliberately NOT done in CHUNK 01** — these belong to later chunks and adding them here would
+breach chunk discipline:
+
+- **Tailwind CSS 4** and the design tokens → CHUNK 02.
+- **MDX and content collections** → CHUNK 04.
+- The real home page → CHUNK 08–09. `src/pages/index.astro` is a placeholder carrying `noindex`.
+
+**Outstanding for CHUNK 01 to reach `Complete`:**
+
+1. Push to a **private** GitHub repo (D14). **Needs the repo URL from Raymund.**
+2. Import the repo in Vercel, Hobby plan (D13), project name `raymund-bermudes-portfolio`
+   — neutral, contains no client name, and becomes the public hostname under D9/D5.
+3. Set `site` in `astro.config.mjs` to the resulting `*.vercel.app` origin. It is currently
+   commented out and CHUNK 15 cannot complete without it.
+4. **Verify the security headers against the live deployment**, not localhost — `vercel.json`
+   has no effect on the dev server, so these headers are currently unproven.
+5. Confirm Vercel preview-deployment protection (§3.4).
+
+### Two CSP notes for CHUNK 16
+
+- `style-src` currently allows `'unsafe-inline'`, because `build.inlineStylesheets: 'auto'` inlines
+  small CSS for LCP. Setting it to `'never'` would permit a strict `style-src 'self'` at the cost of
+  a render-blocking request. Deliberate trade-off, revisit at CHUNK 16.
+- `script-src 'self'` is currently honest — the build ships **zero** JavaScript. It must be
+  re-checked when the first island lands in CHUNK 03.
+
+---
+
 ## 6. Chunk board
 
 CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
@@ -272,10 +318,10 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 | # | Chunk | Status | Blocked by |
 |---|---|---|---|
 | 00 | Content & confidentiality clearance (no code) | **Ready to start** | — (D5 settled; critical path) |
-| 01 | Project foundation + deploy + security headers | **Ready to start** | B5, B6 (decisions, not blockers) + a GitHub repo |
-| 02 | Design system | Not Started | 01 |
+| 01 | Project foundation + deploy + security headers | **In Progress** | Deploy pending — needs the private repo URL |
+| 02 | Design system | **Ready to start** | — (01 foundation is in place) |
 | 03 | Global shell | Not Started | 02 |
-| 04 | Content layer | Not Started | 01 |
+| 04 | Content layer | **Ready to start** | — (01 foundation is in place) |
 | 05 | Work index + ProjectCard | Not Started | 04 |
 | 06 | Case study system + Delivery Thread | Not Started | 04, stage-count verify |
 | 07 | Real case study content | Not Started | **00** |
