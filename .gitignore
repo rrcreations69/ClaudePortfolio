@@ -1,0 +1,48 @@
+# Secrets — never commit. Present from the first commit, per CLAUDE.md §Security.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.keystore
+*.jks
+secrets.json
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Astro build output
+dist/
+.astro/
+.output/
+
+# Vercel
+.vercel/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Office lock files — this folder is inside OneDrive and the PRD workbook is edited in Excel
+~$*
+*.tmp
+
+# Test / tooling output
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
