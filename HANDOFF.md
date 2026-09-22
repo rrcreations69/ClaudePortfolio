@@ -8,7 +8,7 @@ PRD workbook, or it did not change. Do not let this file drift — a stale hando
 
 - **Last updated:** 2026-09-22
 - **Updated by:** Claude Code (session 2 — blockers cleared, CHUNK 01 scaffolded)
-- **Phase:** **CHUNK 01 essentially complete** — deployed and headers verified live. One config commit left to push.
+- **Phase:** **CHUNK 01 COMPLETE.** CHUNK 00 in progress — gathering case-study content.
 - **Build state:** Astro 7.3.3 scaffolded. `astro check` and `astro build` both clean.
   Output is **zero JavaScript, 2,387 bytes**.
 - **Live:** https://raymundbermudes.vercel.app — deployed, security headers verified.
@@ -381,8 +381,8 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 
 | # | Chunk | Status | Blocked by |
 |---|---|---|---|
-| 00 | Content & confidentiality clearance (no code) | **Ready to start** | — (D5 settled; critical path) |
-| 01 | Project foundation + deploy + security headers | **Review** | Deployed + headers verified; `site` commit still to push |
+| 00 | Content & confidentiality clearance (no code) | **In Progress** | Waiting on Raymund’s CTBC recollections |
+| 01 | Project foundation + deploy + security headers | **COMPLETE** | — |
 | 02 | Design system | **Ready to start** | — (01 foundation is in place) |
 | 03 | Global shell | Not Started | 02 |
 | 04 | Content layer | **Ready to start** | — (01 foundation is in place) |
