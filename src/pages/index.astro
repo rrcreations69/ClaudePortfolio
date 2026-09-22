@@ -1,0 +1,51 @@
+---
+// CHUNK 01 placeholder.
+// This page exists to prove the toolchain, the deploy pipeline and the security
+// headers. The real home page is CHUNK 08 (hero) and CHUNK 09 (thread, selected
+// work, experience teaser). Nothing here is design work — that is CHUNK 02.
+const buildDate = new Date().toISOString().slice(0, 10);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Raymund Bermudes — Portfolio (in development)</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <main>
+      <h1>Raymund Ryan Bermudes, Jr.</h1>
+      <p>Solution Analyst &amp; Android Developer.</p>
+      <p>
+        This site is under construction. CHUNK 01 — project foundation, deploy
+        pipeline and security headers — is in place. Content follows.
+      </p>
+      <p>
+        <small>Build {buildDate}</small>
+      </p>
+    </main>
+  </body>
+</html>
+
+<style>
+  /* Deliberately minimal. The design system is CHUNK 02 and will replace this
+     entirely with tokens from src/styles/tokens.css. Do not build on this. */
+  :root {
+    color-scheme: light dark;
+  }
+
+  body {
+    margin: 0;
+    padding: 32px 16px;
+    font-family: system-ui, sans-serif;
+    line-height: 1.65;
+  }
+
+  main {
+    max-width: 68ch;
+    margin-inline: auto;
+  }
+</style>
