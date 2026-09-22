@@ -1,5 +1,6 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,4 +20,35 @@ export default defineConfig({
     // `style-src 'self'` at the cost of an extra render-blocking request.
     inlineStylesheets: 'auto',
   },
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  // Fonts are downloaded at build time and served from our own origin, so the
+  // browser never contacts a third party. That keeps `font-src 'self'` honest
+  // and preserves the zero-third-party-origin rule.
+  //
+  // Two variable font files total, well inside the 3-file cap. Weights are
+  // restricted to 400/500/700 — no other weight is permitted to appear.
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'Geist',
+      cssVariable: '--font-geist-sans',
+      weights: [400, 500, 700],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Geist Mono',
+      cssVariable: '--font-geist-mono',
+      weights: [400],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['ui-monospace', 'monospace'],
+    },
+  ],
 });

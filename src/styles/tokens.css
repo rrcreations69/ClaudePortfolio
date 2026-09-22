@@ -1,0 +1,134 @@
+/* ============================================================================
+   DESIGN TOKENS — CHUNK 02
+   ============================================================================
+   The single source of truth for colour, type, space, layout and motion.
+   Real CSS custom properties, not a Tailwind config: Tailwind consumes these,
+   it does not own them. That keeps the escape hatch open.
+
+   RULES THAT MUST NOT BE BROKEN WITHOUT RECOMPUTING:
+
+   1. All eight text/background pairs clear WCAG AAA (7:1) in BOTH themes.
+      Change a colour and you must recompute contrast. See CLAUDE.md.
+   2. --accent is for links, focus rings, active states and the Delivery
+      Thread marker ONLY. Never decoration. Never gradients. Never large fills.
+   3. Spacing is a strict 4px scale. No arbitrary values.
+   4. Motion animates opacity and transform ONLY.
+   ========================================================================= */
+
+:root {
+  /* --- Colour: light (default) ------------------------------------------ */
+  --bg: #ffffff;
+  --surface: #f6f6f3;
+  --text: #14140f;
+  --text-muted: #535349;
+  --accent: #1a43bd;
+  --border: #e4e4de;
+  --border-strong: #8e8e87;
+
+  /* --- Typography -------------------------------------------------------- */
+  /* Families are wired by Astro's Fonts API, which self-hosts the files.
+     --font-geist-sans / --font-geist-mono are emitted by Astro at build time. */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Weights — 400/500/700 only. No other weight is licensed to appear. */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* Body steps 17px → 18px. Everything else is relative to it. */
+  --text-xs: 0.8125rem;   /* 13px — metadata, captions */
+  --text-sm: 0.9375rem;   /* 15px — secondary UI */
+  --text-base: 1.0625rem; /* 17px — body, mobile */
+  --text-lg: 1.25rem;     /* 20px — lead paragraphs */
+  --text-xl: 1.5rem;      /* 24px — h3 */
+  --text-2xl: 1.875rem;   /* 30px — h2 */
+  --text-3xl: 2.25rem;    /* 36px — h1 */
+  --text-4xl: 3rem;       /* 48px — hero, desktop only */
+
+  --leading-tight: 1.2;   /* headings */
+  --leading-snug: 1.4;    /* short UI text */
+  --leading-body: 1.65;   /* body prose — per CLAUDE.md */
+
+  --tracking-tight: -0.02em; /* large headings only */
+  --tracking-normal: 0;
+
+  /* --- Spacing: strict 4px scale ----------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* --- Layout ------------------------------------------------------------ */
+  --width-shell: 1200px;  /* outer page shell */
+  --width-wide: 1040px;   /* wide content blocks */
+  --width-prose: 68ch;    /* prose measure cap — per CLAUDE.md */
+  --gutter: var(--space-4);
+
+  /* --- Borders ----------------------------------------------------------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --border-width: 1px;
+
+  /* --- Motion ------------------------------------------------------------ */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 150ms;
+  --duration-standard: 250ms;
+
+  /* --- Focus ------------------------------------------------------------- */
+  --focus-width: 2px;
+  --focus-offset: 2px;
+}
+
+/* --- Colour: dark ---------------------------------------------------------
+   Applied when the OS asks for dark, UNLESS the user has explicitly chosen
+   light. The :root:not([data-theme='light']) guard is what makes the CHUNK 12
+   ThemeToggle able to override the OS preference. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0e0e0d;
+    --surface: #191917;
+    --text: #f4f4ef;
+    --text-muted: #a8a8a0;
+    --accent: #8fa8ff;
+    --border: #2c2c28;
+    --border-strong: #6b6b61;
+  }
+}
+
+/* Explicit dark, chosen by the user. Same values; must stay in sync. */
+:root[data-theme='dark'] {
+  --bg: #0e0e0d;
+  --surface: #191917;
+  --text: #f4f4ef;
+  --text-muted: #a8a8a0;
+  --accent: #8fa8ff;
+  --border: #2c2c28;
+  --border-strong: #6b6b61;
+}
+
+/* --- Reduced motion: the global kill switch -------------------------------
+   Per CLAUDE.md, one global rule rather than per-component logic. No
+   MotionWrapper component (D10). Content is never hidden pending animation,
+   so removing animation never removes content. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0.01ms;
+    --duration-standard: 0.01ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

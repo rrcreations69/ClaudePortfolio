@@ -218,22 +218,56 @@ as its own decision.
 
 ### Questions still needed — and two that gate everything
 
-**GATING — answer before any drafting:**
+**GATING — BOTH CLEARED by Raymund 2026-09-22 ("Both cleared").**
 
-1. **Is the remediation complete, released, and re-scanned/closed off?** If any finding is still
-   open in a live build, **nothing about this publishes at any tier.** Describing a live weakness in
-   a production app is not a portfolio piece.
-2. **Is Raymund contractually free to say a VAPT happened at all?** Some engagements treat the
-   existence of a security assessment as confidential.
+1. ✅ Remediation is complete, released and closed off. Nothing described is live-exploitable.
+2. ✅ He is free to say a VAPT took place.
 
-**Then, for the story — recorded here in full, sanitised only on the way out:**
+Drafting may proceed **at `abstracted` tier**, still with no specific vulnerabilities, library names,
+versions or attack paths.
 
-3. What *classes* of finding came back? (Categories only — not specifics.)
-4. **How did he fix them without upgrading libraries?** This is the heart of the case study.
-5. How did he verify each fix actually worked?
-6. Did the client re-scan and confirm closure? Was there a UAT cycle?
-7. How long did it take, roughly? Was he under deadline pressure?
-8. What made it "almost crazy" — the constraint itself, the volume, the diagnosis?
+**How he fixed it — stated 2026-09-22:**
+
+> I refactor the codes
+
+**This is the correct headline but it is not yet a case study.** "Refactored the code" is what a
+CV bullet says. The case study has to show the reasoning underneath it, or it fails the recruiter
+test question it exists to answer.
+
+⚠️ **METHOD WARNING FOR WHOEVER CONTINUES THIS.** It is tempting to fill this gap by listing the
+standard Android hardening measures — network security config, disabling backup, closing exported
+components, WebView hardening, stripping logging, certificate pinning, ProGuard/R8 — and asking
+Raymund to confirm. **Do not do this.** Offering a plausible list and collecting a "yes" manufactures
+detail he did not independently recall, and he would then be defending invented specifics in an
+interview. That is fabrication with extra steps, and `CLAUDE.md`'s first rule forbids it.
+
+**Ask open questions. Record only what he volunteers in his own words.**
+
+### The crux question — still unanswered
+
+**Were the findings in the third-party libraries, or in how the app's own code was written?**
+
+This determines the entire shape of the story, and the two answers are very different:
+
+- **Findings in his own code** → refactoring is the direct and obvious fix. The constraint about
+  libraries is then context rather than the central problem.
+- **Findings in the libraries he could not upgrade** → then refactoring *his* code to stop relying
+  on the vulnerable code paths is a genuinely resourceful mitigation, and **that is the case
+  study.** Working around an un-upgradable dependency by removing the app's dependence on the
+  vulnerable behaviour is exactly the kind of constrained problem-solving worth publishing.
+
+**Do not assume the second just because it is the better story.**
+
+### Remaining questions
+
+3. Findings in his own code, in the libraries, or both? *(the crux, above)*
+4. One concrete example: what did the scan flag, and what did he change? **In his own words.**
+5. Why would upgrading have "broken all the codes"? Major-version API changes, a framework upgrade
+   cascade, something else?
+6. How did he verify each fix worked?
+7. Did the client re-scan and confirm closure? Was there a UAT cycle?
+8. Roughly how long, and under deadline pressure?
+9. What made it "almost crazy" — the constraint, the volume, or the diagnosis?
 
 `[CONTENT REQUIRED]`
 

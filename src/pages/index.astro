@@ -1,8 +1,14 @@
 ---
-// CHUNK 01 placeholder.
-// This page exists to prove the toolchain, the deploy pipeline and the security
-// headers. The real home page is CHUNK 08 (hero) and CHUNK 09 (thread, selected
-// work, experience teaser). Nothing here is design work — that is CHUNK 02.
+// CHUNK 01/02 placeholder.
+// Proves the toolchain, the deploy pipeline, the security headers and now the
+// design system. The real home page is CHUNK 08 (hero) and CHUNK 09 (thread,
+// selected work, experience teaser).
+//
+// The document wrapper is inline here deliberately. Extracting it into a
+// BaseLayout with header, nav and footer is CHUNK 03 — the global shell.
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+
 const buildDate = new Date().toISOString().slice(0, 10);
 ---
 
@@ -14,38 +20,28 @@ const buildDate = new Date().toISOString().slice(0, 10);
     <meta name="robots" content="noindex, nofollow" />
     <title>Raymund Bermudes — Portfolio (in development)</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Font cssVariable="--font-geist-sans" preload />
+    <Font cssVariable="--font-geist-mono" />
   </head>
   <body>
-    <main>
-      <h1>Raymund Ryan Bermudes</h1>
-      <p>Solution Analyst &amp; Android Developer.</p>
-      <p>
-        This site is under construction. CHUNK 01 — project foundation, deploy
-        pipeline and security headers — is in place. Content follows.
-      </p>
-      <p>
-        <small>Build {buildDate}</small>
-      </p>
-    </main>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="shell" style="padding-block: var(--space-24);">
+      <main id="main" class="prose">
+        <h1>Raymund Ryan Bermudes</h1>
+        <p style="color: var(--text-muted); font-size: var(--text-lg);">
+          Solution Analyst &amp; Android Developer.
+        </p>
+        <p>
+          This site is under construction. The project foundation, deploy
+          pipeline, security headers and design system are in place. Content
+          follows.
+        </p>
+        <p>
+          <a href="/styleguide">View the design system</a>
+        </p>
+        <p><small>Build {buildDate}</small></p>
+      </main>
+    </div>
   </body>
 </html>
-
-<style>
-  /* Deliberately minimal. The design system is CHUNK 02 and will replace this
-     entirely with tokens from src/styles/tokens.css. Do not build on this. */
-  :root {
-    color-scheme: light dark;
-  }
-
-  body {
-    margin: 0;
-    padding: 32px 16px;
-    font-family: system-ui, sans-serif;
-    line-height: 1.65;
-  }
-
-  main {
-    max-width: 68ch;
-    margin-inline: auto;
-  }
-</style>
