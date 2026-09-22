@@ -7,9 +7,10 @@ Its job is to answer, in under a minute: what is true right now, what is blocked
 PRD workbook, or it did not change. Do not let this file drift — a stale handoff is worse than none.
 
 - **Last updated:** 2026-09-22
-- **Updated by:** Claude Code (session 1 — environment gate + decision walkthrough)
-- **Phase:** Phase 1 complete. Pre-CHUNK 01.
+- **Updated by:** Claude Code (session 2 — blockers cleared, first commit)
+- **Phase:** Phase 1 complete. **CHUNK 01 ready to start.**
 - **Build state:** nothing built. No `package.json`, no `src/`, no dependencies.
+- **Repo:** initialised, `main`, 1 commit (`ad51196`). No remote yet — must be **private** (D14).
 
 ---
 
@@ -20,12 +21,15 @@ PRD workbook, or it did not change. Do not let this file drift — a stale hando
 | ~~B1~~ | ~~Node.js >=22 + npm not installed~~ | **CLOSED 2026-09-22** | — | Node **v24.19.0** + npm **11.17.0** at `C:\Program Files\nodejs`, on the machine PATH. `npm ping` → `PONG`. |
 | ~~B2~~ | ~~Git repository rooted at `C:\Users\RaymundBermudes`~~ | **CLOSED 2026-09-22** | — | Stray home-level `.git` no longer exists. Repo re-rooted to the project folder. See §4. |
 | ~~B5~~ | ~~Project lives inside OneDrive~~ | **DECIDED 2026-09-22** | — | Staying at `Documents\Rr`. Relocation declined. Mitigations in §5.1 apply at CHUNK 01. |
-| B6 | **git commit identity not yet set** | OPEN | Raymund | Decided: GitHub `@users.noreply.github.com`. **Needs Raymund's GitHub username to configure.** See §5.2. |
-| ~~B3~~ | ~~Decisions D1–D4 unconfirmed~~ | **CLOSED 2026-09-22** | — | D1–D13 all settled. See §3. |
+| ~~B6~~ | ~~git commit identity not set~~ | **CLOSED 2026-09-22** | — | Repo-local `user.email` set to the GitHub noreply address. Global config untouched. See §5.2. |
+| ~~B3~~ | ~~Decisions D1–D4 unconfirmed~~ | **CLOSED 2026-09-22** | — | D1–D14 all settled. See §3. |
 | ~~B4~~ | ~~D5 — confidentiality tiers unconfirmed~~ | **CLOSED 2026-09-22** | — | Confirmed by Raymund as proposed. See §3 and §3.1. |
 
-**CHUNK 01 is no longer blocked by tooling.** B5 and B6 are cheap decisions, not blockers —
-but both get more expensive after the first commit, so settle them first.
+**No blockers remain. CHUNK 01 is ready to start.**
+
+Outstanding inputs are not blockers — they are things Raymund supplies when the relevant chunk
+arrives: an empty **private** GitHub repo and a Vercel account (CHUNK 01), the dedicated email
+address (CHUNK 11), and the CHUNK 00 content register (§7).
 
 ---
 
@@ -78,6 +82,7 @@ were amended.** These are now project facts — do not re-open one without a wri
 | D11 | Content model | **One collection, two depths.** A project *is* its case study; the card is its summary | 2026-09-22 |
 | D12 | Deployment timing | **Deploy from CHUNK 01**, with security headers, not at P23 | 2026-09-22 |
 | D13 | Vercel plan | **AMENDED — Hobby.** Site is job-seeking, not client-soliciting. See §3.3 | 2026-09-22 |
+| **D14** | **GitHub repository visibility** | **PRIVATE.** New decision, not in §10.1 — raised when the first commit was prepared. See §3.4 | 2026-09-22 |
 
 ### 3.1 D5 — confidentiality, as confirmed
 
@@ -111,7 +116,38 @@ Hobby's terms are non-commercial. Choosing it means **the site must not solicit 
 primary audience — that framing is now out of scope for the copy. Constrains CHUNK 00, 08 and 11.
 If the positioning ever changes, the plan must change with it.
 
-### 3.4 Still open — not part of D1–D13
+### 3.4 D14 — the GitHub repository is PRIVATE
+
+Raised 2026-09-22 while preparing the first commit; not anticipated in §10.1.
+
+**The problem.** All four planning documents name the client engagements directly — verified by
+scan, not assumption:
+
+| File | CTBC | CASECenter | SBC |
+|---|---|---|---|
+| `CLAUDE.md` | 1 | 2 | 1 |
+| `HANDOFF.md` | 3 | 6 | 2 |
+| `PHASE-1-DISCOVERY.md` | 4 | 5 | 4 |
+| PRD workbook | 4 | 4 | 4 |
+
+`PHASE-1-DISCOVERY.md` also states plainly that the SBC engagement involved security remediation —
+the exact association D5 puts at `abstracted` tier. In a public repository this would publish what
+D5 forbids, and **git history is permanent**: deleting the files later does not remove them from
+history, from existing clones, or from GitHub's cached views.
+
+**Decision: the repository is private.** Vercel deploys from a private repo on the Hobby plan with
+no change to the site, so this costs nothing except recruiters being unable to browse the source.
+
+**Consequences to honour:**
+
+- **Never make this repository public** without first rewriting history to remove the planning
+  documents. Treat "make it public" as a request that re-opens D5, not a settings change.
+- The site's *published output* is public regardless — D5 governs it exactly as before. Repository
+  privacy is not a licence to relax slugs, page titles, file names or OG metadata.
+- Vercel **preview deployments are public by default** on URLs that are unlisted but not
+  authenticated. Confirm preview protection at CHUNK 01.
+
+### 3.5 Still open — not part of D1–D13
 
 - **Positioning line (A1).** Three drafts in `PHASE-1-DISCOVERY.md` §10.1; Option 1 recommended.
   Blocks CHUNK 08.
@@ -198,22 +234,19 @@ to a public GitHub repo. A personal, job-seeking portfolio whose entire history 
 current employer's address is an odd signal, and it is effectively unfixable after the fact without
 rewriting history.
 
-**DECIDED 2026-09-22 — use GitHub's `@users.noreply.github.com` address.** No real address is
-published, and GitHub still attributes the commits to Raymund's account.
+**RESOLVED 2026-09-22.** Repo-local identity set to GitHub's noreply address — no real address is
+published, and GitHub still attributes commits to Raymund's account.
 
-**Blocked on one input: Raymund's GitHub username.** The address takes the form
-`ID+username@users.noreply.github.com`, and the exact value is shown at
-*GitHub → Settings → Emails → "Keep my email addresses private"*. Set it **repository-local**, so
-global config and work repositories are untouched:
-
-```bash
-git config user.email "ID+username@users.noreply.github.com"
+```
+user.name  = Raymund Bermudes                                      (inherited from global)
+user.email = 28356582+rrcreations69@users.noreply.github.com       (repository-local)
 ```
 
-Also tick **"Block command line pushes that expose my email"** on that same GitHub settings page —
-it turns this from a convention into an enforced guarantee.
+Global config remains `raymund.bermudes@gdslinkasia.com`, so **work repositories are unaffected.**
 
-Until this is set, **no commit has been made.** The first commit waits on it.
+**Still worth doing:** tick **"Block command line pushes that expose my email"** at
+*GitHub → Settings → Emails*. It turns this from a local convention into an enforced guarantee, and
+protects against a future clone that lacks the repo-local override.
 
 ### 5.3 The `docs/` path discrepancy
 
@@ -289,20 +322,19 @@ Nothing is guessed, approximated or inferred.
 ## 8. Next actions
 
 **Raymund**
-1. **Provide the GitHub noreply address** from *Settings → Emails* (§5.2) — the one thing holding up
-   the first commit.
+1. Create an empty **private** GitHub repo (D14) — needed by D12, deploy-from-CHUNK-01.
 2. Add `node_modules` to OneDrive's sync exclusions once CHUNK 01 creates it (§5.1).
-3. Create an empty GitHub repo (needed by D12, deploy-from-CHUNK-01).
 4. Create the dedicated email address (D7) — needed by CHUNK 11, not before.
 5. **CHUNK 00 is the critical path and needs none of the above.** D5 is settled, so case-study
    writing can begin at any time.
 
 **Claude Code (next session)**
 1. Re-verify `node -v` before scaffolding — do not trust this file's recorded value alone.
-2. Set the repo-local git identity before the first commit.
-3. Verify the current stable Astro major and its actual Node floor — do not assume "7" or "22".
-4. Propose the Vercel project name for confirmation (§3.2) before creating the deployment.
-5. Then CHUNK 01.
+2. Verify the current stable Astro major and its actual Node floor — do not assume "7" or "22".
+3. Propose the Vercel project name for confirmation (§3.2) before creating the deployment.
+4. Confirm the GitHub repo is **private** before adding it as a remote (D14).
+5. Check Vercel preview-deployment protection (§3.4).
+6. Then CHUNK 01.
 
 **Done 2026-09-22**
 - Node v24.19.0 + npm 11.17.0 verified working; `npm ping` → `PONG`. B1 closed.
@@ -322,5 +354,5 @@ Nothing is guessed, approximated or inferred.
 
 | Date | Session | What happened |
 |---|---|---|
-| 2026-09-22 | 2 | **Cleared both blockers.** Node v24.19.0 + npm 11.17.0 confirmed working (`npm ping` → `PONG`); the earlier "not installed" result was correct at the time, and Node was installed since. Stray home-level `.git` confirmed already gone (not deleted by Claude). Ran `git init -b main` in the project folder and wrote `.gitignore` before any commit — `git status` now shows 5 files, none from the user profile. Raised two new items: **B5** (project sits in a syncing OneDrive folder) and **B6** (git identity is a work email, permanent in public commit history). B5 decided — **project stays at `Documents\Rr`**, relocation declined, mitigations recorded. B6 decided — **GitHub noreply address**, pending the username. No commit made, no scaffolding, no dependency installed. |
+| 2026-09-22 | 2 | **Cleared both blockers.** Node v24.19.0 + npm 11.17.0 confirmed working (`npm ping` → `PONG`); the earlier "not installed" result was correct at the time, and Node was installed since. Stray home-level `.git` confirmed already gone (not deleted by Claude). Ran `git init -b main` in the project folder and wrote `.gitignore` before any commit — `git status` now shows 5 files, none from the user profile. Raised two new items: **B5** (project sits in a syncing OneDrive folder) and **B6** (git identity is a work email, permanent in public commit history). B5 decided — **project stays at `Documents\Rr`**, relocation declined, mitigations recorded. B6 resolved — repo-local identity set to the GitHub noreply address. Scanned the planning docs before committing and found CTBC/SBC/CASECenter throughout, including the SBC security association that D5 puts at `abstracted` tier — raised it, and **D14** was decided: **the GitHub repo is private**. First commit made (`ad51196`), authored by the noreply address. No scaffolding, no dependency installed, no remote added. |
 | 2026-09-22 | 1 | Read `CLAUDE.md` + `PHASE-1-DISCOVERY.md`. Ran environment gate: **FAIL** — Node/npm absent; git, registry reachability and corporate-restriction checks all pass. Confirmed B2 (home-directory git repo, 0 commits, no exposure yet). Flagged the `docs/` path discrepancy. Created this file. **Settled all of D1–D13** — 11 as recommended, D9 and D13 amended; B3 and B4 closed. Mirrored all outcomes into the PRD workbook (sheets 11, 18, 10). No code written, no dependency installed, no git operation run. |
