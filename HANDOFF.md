@@ -8,10 +8,11 @@ PRD workbook, or it did not change. Do not let this file drift — a stale hando
 
 - **Last updated:** 2026-09-22
 - **Updated by:** Claude Code (session 2 — blockers cleared, CHUNK 01 scaffolded)
-- **Phase:** **CHUNK 01 In Progress** — foundation and headers done, deploy outstanding.
+- **Phase:** **CHUNK 01 essentially complete** — deployed and headers verified live. One config commit left to push.
 - **Build state:** Astro 7.3.3 scaffolded. `astro check` and `astro build` both clean.
   Output is **zero JavaScript, 2,387 bytes**.
-- **Repo:** `main`, 4 commits, tip `b1f806c`. **No remote yet** — must be **private** (D14).
+- **Live:** https://raymundbermudes.vercel.app — deployed, security headers verified.
+- **Repo:** `rrcreations69/ClaudePortfolio` (private), branch `main`.
 
 ---
 
@@ -26,11 +27,13 @@ PRD workbook, or it did not change. Do not let this file drift — a stale hando
 | ~~B3~~ | ~~Decisions D1–D4 unconfirmed~~ | **CLOSED 2026-09-22** | — | D1–D14 all settled. See §3. |
 | ~~B4~~ | ~~D5 — confidentiality tiers unconfirmed~~ | **CLOSED 2026-09-22** | — | Confirmed by Raymund as proposed. See §3 and §3.1. |
 
-**No blockers remain. CHUNK 01 is scaffolded and building; only the deploy is outstanding.**
+**No blockers remain. The site is deployed and live at https://raymundbermudes.vercel.app.**
 
-Outstanding inputs are things Raymund supplies when the relevant chunk arrives: the **private**
-GitHub repo URL and a Vercel account (CHUNK 01 — the only thing holding CHUNK 01 open), the
-dedicated email address (CHUNK 11), and the CHUNK 00 content register (§7).
+Outstanding inputs are things Raymund supplies when the relevant chunk arrives: the dedicated email
+address (CHUNK 11) and the CHUNK 00 content register (§7). Neither blocks anything today.
+
+**Note on pushing:** this session's auto-approval blocks `git push` and `git remote add` as outbound
+publication. Claude can commit, but **Raymund runs the pushes**, or adds a Bash permission rule.
 
 ---
 
@@ -107,9 +110,11 @@ identify the client by association. Resolve before any CASECenter content is wri
 
 Recommendation was a custom domain; Raymund chose the Vercel subdomain. Settled. Knock-ons:
 
-- **The Vercel project name becomes the public hostname, so it is subject to D5.** It must not contain
-  a client name. Propose a neutral name at CHUNK 01 for confirmation, e.g. `raymund-bermudes-portfolio`.
-- Canonical URLs, OG tags and the sitemap all target the `*.vercel.app` host.
+- **The Vercel project name becomes the public hostname, so it is subject to D5.** Resolved: the
+  project is named **`raymundbermudes`**, giving **https://raymundbermudes.vercel.app**. Raymund's
+  own name, no client name — compliant. Note the GitHub repo is separately named `ClaudePortfolio`;
+  that name is private and never reaches the public URL.
+- Canonical URLs, OG tags and the sitemap all target that host. `site` is set in `astro.config.mjs`.
 - CHUNK 15 loses its DNS and domain-verification work. No registration cost, no renewal.
 
 ### 3.3 D13 — consequence of the Hobby plan
@@ -147,8 +152,22 @@ no change to the site, so this costs nothing except recruiters being unable to b
   documents. Treat "make it public" as a request that re-opens D5, not a settings change.
 - The site's *published output* is public regardless — D5 governs it exactly as before. Repository
   privacy is not a licence to relax slugs, page titles, file names or OG metadata.
-- Vercel **preview deployments are public by default** on URLs that are unlisted but not
-  authenticated. Confirm preview protection at CHUNK 01.
+- **Vercel preview deployments are PUBLIC — verified 2026-09-22, not assumed.** Both alternate
+  deployment URLs (`raymundbermudes-git-main-rr-4c7a.vercel.app` and the per-deployment
+  `raymundbermudes-2t7nbid3v-rr-4c7a.vercel.app`) returned **HTTP 200 to an unauthenticated
+  request**. An unlisted URL is not a private one.
+
+  **Why this matters at CHUNK 07, not now.** Today every deployment serves a placeholder, so there
+  is nothing to leak. Once case-study drafts exist, pushing one to any branch publishes it at a
+  public URL *before* it has been cleared under D5 — which is exactly the irreversible failure D5
+  and D14 exist to prevent.
+
+  **The mitigation that works on any plan: make confidentiality clearance a pre-commit gate, not a
+  pre-merge one.** Content is sanitised to its tier *before* it is committed. Never rely on "it is
+  only on a branch" as a confidentiality control — it is not one.
+
+  Optionally also check *Vercel → Settings → Deployment Protection* for what the Hobby plan offers.
+  Treat any protection found there as defence in depth, not as a substitute for the pre-commit gate.
 
 ### 3.5 Still open — not part of D1–D13
 
@@ -318,16 +337,32 @@ breach chunk discipline:
 - **MDX and content collections** → CHUNK 04.
 - The real home page → CHUNK 08–09. `src/pages/index.astro` is a placeholder carrying `noindex`.
 
-**Outstanding for CHUNK 01 to reach `Complete`:**
+### Deployment — LIVE
 
-1. Push to a **private** GitHub repo (D14). **Needs the repo URL from Raymund.**
-2. Import the repo in Vercel, Hobby plan (D13), project name `raymund-bermudes-portfolio`
-   — neutral, contains no client name, and becomes the public hostname under D9/D5.
-3. Set `site` in `astro.config.mjs` to the resulting `*.vercel.app` origin. It is currently
-   commented out and CHUNK 15 cannot complete without it.
-4. **Verify the security headers against the live deployment**, not localhost — `vercel.json`
-   has no effect on the dev server, so these headers are currently unproven.
-5. Confirm Vercel preview-deployment protection (§3.4).
+| | |
+|---|---|
+| **Production URL** | **https://raymundbermudes.vercel.app** |
+| Vercel project | `raymundbermudes` (team `rr-4c7a`) — no client name, satisfies D9/D5 |
+| Plan | **Hobby** — satisfies D13 |
+| GitHub repo | `rrcreations69/ClaudePortfolio` — **private**, satisfies D14 |
+| Deployed by | `rrcreations69` — the correct account |
+| First production deploy | commit `eb17185`, build time 12s |
+
+**Security headers verified against the live deployment on 2026-09-22 — all nine present and
+correct:** `Content-Security-Policy`, `Strict-Transport-Security`, `X-Content-Type-Options`,
+`Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options`, `Cross-Origin-Opener-Policy`,
+`Cross-Origin-Resource-Policy`, `X-DNS-Prefetch-Control`. This was checked against a real HTTP
+response, not against `vercel.json` — the dev server does not serve these headers, so localhost
+proves nothing.
+
+**One header we did not set: `Access-Control-Allow-Origin: *`.** Vercel adds it. On a public static
+site with no credentials, no cookies and no API it grants nothing that a plain server-side fetch of
+the public HTML does not already allow, so it is **not** a vulnerability here. Flagged for CHUNK 16
+review rather than changed, and it must be re-examined if the site ever gains an endpoint.
+
+**Remaining for CHUNK 01 to reach `Complete`:**
+
+1. Push the `site` config commit and confirm the redeploy succeeds.
 
 ### Two CSP notes for CHUNK 16
 
@@ -347,7 +382,7 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 | # | Chunk | Status | Blocked by |
 |---|---|---|---|
 | 00 | Content & confidentiality clearance (no code) | **Ready to start** | — (D5 settled; critical path) |
-| 01 | Project foundation + deploy + security headers | **In Progress** | Deploy pending — needs the private repo URL |
+| 01 | Project foundation + deploy + security headers | **Review** | Deployed + headers verified; `site` commit still to push |
 | 02 | Design system | **Ready to start** | — (01 foundation is in place) |
 | 03 | Global shell | Not Started | 02 |
 | 04 | Content layer | **Ready to start** | — (01 foundation is in place) |

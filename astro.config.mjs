@@ -3,12 +3,10 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  // [CONTENT REQUIRED] Set `site` to the production origin once the Vercel
-  // project exists. Per D9 the site stays on *.vercel.app permanently, so this
-  // becomes e.g. 'https://raymund-bermudes-portfolio.vercel.app'.
-  // Canonical URLs, OG tags and the sitemap all depend on it — CHUNK 15 cannot
-  // be completed until it is set.
-  // site: 'https://<project>.vercel.app',
+  // Production origin. Per D9 the site stays on *.vercel.app permanently, so
+  // this is the final canonical host — not a placeholder. Canonical URLs, OG
+  // tags and the sitemap all derive from it.
+  site: 'https://raymundbermudes.vercel.app',
 
   // Static output. No adapter: this is a content site with no server surface,
   // and Vercel detects Astro's static build automatically.
