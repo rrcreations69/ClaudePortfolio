@@ -101,10 +101,23 @@ Raymund confirmed the proposed tiers on **2026-09-22**. This date and reviewer p
 | SBC / security remediation | `abstracted` | Class of problem only. No client, no sector, sanitised architecture |
 | CASECenter / workflow | `sectoral` | Sector, scale, geography. No client name |
 
-**Open sub-question, carried to CHUNK 00 — do not assume either way.** At `sectoral`, may the literal
-string **"CASECenter"** appear on the site? It is a product name rather than a client name, so the
-tier does not automatically forbid it — but combined with Raymund's public employment history it may
-identify the client by association. Resolve before any CASECenter content is written.
+**Correction 2026-09-22 — the register mis-modelled this.** Raymund clarified during CHUNK 00:
+
+> CTBC and CASECenter are two engagements. CTBC is our client and CASECenter is proprietary tool
+> that we use to create systems for SBC, CTBC and many more
+
+**CTBC and SBC are clients. CASECenter is a build tool spanning many clients — not a client, and not
+client-specific.** The register's "CASECenter work" row names a tool rather than an engagement and
+should be reframed around whichever client engagement it meant.
+
+**Consequence for disclosure:** because the tool serves many clients, naming it does **not** identify
+any one of them — "CASECenter ⇒ CTBC" does not follow. The client-identification concern is
+withdrawn.
+
+**The open question is now about the employer, not the client:** is CASECenter publicly marketed or
+an internal tool? Naming an unpublicised internal build tool discloses employer tooling, which is a
+separate matter from D5's client tiers. **Unresolved — ask Raymund. Do not research the employer to
+settle it.**
 
 ### 3.2 D9 — consequences of staying on `*.vercel.app`
 
