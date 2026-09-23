@@ -1,0 +1,31 @@
+---
+/**
+ * Tag — a single stack or domain label.
+ *
+ * Non-interactive by design. Filtering is deferred (D4), so a tag that looked
+ * clickable but did nothing would be a lie told by a cursor.
+ */
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<li class="tag">{label}</li>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-3);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+/**
+ * ProjectGrid — an ordered list of project cards.
+ *
+ * A real <ol>, because the order is curated (frontmatter `order`) and that
+ * ordering carries meaning: the strongest work first. A screen reader
+ * announces the count, which is useful information on an index page.
+ *
+ * Single column by design. These cards are dense with text; two columns would
+ * halve the measure and make the evidence block harder to scan, which is the
+ * one thing it exists to do.
+ */
+---
+
+<ol class="grid">
+  <slot />
+</ol>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--space-8);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>

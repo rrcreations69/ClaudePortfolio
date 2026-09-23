@@ -1,35 +1,59 @@
 ---
 /**
- * Work index — CHUNK 04 wiring.
+ * Work index — CHUNK 05.
  *
- * Reads the collection so the content layer is proven end to end rather than
- * merely defined. The real index — ProjectCard, the evidence block, ordering
- * and featured handling — is CHUNK 05; this renders the honest empty state
- * until there is something to list.
+ * Lists every project as an evidence card, ordered by the curated `order`
+ * field rather than by date. Newest-first is a blog convention; a portfolio
+ * should lead with its strongest work.
  */
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectGrid from '../../components/work/ProjectGrid.astro';
+import ProjectCard from '../../components/work/ProjectCard.astro';
 
 const projects = (await getCollection('work')).sort(
   (a, b) => a.data.order - b.data.order,
 );
+
+const hasProjects = projects.length > 0;
 ---
 
 <BaseLayout
   title="Work"
-  description="Case studies in enterprise Android development and maintenance."
-  noindex
-  prose
+  description="Case studies in enterprise Android development, maintenance and production support."
+  noindex={!hasProjects}
+  prose={!hasProjects}
 >
-  <h1>Work</h1>
-  <p>
-    Case studies are in preparation. Each one covers a single piece of
-    production work: the problem, what I personally did, how it was
-    investigated, and how the fix was validated.
-  </p>
+  <div class="intro">
+    <h1>Work</h1>
+    <p>
+      Each case study covers one piece of production work: the problem, what I
+      personally did, how I investigated it, and how the result was validated.
+    </p>
+  </div>
 
   {
-    projects.length === 0 ? (
+    hasProjects ? (
+      <div class="wide">
+        <ProjectGrid>
+          {projects.map((project) => (
+            <li>
+              <ProjectCard
+                slug={project.data.slug}
+                title={project.data.title}
+                clientDescriptor={project.data.clientDescriptor}
+                disclosure={project.data.disclosure}
+                period={project.data.period}
+                problem={project.data.problem}
+                myRole={project.data.myRole}
+                outcome={project.data.outcome}
+                stack={project.data.stack}
+              />
+            </li>
+          ))}
+        </ProjectGrid>
+      </div>
+    ) : (
       <p class="pending">
         <strong>[CONTENT REQUIRED]</strong> The content layer is wired and the
         collection is queryable — it is simply empty. Case study content is
@@ -37,20 +61,24 @@ const projects = (await getCollection('work')).sort(
         No placeholder project is committed, because a fabricated case study
         would be worse than an empty page.
       </p>
-    ) : (
-      <ul>
-        {projects.map((project) => (
-          <li>
-            <a href={`/work/${project.data.slug}`}>{project.data.title}</a>
-          </li>
-        ))}
-      </ul>
     )
   }
 </BaseLayout>
 
 <style>
+  .intro {
+    max-width: var(--width-prose);
+    margin-block-end: var(--space-12);
+  }
+
+  .intro p {
+    margin-block-start: var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+
   .pending {
+    max-width: var(--width-prose);
     padding: var(--space-4);
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-md);

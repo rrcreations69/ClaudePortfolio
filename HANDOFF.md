@@ -8,7 +8,7 @@ PRD workbook, or it did not change. Do not let this file drift — a stale hando
 
 - **Last updated:** 2026-09-23
 - **Updated by:** Claude Code (session 3 — CHUNK 02 design system, CHUNK 03 global shell)
-- **Phase:** **CHUNKS 01–04 COMPLETE.** CHUNK 00 in progress. Next: CHUNK 05 (work index).
+- **Phase:** **CHUNKS 01–05 COMPLETE.** CHUNK 00 in progress. Next: CHUNK 06 (case study + Delivery Thread).
 - **Build state:** 6 routes building. `astro check` 0/0/0, build clean.
   Output is **zero JavaScript, 102.3 KB** total including both fonts.
 - **Live:** https://raymundbermudes.vercel.app — deployed, security headers verified.
@@ -399,7 +399,7 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 | 02 | Design system | **COMPLETE** | — |
 | 03 | Global shell | **COMPLETE** | — |
 | 04 | Content layer | **COMPLETE** | — |
-| 05 | Work index + ProjectCard | **Ready to start** | — |
+| 05 | Work index + ProjectCard | **COMPLETE** | — |
 | 06 | Case study system + Delivery Thread | **Ready to start** | Stage-count question (8 vs 7) still open |
 | 07 | Real case study content | Not Started | **00** |
 | 08 | Home — hero | Not Started | 03, positioning line |

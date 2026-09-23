@@ -1,0 +1,180 @@
+---
+/**
+ * ProjectCard — the evidence block. Signature element 2 (§5.3).
+ *
+ * Every card carries the same four facts in the same order: Problem, My role,
+ * Stack, Outcome. That is the whole idea. A recruiter comparing candidates
+ * finds the same information in the same place on every card, and answers most
+ * of the Sheet 13 questions *before* deciding whether to click.
+ *
+ * Deliberately absent:
+ *  - No hero image. There is nothing publishable to show, and a decorative
+ *    stock image would be filler.
+ *  - No "View project" link. The title says where it goes.
+ *  - No metric slot. There is no large-numeral treatment anywhere in this
+ *    design system, because an empty box invites something to fill it.
+ *
+ * The "Outcome" label is deliberately quieter than "Impact" or "Results" — a
+ * word a sentence can fill honestly when there is no number to report.
+ *
+ * Linking: only the title is a link. The card is not a click target, because
+ * making it one means either nesting interactive elements or covering the card
+ * with an overlay that breaks text selection.
+ */
+import ProjectMeta from './ProjectMeta.astro';
+import Tag from './Tag.astro';
+import type { DISCLOSURE_TIERS } from '../../content/schema.ts';
+
+interface Props {
+  slug: string;
+  title: string;
+  clientDescriptor: string;
+  disclosure: (typeof DISCLOSURE_TIERS)[number];
+  period: { start: string; end?: string };
+  problem: string;
+  myRole: string;
+  outcome: string;
+  stack: readonly string[];
+  /** h2 inside a list of projects; h3 when nested under another heading. */
+  headingLevel?: 2 | 3;
+}
+
+const {
+  slug,
+  title,
+  clientDescriptor,
+  disclosure,
+  period,
+  problem,
+  myRole,
+  outcome,
+  stack,
+  headingLevel = 2,
+} = Astro.props;
+
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+const href = `/work/${slug}`;
+---
+
+<article class="card">
+  <Heading class="card__title">
+    <a href={href}>{title}</a>
+  </Heading>
+
+  <ProjectMeta
+    clientDescriptor={clientDescriptor}
+    period={period}
+    disclosure={disclosure}
+  />
+
+  <dl class="card__evidence">
+    <dt>Problem</dt>
+    <dd>{problem}</dd>
+
+    <dt>My role</dt>
+    <dd>{myRole}</dd>
+
+    <dt>Outcome</dt>
+    <dd>{outcome}</dd>
+  </dl>
+
+  {
+    stack.length > 0 && (
+      <>
+        <h3 class="visually-hidden">Stack</h3>
+        <ul class="card__stack">
+          {stack.map((item) => (
+            <Tag label={item} />
+          ))}
+        </ul>
+      </>
+    )
+  }
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    transition: border-color var(--duration-fast) var(--ease);
+  }
+
+  /* The card responds to the title link's hover and focus, so the whole card
+     reads as one unit without being a click target. focus-within means
+     keyboard users get the same affordance as mouse users. */
+  .card:hover,
+  .card:focus-within {
+    border-color: var(--border-strong);
+  }
+
+  .card__title {
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+
+  .card__title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .card__title a:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .card__evidence {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  .card__evidence dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-normal);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  .card__evidence dd {
+    margin: 0;
+    margin-block-start: var(--space-1);
+    font-size: var(--text-base);
+  }
+
+  .card__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-block-start: auto;
+  }
+
+  @media (min-width: 768px) {
+    /* Labels move beside their values, so the four facts line up across
+       stacked cards and can be scanned vertically. */
+    .card__evidence {
+      grid-template-columns: 8rem 1fr;
+      gap: var(--space-3) var(--space-4);
+    }
+
+    .card__evidence dt {
+      grid-column: 1;
+      padding-block-start: 0.35em;
+    }
+
+    .card__evidence dd {
+      grid-column: 2;
+      margin-block-start: 0;
+    }
+  }
+</style>

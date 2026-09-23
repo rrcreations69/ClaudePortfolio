@@ -1,0 +1,94 @@
+---
+/**
+ * ProjectMeta — the client descriptor, the period, and an honest statement of
+ * what has been withheld.
+ *
+ * On the disclosure badge: the raw tier names (`sectoral`, `abstracted`) are
+ * internal jargon and mean nothing to a recruiter, so they are rendered as
+ * plain English instead. The badge is not an apology — saying plainly that a
+ * client has been anonymised reads as professional discretion, and it
+ * pre-empts the reader who would otherwise wonder why the detail is thin.
+ *
+ * A `named` project shows no badge: nothing has been withheld, so there is
+ * nothing to declare.
+ */
+import type { DISCLOSURE_TIERS } from '../../content/schema.ts';
+
+type Disclosure = (typeof DISCLOSURE_TIERS)[number];
+
+interface Props {
+  clientDescriptor: string;
+  period: { start: string; end?: string };
+  disclosure: Disclosure;
+}
+
+const { clientDescriptor, period, disclosure } = Astro.props;
+
+const DISCLOSURE_LABEL: Record<Disclosure, string | null> = {
+  named: null,
+  sectoral: 'Client anonymised',
+  abstracted: 'Client and sector anonymised',
+};
+
+const badge = DISCLOSURE_LABEL[disclosure];
+const periodLabel = period.end
+  ? period.start === period.end
+    ? period.start
+    : `${period.start} – ${period.end}`
+  : `${period.start} – present`;
+---
+
+<ul class="meta">
+  <li>{clientDescriptor}</li>
+  <li>
+    <span class="visually-hidden">Period: </span>
+    {periodLabel}
+  </li>
+  {badge && <li class="meta__badge">{badge}</li>}
+</ul>
+
+<style>
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  /* Separators are decoration, so they are drawn rather than typed — a "·"
+     in the markup would be read aloud by a screen reader. */
+  .meta > li + li::before {
+    content: '';
+    display: inline-block;
+    inline-size: var(--space-1);
+    block-size: var(--space-1);
+    margin-inline-end: var(--space-3);
+    border-radius: 50%;
+    background-color: var(--border-strong);
+    vertical-align: middle;
+  }
+
+  .meta__badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+  }
+
+  /* At narrow widths these items wrap onto separate lines, which left a
+     separator dot sitting at the start of a line where it read as a list
+     bullet. Below this breakpoint the items stack cleanly instead and the
+     separators are dropped entirely — the line break does that job. */
+  @media (max-width: 559px) {
+    .meta {
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .meta > li + li::before {
+      content: none;
+    }
+  }
+</style>
