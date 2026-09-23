@@ -1,0 +1,36 @@
+---
+/**
+ * Work index — CHUNK 03 placeholder.
+ * The real index, with ProjectCard and the content collection, is CHUNK 05.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Work"
+  description="Case studies in enterprise Android development and maintenance."
+  noindex
+  prose
+>
+  <h1>Work</h1>
+  <p>
+    Case studies are in preparation. Each one covers a single piece of
+    production work: the problem, what I personally did, how it was
+    investigated, and how the fix was validated.
+  </p>
+  <p class="pending">
+    <strong>[CONTENT REQUIRED]</strong> Case study content is CHUNK 07, blocked
+    on CHUNK 00 (content and confidentiality clearance).
+  </p>
+</BaseLayout>
+
+<style>
+  .pending {
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+</style>

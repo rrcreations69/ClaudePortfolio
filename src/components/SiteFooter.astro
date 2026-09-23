@@ -1,0 +1,99 @@
+---
+/**
+ * SiteFooter — a second route to contact and the resume, for the visitor who
+ * scrolled instead of looking up.
+ *
+ * Contact links are intentionally absent until the real values are confirmed
+ * (content register CG-07). A footer with a placeholder email is worse than a
+ * footer without one.
+ */
+import Link from './Link.astro';
+import { site } from '../data/site';
+
+interface Props {
+  showResume: boolean;
+}
+
+const { showResume } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell site-footer__inner">
+    <p class="site-footer__meta">
+      <span>&copy; {year} {site.name}</span>
+    </p>
+
+    <nav class="site-footer__nav" aria-label="Footer">
+      <ul class="site-footer__list">
+        {
+          site.nav.map((item) => (
+            <li>
+              <Link href={item.href} class="site-footer__link">
+                {item.label}
+              </Link>
+            </li>
+          ))
+        }
+        {
+          showResume && (
+            <li>
+              <Link href={site.resumeHref} class="site-footer__link">
+                Resume
+              </Link>
+            </li>
+          )
+        }
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-block-start: var(--space-24);
+    border-block-start: var(--border-width) solid var(--border);
+    background-color: var(--surface);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4) var(--space-6);
+    padding-block: var(--space-8);
+  }
+
+  .site-footer__meta {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .site-footer__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .site-footer__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* ≥44×44px — interaction rule 4, same as the header. */
+    min-block-size: 44px;
+    min-inline-size: 44px;
+    color: var(--text);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+
+  .site-footer__link:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+</style>

@@ -1,0 +1,181 @@
+---
+/**
+ * SiteHeader — name, three nav items, one action.
+ *
+ * NO JAVASCRIPT. No hamburger menu, no MobileNav island.
+ *
+ * The plan reserved `MobileNav` as one of the four permitted islands, but with
+ * three nav items and one button there is nothing to collapse. At narrow
+ * widths the nav simply wraps onto its own row — which works at 320px, works
+ * with JS disabled because there is no JS, and needs no focus trapping, no
+ * aria-expanded, no body-scroll lock and no escape-key handling.
+ *
+ * Interaction rule 5 decides it: a hamburger here would put every destination
+ * one tap further away in exchange for nothing. That makes content harder to
+ * reach, so it is not built. The island budget drops from four to three.
+ */
+import Link from './Link.astro';
+import { site, isCurrentPath } from '../data/site';
+
+interface Props {
+  /** Rendered only when the CV file actually exists — see BaseLayout. */
+  showResume: boolean;
+}
+
+const { showResume } = Astro.props;
+const pathname = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <Link href="/" class="site-header__name">
+      {site.shortName}
+    </Link>
+
+    <nav class="site-header__nav" aria-label="Main">
+      <ul class="site-header__list">
+        {
+          site.nav.map((item) => {
+            const current = isCurrentPath(item.href, pathname);
+            return (
+              <li>
+                <Link
+                  href={item.href}
+                  class="site-header__link"
+                  aria-current={current ? 'page' : undefined}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })
+        }
+        {
+          showResume && (
+            <li>
+              <Link href={site.resumeHref} class="site-header__resume">
+                Resume
+              </Link>
+            </li>
+          )
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-block-end: var(--border-width) solid var(--border);
+    background-color: var(--bg);
+  }
+
+  .site-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    padding-block: var(--space-4);
+  }
+
+  /* The name is the home link. Deliberately not accent-coloured — accent is
+     reserved for links, focus, active states and the thread marker, and a
+     coloured wordmark would read as decoration. */
+  .site-header__name {
+    color: var(--text);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-base);
+    text-decoration: none;
+    letter-spacing: var(--tracking-tight);
+    /* 44px touch target without visually inflating the text */
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+  }
+
+  .site-header__name:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .site-header__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .site-header__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* ≥44×44px touch target at every width — interaction rule 4.
+       Height alone is not enough: "Work" is only 37px wide at its natural
+       size, so min-inline-size carries the other half of the rule. */
+    min-block-size: 44px;
+    min-inline-size: 44px;
+    color: var(--text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+  }
+
+  .site-header__link:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  /* Active state — one of the four permitted uses of accent. The underline
+     carries the meaning too, so it does not rely on colour alone. */
+  .site-header__link[aria-current='page'] {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+  }
+
+  .site-header__resume {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    padding-inline: var(--space-4);
+    border: var(--border-width) solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    transition:
+      background-color var(--duration-fast) var(--ease),
+      border-color var(--duration-fast) var(--ease);
+  }
+
+  .site-header__resume:hover {
+    opacity: 1;
+    background-color: var(--surface);
+    border-color: var(--text);
+  }
+
+  /* At narrow widths the nav takes its own row, full width, evenly spread.
+     This is the entire "mobile menu". */
+  @media (max-width: 559px) {
+    .site-header__inner {
+      gap: var(--space-2);
+    }
+
+    .site-header__nav {
+      inline-size: 100%;
+    }
+
+    .site-header__list {
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+  }
+</style>

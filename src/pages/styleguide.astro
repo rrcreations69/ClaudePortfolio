@@ -7,8 +7,7 @@
 // It exists so the design system can be verified by looking at it: every token
 // rendered at its real value, in both themes, at every width. A design system
 // you cannot see is a design system you cannot check.
-import { Font } from 'astro:assets';
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const colours = [
   { token: '--bg', role: 'Page background' },
@@ -34,22 +33,8 @@ const typeScale = [
 const spacing = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Design system — Raymund Bermudes</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <Font cssVariable="--font-geist-sans" preload />
-    <Font cssVariable="--font-geist-mono" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+<BaseLayout title="Design system" noindex>
 
-    <div class="shell" style="padding-block: var(--space-16);">
-      <main id="main">
         <header class="prose" style="margin-block-end: var(--space-16);">
           <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-muted);">
             CHUNK 02 — temporary, removed before launch
@@ -196,7 +181,4 @@ const spacing = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32];
             </p>
           </div>
         </section>
-      </main>
-    </div>
-  </body>
-</html>
+</BaseLayout>

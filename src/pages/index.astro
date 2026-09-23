@@ -1,47 +1,37 @@
 ---
-// CHUNK 01/02 placeholder.
-// Proves the toolchain, the deploy pipeline, the security headers and now the
-// design system. The real home page is CHUNK 08 (hero) and CHUNK 09 (thread,
-// selected work, experience teaser).
-//
-// The document wrapper is inline here deliberately. Extracting it into a
-// BaseLayout with header, nav and footer is CHUNK 03 — the global shell.
-import { Font } from 'astro:assets';
-import '../styles/global.css';
-
-const buildDate = new Date().toISOString().slice(0, 10);
+/**
+ * Home — CHUNK 03 placeholder.
+ *
+ * The real home page is CHUNK 08 (hero) and CHUNK 09 (delivery thread,
+ * selected work, experience teaser). This exists so the shell has somewhere to
+ * live and can be navigated end to end.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Link from '../components/Link.astro';
+import { site } from '../data/site';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Raymund Bermudes — Portfolio (in development)</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <Font cssVariable="--font-geist-sans" preload />
-    <Font cssVariable="--font-geist-mono" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+<BaseLayout title={site.name} noindex prose>
+  <h1>{site.name}</h1>
+  <p class="lead">{site.role}</p>
+  <p>
+    Requirements to release, and everything after.
+    <!-- [VERIFY INFORMATION] Positioning line (CG-09) not yet chosen — this is
+         Option 3 from PHASE-1-DISCOVERY.md §10.1, shown as a placeholder only.
+         Replace in CHUNK 08 with whichever option Raymund picks. -->
+  </p>
+  <p>
+    This site is under construction. The foundation, security headers, design
+    system and global shell are in place. Content follows.
+  </p>
+  <p>
+    <Link href="/styleguide">View the design system</Link>
+  </p>
+</BaseLayout>
 
-    <div class="shell" style="padding-block: var(--space-24);">
-      <main id="main" class="prose">
-        <h1>Raymund Ryan Bermudes</h1>
-        <p style="color: var(--text-muted); font-size: var(--text-lg);">
-          Solution Analyst &amp; Android Developer.
-        </p>
-        <p>
-          This site is under construction. The project foundation, deploy
-          pipeline, security headers and design system are in place. Content
-          follows.
-        </p>
-        <p>
-          <a href="/styleguide">View the design system</a>
-        </p>
-        <p><small>Build {buildDate}</small></p>
-      </main>
-    </div>
-  </body>
-</html>
+<style>
+  .lead {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+  }
+</style>

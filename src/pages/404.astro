@@ -1,0 +1,17 @@
+---
+/**
+ * 404 — part of the 6-route IA, so it belongs to the shell rather than to QA.
+ * A 404 that keeps its header and footer leaves the visitor a way onward.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Link from '../components/Link.astro';
+---
+
+<BaseLayout title="Page not found" noindex prose>
+  <h1>Page not found</h1>
+  <p>That page does not exist, or it has moved.</p>
+  <p>
+    Try <Link href="/work">the work</Link>, <Link href="/about">about</Link>, or
+    <Link href="/contact">get in touch</Link>.
+  </p>
+</BaseLayout>

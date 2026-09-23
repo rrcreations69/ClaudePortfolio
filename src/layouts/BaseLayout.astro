@@ -1,0 +1,95 @@
+---
+/**
+ * BaseLayout — the document every page inherits.
+ *
+ * Owns: <head>, fonts, global styles, the skip link, header, footer and the
+ * <main> landmark. Pages supply only their content.
+ *
+ * Full SEO — canonical URLs, OG tags, sitemap, generated OG images — is
+ * CHUNK 15. What is here is the minimum a correct HTML document needs, plus
+ * the noindex switch, so nothing unfinished can be indexed in the meantime.
+ */
+import { existsSync } from 'node:fs';
+import { Font } from 'astro:assets';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { site } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Pages that are not finished set this. Removed per page at CHUNK 15. */
+  noindex?: boolean;
+  /** Prose pages get the 68ch measure; index pages manage their own width. */
+  prose?: boolean;
+}
+
+const { title, description, noindex = false, prose = false } = Astro.props;
+
+// The Resume button appears only when the CV actually exists. Until Raymund
+// supplies it (content register CG-04) the button is simply absent, because a
+// Resume link that 404s fails the recruiter test at its final step. Drop the
+// file into public/ and the button appears everywhere on the next build — no
+// code change needed.
+const showResume = existsSync(site.resumeFile);
+
+const fullTitle = title === site.name ? title : `${title} — ${site.shortName}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Font cssVariable="--font-geist-sans" preload />
+    <Font cssVariable="--font-geist-mono" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <SiteHeader showResume={showResume} />
+
+    <main id="main" class="site-main" tabindex="-1">
+      <div class="shell">
+        <div class={prose ? 'prose' : undefined}>
+          <slot />
+        </div>
+      </div>
+    </main>
+
+    <SiteFooter showResume={showResume} />
+  </body>
+</html>
+
+<style>
+  body {
+    /* Footer sits at the bottom on short pages without position tricks. */
+    display: flex;
+    flex-direction: column;
+    min-block-size: 100dvh;
+  }
+
+  .site-main {
+    flex: 1;
+    padding-block: var(--space-16);
+  }
+
+  /* The skip link targets <main>, which needs tabindex="-1" to receive focus.
+     Suppress the resulting outline on the container — the focus ring belongs
+     on the interactive elements inside it, not the whole page region. */
+  .site-main:focus {
+    outline: none;
+  }
+
+  @media (min-width: 768px) {
+    .site-main {
+      padding-block: var(--space-24);
+    }
+  }
+</style>

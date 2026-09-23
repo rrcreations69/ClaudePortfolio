@@ -1,0 +1,29 @@
+---
+/**
+ * Contact — CHUNK 03 placeholder.
+ * The real page is CHUNK 11. Per D6: links only. No form, no form backend,
+ * no analytics — zero third-party origins.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact" noindex prose>
+  <h1>Contact</h1>
+  <p class="pending">
+    <strong>[CONTENT REQUIRED]</strong> Published email address (D7 — a
+    dedicated address, not yet created), LinkedIn and GitHub URLs confirmed
+    public and current (CG-07), and the resume PDF (CG-04). This page is built
+    in CHUNK 11.
+  </p>
+</BaseLayout>
+
+<style>
+  .pending {
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+</style>

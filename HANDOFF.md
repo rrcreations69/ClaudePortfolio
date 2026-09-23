@@ -6,11 +6,11 @@ Its job is to answer, in under a minute: what is true right now, what is blocked
 **Update rule:** whoever ends a session updates this file. A chunk's status changes here *and* in the
 PRD workbook, or it did not change. Do not let this file drift — a stale handoff is worse than none.
 
-- **Last updated:** 2026-09-22
-- **Updated by:** Claude Code (session 2 — blockers cleared, CHUNK 01 scaffolded)
-- **Phase:** **CHUNK 01 COMPLETE.** CHUNK 00 in progress — gathering case-study content.
-- **Build state:** Astro 7.3.3 scaffolded. `astro check` and `astro build` both clean.
-  Output is **zero JavaScript, 2,387 bytes**.
+- **Last updated:** 2026-09-23
+- **Updated by:** Claude Code (session 3 — CHUNK 02 design system, CHUNK 03 global shell)
+- **Phase:** **CHUNKS 01, 02, 03 COMPLETE.** CHUNK 00 in progress. Next: CHUNK 04 (content layer).
+- **Build state:** 6 routes building. `astro check` 0/0/0, build clean.
+  Output is **zero JavaScript, 102.3 KB** total including both fonts.
 - **Live:** https://raymundbermudes.vercel.app — deployed, security headers verified.
 - **Repo:** `rrcreations69/ClaudePortfolio` (private), branch `main`.
 
@@ -396,8 +396,8 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 |---|---|---|---|
 | 00 | Content & confidentiality clearance (no code) | **In Progress** | Waiting on Raymund’s CTBC recollections |
 | 01 | Project foundation + deploy + security headers | **COMPLETE** | — |
-| 02 | Design system | **Ready to start** | — (01 foundation is in place) |
-| 03 | Global shell | Not Started | 02 |
+| 02 | Design system | **COMPLETE** | — |
+| 03 | Global shell | **COMPLETE** | — |
 | 04 | Content layer | **Ready to start** | — (01 foundation is in place) |
 | 05 | Work index + ProjectCard | Not Started | 04 |
 | 06 | Case study system + Delivery Thread | Not Started | 04, stage-count verify |
@@ -477,5 +477,6 @@ Nothing is guessed, approximated or inferred.
 
 | Date | Session | What happened |
 |---|---|---|
+| 2026-09-23 | 3 | **CHUNK 02 (design system) and CHUNK 03 (global shell) complete.** Tokens as real custom properties consumed by Tailwind via `@theme`; Geist self-hosted through Astro's Fonts API; `BaseLayout`, `SiteHeader`, `SiteFooter`, a `Link` component that enforces `rel="noopener noreferrer"`, typed site config, and placeholder pages so the shell is navigable end to end. **Deviation: no `MobileNav` island** — three nav items and one action have nothing to collapse, so the nav wraps instead; island budget drops 4 → 3. **Defect found and fixed in verification:** nav touch targets were 44px tall but 37px wide, failing the ≥44×44 rule. Hit the predicted OneDrive `EBUSY` lock on a build; a retry succeeded. 6 routes, zero JavaScript, 102.3 KB. |
 | 2026-09-22 | 2 | **Cleared both blockers.** Node v24.19.0 + npm 11.17.0 confirmed working (`npm ping` → `PONG`); the earlier "not installed" result was correct at the time, and Node was installed since. Stray home-level `.git` confirmed already gone (not deleted by Claude). Ran `git init -b main` in the project folder and wrote `.gitignore` before any commit — `git status` now shows 5 files, none from the user profile. Raised two new items: **B5** (project sits in a syncing OneDrive folder) and **B6** (git identity is a work email, permanent in public commit history). B5 decided — **project stays at `Documents\Rr`**, relocation declined, mitigations recorded. B6 resolved — repo-local identity set to the GitHub noreply address. Scanned the planning docs before committing and found CTBC/SBC/CASECenter throughout, including the SBC security association that D5 puts at `abstracted` tier — raised it, and **D14** was decided: **the GitHub repo is private**. First commit made (`ad51196`), authored by the noreply address. No scaffolding, no dependency installed, no remote added. |
 | 2026-09-22 | 1 | Read `CLAUDE.md` + `PHASE-1-DISCOVERY.md`. Ran environment gate: **FAIL** — Node/npm absent; git, registry reachability and corporate-restriction checks all pass. Confirmed B2 (home-directory git repo, 0 commits, no exposure yet). Flagged the `docs/` path discrepancy. Created this file. **Settled all of D1–D13** — 11 as recommended, D9 and D13 amended; B3 and B4 closed. Mirrored all outcomes into the PRD workbook (sheets 11, 18, 10). No code written, no dependency installed, no git operation run. |
