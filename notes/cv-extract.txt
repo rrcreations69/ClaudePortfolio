@@ -1,0 +1,71 @@
+Raymund Ryan Bermudes
+Solutions Analyst & Enterprise Systems Developer
+                   Cavite, Philippines | raymund.bermudes21@gmail.com | linkedin.com/in/raymundbermudes
+
+
+
+PROFESSIONAL SUMMARY
+Results-driven Solutions Analyst and Mobile Developer with 5+ years of experience delivering enterprise systems,
+fintech decisioning platforms, and Android applications. Adept at translating complex business requirements into scalable
+technical solutions, leading API integrations, and driving full system lifecycle delivery from design through production.
+Experienced in Agile environments with a strong track record of cross-functional collaboration. Seeking an overseas
+opportunity to bring enterprise-grade technical expertise to global organisations across Europe, the UK, or the US.
+
+CORE COMPETENCIES
+Enterprise Systems                 Credit decisioning platforms, SDLC, system integration, REST APIs
+Mobile Development                 Android (Java / Kotlin) — feature development, legacy maintenance, production delivery
+Internal Tooling                   Retool application development for business workflow automation
+API & Integrations                 REST API design, Postman, third-party service integration
+Languages                          Java · Kotlin · C# · JavaScript · PHP · Oracle PL/SQL
+Process & Collaboration            Agile / Scrum, cross-team coordination (QA, UX, Backend, Product)
+Client Engagement                  Stakeholder demos, end-user training, on-site technical support
+
+PROFESSIONAL EXPERIENCE
+Solutions Analyst
+GDS Link Asia · Makati, Philippines · Jan 2024 – Present
+  • Lead end-to-end implementation of enterprise decisioning systems, aligning technical architecture with business
+  analytics requirements.
+  • Drive delivery of CASE Center policy systems for credit risk and decision automation across fintech clients.
+  • Build and maintain internal operational tools using Retool, improving workflow efficiency and reducing manual
+  overhead.
+  • Manage REST API integrations and coordinate delivery milestones across Product, QA, and Backend Engineering
+  teams.
+  • Identify and resolve UI inconsistencies through structured engineering reviews, improving system reliability and user
+  experience.
+
+Junior Android Developer
+GDS Link Asia · Makati, Philippines · Jul 2022 – Dec 2023
+  • Developed and maintained production Android applications using Java and Kotlin within enterprise-grade
+  environments.
+  • Implemented new features in complex legacy systems while preserving stability, performance, and backward
+  compatibility.
+  • Collaborated with UI/UX, QA, and Backend teams within Agile sprints to deliver reliable, production-ready mobile
+  features.
+  • Improved application stability through systematic debugging, edge-case handling, and code reviews.
+  • Contributed to continuous delivery workflows, supporting regular release cycles and hotfix deployments.
+
+System Specialist
+MCS Ventures · Bacoor, Cavite, Philippines · 2019 – 2021
+  • Served as an all-around enterprise systems developer managing full SDLC using C#, Java, and Oracle PL/SQL.
+  • Provided on-site client technical support including installation, troubleshooting, and live issue resolution.
+  • Led production deployments and system updates with a focus on zero-downtime releases and operational stability.
+  • Conducted system demonstrations and training sessions for clients and end-users to drive adoption and proficiency.
+  • Acted as escalation point for critical incidents, ensuring timely resolution and high client satisfaction.
+  • Mentored junior staff on system functionality, workflows, and operational best practices.
+IT Field Technician (Internship)
+Pipol Broadband & Telecommunication Corp. · Bacoor, Cavite, Philippines · 2018 – 2019
+  • Delivered technical support across multiple sites including installation, troubleshooting, and preventive maintenance
+  of IT infrastructure.
+
+
+EDUCATION
+Bachelor of Science in Information Technology
+Cavite State University · 2015 – 2019
+
+
+ADDITIONAL INFORMATION
+Availability: Open to full relocation to Europe, UK, or the US. Available for visa sponsorship discussions.
+Work Authorisation: Philippine passport holder. Eligible to apply for work visas (Skilled Worker / Tier 2 / H-1B
+equivalent).
+Languages: Filipino (native), English (professional proficiency).
+
