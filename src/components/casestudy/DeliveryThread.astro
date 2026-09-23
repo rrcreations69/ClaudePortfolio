@@ -99,7 +99,14 @@ const { items } = Astro.props;
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     letter-spacing: 0.04em;
-    opacity: 0.8;
+    /* NO opacity here.
+       This previously carried `opacity: 0.8`, which blended --text-muted
+       (#535349, a genuine 7.2:1 against white) down to #75756d — 4.64:1.
+       That silently broke the AAA guarantee the whole design system rests
+       on, and axe caught it on all six stage labels.
+       The label is already differentiated by size, monospace and
+       --text-muted. It does not need dimming, and dimming tokens is how a
+       verified contrast ratio stops being true. */
   }
 
   .thread__text {
