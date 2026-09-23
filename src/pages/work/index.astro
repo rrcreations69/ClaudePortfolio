@@ -1,9 +1,18 @@
 ---
 /**
- * Work index — CHUNK 03 placeholder.
- * The real index, with ProjectCard and the content collection, is CHUNK 05.
+ * Work index — CHUNK 04 wiring.
+ *
+ * Reads the collection so the content layer is proven end to end rather than
+ * merely defined. The real index — ProjectCard, the evidence block, ordering
+ * and featured handling — is CHUNK 05; this renders the honest empty state
+ * until there is something to list.
  */
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const projects = (await getCollection('work')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <BaseLayout
@@ -18,10 +27,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     production work: the problem, what I personally did, how it was
     investigated, and how the fix was validated.
   </p>
-  <p class="pending">
-    <strong>[CONTENT REQUIRED]</strong> Case study content is CHUNK 07, blocked
-    on CHUNK 00 (content and confidentiality clearance).
-  </p>
+
+  {
+    projects.length === 0 ? (
+      <p class="pending">
+        <strong>[CONTENT REQUIRED]</strong> The content layer is wired and the
+        collection is queryable — it is simply empty. Case study content is
+        CHUNK 07, blocked on CHUNK 00 (content and confidentiality clearance).
+        No placeholder project is committed, because a fabricated case study
+        would be worse than an empty page.
+      </p>
+    ) : (
+      <ul>
+        {projects.map((project) => (
+          <li>
+            <a href={`/work/${project.data.slug}`}>{project.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </BaseLayout>
 
 <style>

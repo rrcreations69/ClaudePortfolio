@@ -1,5 +1,13 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "exclude": ["dist"],
+  "compilerOptions": {
+    // Imports carry explicit .ts extensions so that the same modules resolve
+    // under both Vite (the Astro build) and plain Node (scripts/*.ts, run via
+    // Node's built-in type stripping). Nothing here is ever emitted by tsc —
+    // Astro owns the build — so this only affects resolution.
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
 }

@@ -2,6 +2,8 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
+import mdx from '@astrojs/mdx';
+
 // https://astro.build/config
 export default defineConfig({
   // Production origin. Per D9 the site stays on *.vercel.app permanently, so
@@ -51,4 +53,6 @@ export default defineConfig({
       fallbacks: ['ui-monospace', 'monospace'],
     },
   ],
+
+  integrations: [mdx()],
 });

@@ -12,13 +12,16 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "verify": "astro check && astro build",
-    "astro": "astro"
+    "verify": "npm run check:schema && astro check && astro build",
+    "astro": "astro",
+    "check:schema": "node scripts/check-schema.ts"
   },
   "dependencies": {
+    "@astrojs/mdx": "^8.0.2",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.3",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "zod": "^4.6.5"
   },
   "allowScripts": {
     "esbuild": true
