@@ -89,6 +89,8 @@ were amended.** These are now project facts — do not re-open one without a wri
 | D12 | Deployment timing | **Deploy from CHUNK 01**, with security headers, not at P23 | 2026-09-22 |
 | D13 | Vercel plan | **AMENDED — Hobby.** Site is job-seeking, not client-soliciting. See §3.3 | 2026-09-22 |
 | **D14** | **GitHub repository visibility** | **PRIVATE.** New decision, not in §10.1 — raised when the first commit was prepared. See §3.4 | 2026-09-22 |
+| **D15** | **Positioning** | **"Solutions Analyst & Enterprise Systems Developer"** — matches the CV. Was "Solution Analyst & Android Developer". See §3.6 | 2026-09-23 |
+| **D16** | **Experience guardrail** | **Widened to match the CV.** `CLAUDE.md`'s attributable-experience list now reflects what Raymund already claims publicly. See §3.7 | 2026-09-23 |
 
 ### 3.1 D5 — confidentiality, as confirmed
 
@@ -181,6 +183,43 @@ no change to the site, so this costs nothing except recruiters being unable to b
 
   Optionally also check *Vercel → Settings → Deployment Protection* for what the Hobby plan offers.
   Treat any protection found there as defence in depth, not as a substitute for the pre-commit gate.
+
+### 3.6 D15 — positioning now matches the CV
+
+Raymund supplied his CV on 2026-09-23. It says **"Solutions Analyst & Enterprise Systems
+Developer"**; the project had been built around "Solution Analyst & Android Developer". **A
+portfolio must not contradict the CV attached to it** — that is the first inconsistency a recruiter
+can check, and the cheapest way to lose their trust.
+
+The CV also showed the framing was off on the facts: **Android was the previous role.**
+
+| Role | Dates |
+|---|---|
+| Solutions Analyst, GDS Link Asia | Jan 2024 – present |
+| Junior Android Developer, GDS Link Asia | Jul 2022 – Dec 2023 |
+
+Android is still genuine, current work — he remains the sole maintainer of a production mobile
+application — but it is one strand, not the headline.
+
+**Consequence: the three positioning-line drafts in `PHASE-1-DISCOVERY.md` §10.1 are now stale.**
+All three lead with Android. CG-09 needs fresh drafts against the new positioning before CHUNK 08.
+
+### 3.7 D16 — the experience guardrail now matches the CV
+
+`CLAUDE.md`'s list of attributable experience was written before the CV existed and omitted things
+Raymund has claimed publicly for years: C#, JavaScript, PHP, Oracle PL/SQL, Agile/Scrum,
+client-facing demos and training, production deployments, incident escalation, mentoring.
+
+The list was not wrong, merely incomplete — and an incomplete guardrail blocks accurate history,
+which is the opposite of what it is for. It has been rewritten from the CV, grouped by category.
+
+**What did NOT change:** the rule itself. Anything absent from the list is still unattributable
+without asking. **n8n, Claude Code and Codex remain excluded** — Raymund described them as things he
+is learning, not things he has delivered with, and they must not appear in Skills or be implied
+anywhere.
+
+**Also now public, per his own CV:** his employer (GDS Link Asia), the tool (CASECenter) and the
+sector (fintech / credit decisioning). **Individual clients remain restricted.** D5 is untouched.
 
 ### 3.5 Still open — not part of D1–D13
 

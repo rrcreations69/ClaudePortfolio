@@ -4,7 +4,9 @@ Operating instructions for Claude Code on this repository. Read this before doin
 
 ## What this is
 
-A production portfolio website for **Raymund Ryan Bermudes**, positioned as a **Solution Analyst & Android Developer** — specifically, someone who spans *Requirement → Analysis → Design → Development → Testing → UAT → Release → Support*, not someone who only writes Android code.
+A production portfolio website for **Raymund Ryan Bermudes**, positioned as a **Solutions Analyst & Enterprise Systems Developer** — specifically, someone who spans *Requirement → Analysis → Design → Development → Testing → UAT → Release → Support*, not someone who only writes code.
+
+**Positioning confirmed 2026-09-23 (D15)** to match his CV and LinkedIn. It was previously "Solution Analyst & Android Developer"; that was changed because a portfolio must not contradict the CV attached to it, and because Android was his *previous* role (Junior Android Developer, Jul 2022 – Dec 2023) rather than his current one (Solutions Analyst, Jan 2024 – present). Android remains genuine, current work — he is still the sole maintainer of a production mobile application — but it is one strand of the story, not the headline.
 
 Audience: recruiters, hiring managers, technical leads, potential clients. It is a real professional artefact, not a template exercise.
 
@@ -12,24 +14,34 @@ Audience: recruiters, hiring managers, technical leads, potential clients. It is
 
 | Document | Role |
 |---|---|
-| `docs/PRD-Progress-Tracker.xlsx` | The PRD, roadmap, QA checklist, risk register, decision log and progress tracker. 19 sheets. **Update it as work completes.** |
-| `docs/PHASE-1-DISCOVERY.md` | The full architecture, IA, UX strategy, design system and chunk plan. Every decision below is argued there. |
+| **`HANDOFF.md`** | **Read this first, every session.** Current state, blockers, decisions D1–D16, chunk board, what's next. |
+| `Raymund_Portfolio_PRD_Progress_Tracker.xlsx` | The PRD, roadmap, QA checklist, risk register, decision log and progress tracker. 19 sheets. **Update it as work completes.** |
+| `PHASE-1-DISCOVERY.md` | The full architecture, IA, UX strategy, design system and chunk plan. Every decision below is argued there. |
+| `notes/` | CHUNK 00 raw content and CV findings. **Private working notes — never published, never built.** |
 | This file | The short version Claude Code needs every session. |
 
-If this file and `PHASE-1-DISCOVERY.md` disagree, the discovery report wins and this file is wrong — fix it.
+All four live at the repository root. (Earlier versions of this file referred to a `docs/` directory; it never existed.)
+
+If this file and `PHASE-1-DISCOVERY.md` disagree, the discovery report wins and this file is wrong — fix it. If either disagrees with `HANDOFF.md` about *current state*, `HANDOFF.md` wins, because it is the one kept up to date.
 
 ## Current status
 
-**Phase 1 (discovery & architecture): COMPLETE.**
-**Next: CHUNK 00 (content, no code) and CHUNK 01 (project foundation).**
+**Phase 1: COMPLETE. CHUNKS 01–05: COMPLETE. CHUNK 00: in progress.**
 
-Nothing has been built. There is no `package.json` yet.
+The site is live at **https://raymundbermudes.vercel.app** — Astro 7 on Vercel Hobby, from the private repo `rrcreations69/ClaudePortfolio`. Six routes build; zero JavaScript ships; all nine security headers verified against live responses.
 
-### Blocking before CHUNK 01
+Built so far: project foundation and security headers (01) · design system and tokens (02) · global shell, nav, footer, `Link` (03) · content collection and schema guards (04) · work index and `ProjectCard` (05).
 
-1. Decisions **D1–D13** in `PHASE-1-DISCOVERY.md` §10.1 approved or amended by Raymund. **D5 (confidentiality tiers) is the one that matters and must not be assumed.**
-2. `node -v` ≥ 22 and `npm -v` working. `git --version`. A GitHub repo. Verify before scaffolding, not during.
-3. This may be a corporate-managed machine — npm registry access behind a proxy is a live possibility. If install fails, say so and stop; do not work around it silently.
+**Next: CHUNK 06** — case study system and Delivery Thread. Then 07 (real content, blocked on 00), 08–11 (pages), 12–16 (QA).
+
+**Decisions D1–D16 are all settled.** See `HANDOFF.md` §3. Do not re-open one without writing down why.
+
+### Still blocked / still needed
+
+1. **CHUNK 07 is blocked on CHUNK 00.** The case study needs Raymund's own account — see `notes/CHUNK-00-content.md`.
+2. **The Delivery Thread stage count is unresolved** — 8 stages or 7. See the Delivery Thread note below. Blocks CHUNK 06's rail.
+3. **The CV PDF is not cleared for publication.** Ask again at CHUNK 11. Until then the Resume button correctly does not render.
+4. **`git push` is blocked for Claude** by this session's auto-approval. Claude commits; Raymund pushes.
 
 ## The stack (decided, Phase 1)
 
@@ -49,8 +61,21 @@ Nothing has been built. There is no `package.json` yet.
 
 No invented metrics, clients, revenue, user counts, performance improvements, awards, certifications, technologies, responsibilities, testimonials or outcomes. If information is missing, write `[CONTENT REQUIRED]` or `[VERIFY INFORMATION]` and stop. Do not guess, do not approximate dates, do not infer a client's industry.
 
-Raymund's actual experience — nothing may be attributed to him beyond this list without asking:
-enterprise Android development and maintenance · Java / Kotlin · REST API integration · database integration · application troubleshooting · production issue investigation · UAT support · application releases · client requirements analysis · technical problem solving · business application development · security remediation · enterprise system support · Retool / business applications · CASECenter / enterprise workflow systems · XSLT / report development.
+Raymund's actual experience — nothing may be attributed to him beyond this list without asking.
+
+**Updated 2026-09-23 (D16) from his CV**, which is his own attestation and therefore authoritative. The earlier list was not wrong, just written before the CV was available, and it was blocking accurate history.
+
+- **Languages:** Java · Kotlin · C# · JavaScript · PHP · Oracle PL/SQL
+- **Mobile:** enterprise Android development and maintenance · feature work in complex legacy systems · backward compatibility · systematic debugging and edge-case handling
+- **Enterprise systems:** credit decisioning platforms · CASECenter policy systems for credit risk and decision automation · enterprise system support · full SDLC ownership · business application development · Retool internal tooling · XSLT / report development
+- **Integration & data:** REST API design and integration · Postman · database integration
+- **Delivery & operations:** UAT support · application releases · production deployments and zero-downtime releases · hotfix and continuous-delivery workflows · production issue investigation · application troubleshooting · incident escalation · security remediation
+- **Analysis & collaboration:** client requirements analysis · technical problem solving · Agile / Scrum · cross-team coordination with QA, UX, Backend and Product
+- **Client-facing:** stakeholder demos · end-user training · on-site technical support · mentoring junior staff
+
+**Still not attributable without asking:** anything absent above. In particular **n8n, Claude Code and Codex are things he is currently learning, not delivery experience** — they do not appear in Skills, and nothing may imply he has shipped with them.
+
+**Domain note.** His CV already states publicly that he works on credit decisioning and fintech systems at GDS Link Asia, using CASECenter. The employer, the tool and the sector are therefore public and may be named. **Individual clients are not** — see the confidentiality rules below.
 
 ### 2. Confidentiality — three-tier disclosure
 
@@ -64,7 +89,13 @@ Every project publishes at exactly one tier, recorded in frontmatter:
 
 **The tier applies to everything public, not just body copy: URLs, slugs, file names, image names and metadata, page titles, commit messages, and preview deployments.** A slug may contain a client name only when `disclosure === 'named'`.
 
-Proposed tiers (pending Raymund's confirmation — **do not write case-study content until confirmed**): CTBC → `sectoral`, SBC security work → `abstracted`, CASECenter → `sectoral`.
+**Tiers CONFIRMED by Raymund 2026-09-22 (D5):** CTBC → `sectoral` · SBC security work → `abstracted`.
+
+**CASECenter is not a client and has no tier.** It is a build tool his employer uses across many clients, and his own CV names it publicly. The tool, the employer (GDS Link Asia) and the sector (fintech / credit decisioning) may all be named. **CTBC and SBC may not**, in any public string.
+
+**The security case study publishes at `abstracted`, overriding its engagement's `sectoral` default** — security content is tiered by the more sensitive of the two. No specific vulnerabilities, library names, versions or attack paths, ever.
+
+This is enforced in `src/content/schema.ts` and `src/lib/confidentiality.ts`, which block restricted names from every public string — slug, title, description, clientDescriptor, problem, myRole, outcome. `npm run check:schema` proves the guards fire. **They are a forcing function, not verification: they cannot tell whether a sentence is true.**
 
 Never commit secrets, tokens, internal URLs, client credentials, unsanitised screenshots or private source.
 

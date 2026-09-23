@@ -23,7 +23,7 @@ export interface SiteConfig {
 export const site: SiteConfig = {
   name: 'Raymund Ryan Bermudes',
   shortName: 'Raymund Bermudes',
-  role: 'Solution Analyst & Android Developer',
+  role: 'Solutions Analyst & Enterprise Systems Developer',
 
   // Per D9 the site stays on *.vercel.app permanently. Must match
   // `site` in astro.config.mjs.
