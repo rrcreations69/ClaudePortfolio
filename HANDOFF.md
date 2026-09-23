@@ -7,8 +7,10 @@ Its job is to answer, in under a minute: what is true right now, what is blocked
 PRD workbook, or it did not change. Do not let this file drift — a stale handoff is worse than none.
 
 - **Last updated:** 2026-09-23
-- **Updated by:** Claude Code (session 3 — CHUNK 02 design system, CHUNK 03 global shell)
-- **Phase:** **CHUNKS 01–06 COMPLETE.** CHUNK 00 in progress. CHUNK 07 blocked on content.
+- **Updated by:** Claude Code (session 3 — alignment review, tracker reconciliation, CHUNK 00 draft)
+- **Phase:** Per the tracker (source of truth): **CHUNKS 03, 04, 05 Complete** · **01, 02, 06
+  Review** (each fails a "Done when" criterion — see below) · **CHUNK 00 In Progress**, and the
+  critical path.
 - **Build state:** 6 routes building. `astro check` 0/0/0, build clean.
   Output is **zero JavaScript, 102.3 KB** total including both fonts.
 - **Live:** https://raymundbermudes.vercel.app — deployed, security headers verified.
@@ -434,12 +436,12 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 | # | Chunk | Status | Blocked by |
 |---|---|---|---|
 | 00 | Content & confidentiality clearance (no code) | **In Progress** | Waiting on Raymund’s CTBC recollections |
-| 01 | Project foundation + deploy + security headers | **COMPLETE** | — |
-| 02 | Design system | **COMPLETE** | — |
+| 01 | Project foundation + deploy + security headers | **Review** | No ESLint, Prettier or CI |
+| 02 | Design system | **Review** | axe has never been run |
 | 03 | Global shell | **COMPLETE** | — |
 | 04 | Content layer | **COMPLETE** | — |
 | 05 | Work index + ProjectCard | **COMPLETE** | — |
-| 06 | Case study system + Delivery Thread | **COMPLETE** | — (stage-count question now only affects CHUNK 09) |
+| 06 | Case study system + Delivery Thread | **Review** | Disclosure, CodeBlock, ArchitectureFigure not built |
 | 07 | Real case study content | Not Started | **00** |
 | 08 | Home — hero | Not Started | 03, positioning line |
 | 09 | Home — thread, selected work, experience teaser | Not Started | 05, 06 |
