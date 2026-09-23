@@ -8,7 +8,7 @@ PRD workbook, or it did not change. Do not let this file drift — a stale hando
 
 - **Last updated:** 2026-09-23
 - **Updated by:** Claude Code (session 3 — alignment review, tracker reconciliation, CHUNK 00 draft)
-- **Phase:** Per the tracker (source of truth): **CHUNKS 03, 04, 05 Complete** · **01, 02, 06
+- **Phase:** Per the tracker (source of truth): **CHUNKS 01, 03, 04, 05 Complete** · **02, 06
   Review** (each fails a "Done when" criterion — see below) · **CHUNK 00 In Progress**, and the
   critical path.
 - **Build state:** 6 routes building. `astro check` 0/0/0, build clean.
@@ -436,7 +436,7 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 | # | Chunk | Status | Blocked by |
 |---|---|---|---|
 | 00 | Content & confidentiality clearance (no code) | **In Progress** | Waiting on Raymund’s CTBC recollections |
-| 01 | Project foundation + deploy + security headers | **Review** | No ESLint, Prettier or CI |
+| 01 | Project foundation + deploy + security headers | **Complete** | — |
 | 02 | Design system | **Review** | axe has never been run |
 | 03 | Global shell | **COMPLETE** | — |
 | 04 | Content layer | **COMPLETE** | — |

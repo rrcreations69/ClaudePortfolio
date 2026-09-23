@@ -88,7 +88,9 @@ export interface MarkdownHeading {
  * does. Only `##` headings become rail entries; deeper ones are detail within
  * a section, and listing them would turn a spine into an outline.
  */
-export function buildThread(headings: readonly MarkdownHeading[]): ThreadItem[] {
+export function buildThread(
+  headings: readonly MarkdownHeading[],
+): ThreadItem[] {
   return headings
     .filter((h) => h.depth === 2)
     .map((h) => {

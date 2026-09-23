@@ -1,0 +1,57 @@
+# CI — CHUNK 01 gap.
+#
+# The tracker required "CI green" at CHUNK 01 and no workflow existed, which is
+# why CHUNK 01 sat at Review. This closes that gap.
+#
+# It runs the same checks a developer runs locally, so CI can never pass
+# something `npm run verify` would reject, or vice versa.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Least privilege: this workflow only reads the repository.
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Matches `engines.node` in package.json. Astro 7 requires >=22.12.0.
+          node-version: '22.12'
+          cache: npm
+
+      # `npm ci` rather than `npm install`: installs exactly the lockfile and
+      # fails if package.json and the lockfile disagree.
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
+
+      # Asserts every confidentiality and content guard actually fires.
+      - name: Schema guards
+        run: npm run check:schema
+
+      - name: Type check
+        run: npm run check
+
+      - name: Build
+        run: npm run build
+
+      # Dependency audit. Fails on moderate and above; low-severity advisories
+      # in build-only tooling should not block a content site's deploy.
+      - name: Audit dependencies
+        run: npm audit --audit-level=moderate

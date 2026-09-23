@@ -78,18 +78,16 @@ const href = `/work/${slug}`;
     <dd>{outcome}</dd>
   </dl>
 
-  {
-    stack.length > 0 && (
-      <>
-        <h3 class="visually-hidden">Stack</h3>
-        <ul class="card__stack">
-          {stack.map((item) => (
-            <Tag label={item} />
-          ))}
-        </ul>
-      </>
-    )
-  }
+  {stack.length > 0 && (
+    <>
+      <h3 class="visually-hidden">Stack</h3>
+      <ul class="card__stack">
+        {stack.map((item) => (
+          <Tag label={item} />
+        ))}
+      </ul>
+    </>
+  )}
 </article>
 
 <style>
@@ -161,7 +159,7 @@ const href = `/work/${slug}`;
 
   @media (min-width: 768px) {
     /* Labels move beside their values, so the four facts line up across
-       stacked cards and can be scanned vertically. */
+             stacked cards and can be scanned vertically. */
     .card__evidence {
       grid-template-columns: 8rem 1fr;
       gap: var(--space-3) var(--space-4);

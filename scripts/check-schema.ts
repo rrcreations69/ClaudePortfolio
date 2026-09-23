@@ -60,13 +60,23 @@ check('detects a plain restricted name', containsRestrictedName('ctbc'));
 check('is case-insensitive', containsRestrictedName('CTBC'));
 check('defeats separator evasion (c-t-b-c)', containsRestrictedName('c-t-b-c'));
 check('defeats dot evasion (C.T.B.C)', containsRestrictedName('C.T.B.C'));
-check('finds a name inside a longer slug', containsRestrictedName('the-ctbc-appraisal-app'));
-check('passes innocent text', !containsRestrictedName('an enterprise mobile application'));
+check(
+  'finds a name inside a longer slug',
+  containsRestrictedName('the-ctbc-appraisal-app'),
+);
+check(
+  'passes innocent text',
+  !containsRestrictedName('an enterprise mobile application'),
+);
 
 console.log('\nSchema — the valid case must still pass\n');
 
 const ok = workSchema.safeParse(validEntry());
-check('a fully valid entry parses', ok.success, ok.success ? '' : JSON.stringify(ok.error.issues));
+check(
+  'a fully valid entry parses',
+  ok.success,
+  ok.success ? '' : JSON.stringify(ok.error.issues),
+);
 
 console.log('\nSchema — each guard must fire\n');
 
@@ -76,7 +86,9 @@ check('empty myRole is rejected (REQ-002)', !emptyRole.success);
 const emptyOutcome = workSchema.safeParse(validEntry({ outcome: '' }));
 check('empty outcome is rejected', !emptyOutcome.success);
 
-const emptyDescriptor = workSchema.safeParse(validEntry({ clientDescriptor: '' }));
+const emptyDescriptor = workSchema.safeParse(
+  validEntry({ clientDescriptor: '' }),
+);
 check('empty clientDescriptor is rejected', !emptyDescriptor.success);
 
 const tierMismatch = workSchema.safeParse(
@@ -91,7 +103,9 @@ const tierMismatch = workSchema.safeParse(
 );
 check('reviewed tier must match published tier', !tierMismatch.success);
 
-const clientOnAbstracted = workSchema.safeParse(validEntry({ client: 'Some Client' }));
+const clientOnAbstracted = workSchema.safeParse(
+  validEntry({ client: 'Some Client' }),
+);
 check('non-named project may not set `client`', !clientOnAbstracted.success);
 
 const namedWithoutClient = workSchema.safeParse(
@@ -108,7 +122,15 @@ check('named project must set `client`', !namedWithoutClient.success);
 
 console.log('\nSchema — client names must not reach public strings\n');
 
-const leakyFields = ['slug', 'title', 'description', 'clientDescriptor', 'problem', 'myRole', 'outcome'];
+const leakyFields = [
+  'slug',
+  'title',
+  'description',
+  'clientDescriptor',
+  'problem',
+  'myRole',
+  'outcome',
+];
 for (const field of leakyFields) {
   const leaked = workSchema.safeParse(
     validEntry({

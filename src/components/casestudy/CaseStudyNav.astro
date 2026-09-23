@@ -16,24 +16,22 @@ const { prev, next } = Astro.props;
 const hasEither = Boolean(prev || next);
 ---
 
-{
-  hasEither && (
-    <nav class="csnav" aria-label="Other case studies">
-      {prev && (
-        <Link href={`/work/${prev.slug}`} class="csnav__link csnav__link--prev">
-          <span class="csnav__dir">Previous</span>
-          <span class="csnav__title">{prev.title}</span>
-        </Link>
-      )}
-      {next && (
-        <Link href={`/work/${next.slug}`} class="csnav__link csnav__link--next">
-          <span class="csnav__dir">Next</span>
-          <span class="csnav__title">{next.title}</span>
-        </Link>
-      )}
-    </nav>
-  )
-}
+{hasEither && (
+  <nav class="csnav" aria-label="Other case studies">
+    {prev && (
+      <Link href={`/work/${prev.slug}`} class="csnav__link csnav__link--prev">
+        <span class="csnav__dir">Previous</span>
+        <span class="csnav__title">{prev.title}</span>
+      </Link>
+    )}
+    {next && (
+      <Link href={`/work/${next.slug}`} class="csnav__link csnav__link--next">
+        <span class="csnav__dir">Next</span>
+        <span class="csnav__title">{next.title}</span>
+      </Link>
+    )}
+  </nav>
+)}
 
 <style>
   .csnav {

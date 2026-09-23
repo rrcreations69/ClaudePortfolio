@@ -42,16 +42,10 @@ const finalRel = relTokens.size > 0 ? [...relTokens].join(' ') : undefined;
 const finalTarget = target ?? (isExternal ? '_blank' : undefined);
 ---
 
-<a
-  href={href}
-  class={className}
-  rel={finalRel}
-  target={finalTarget}
-  {...rest}
->
-  <slot />{
-    isExternal && finalTarget === '_blank' && (
-      <span class="visually-hidden">(opens in a new tab)</span>
-    )
-  }{isProtocolLink && null}
+<a href={href} class={className} rel={finalRel} target={finalTarget} {...rest}>
+  <slot />
+  {isExternal && finalTarget === '_blank' && (
+    <span class="visually-hidden">(opens in a new tab)</span>
+  )}
+  {isProtocolLink && null}
 </a>

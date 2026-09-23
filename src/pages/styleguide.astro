@@ -14,7 +14,10 @@ const colours = [
   { token: '--surface', role: 'Raised surface — cards, code blocks' },
   { token: '--text', role: 'Body text' },
   { token: '--text-muted', role: 'Secondary text, metadata' },
-  { token: '--accent', role: 'Links, focus, active, thread marker — nothing else' },
+  {
+    token: '--accent',
+    role: 'Links, focus, active, thread marker — nothing else',
+  },
   { token: '--border', role: 'Hairlines, dividers' },
   { token: '--border-strong', role: 'Emphasised borders' },
 ];
@@ -34,151 +37,151 @@ const spacing = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32];
 ---
 
 <BaseLayout title="Design system" noindex>
+  <header class="prose" style="margin-block-end: var(--space-16);">
+    <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-muted);">
+      CHUNK 02 — temporary, removed before launch
+    </p>
+    <h1>Design system</h1>
+    <p style="color: var(--text-muted);">
+      Every token at its real value. Switch your OS between light and dark to
+      check both themes — the toggle itself ships in CHUNK 12.
+    </p>
+  </header>
 
-        <header class="prose" style="margin-block-end: var(--space-16);">
-          <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-muted);">
-            CHUNK 02 — temporary, removed before launch
-          </p>
-          <h1>Design system</h1>
-          <p style="color: var(--text-muted);">
-            Every token at its real value. Switch your OS between light and dark
-            to check both themes — the toggle itself ships in CHUNK 12.
-          </p>
-        </header>
+  {/* --- Colour ------------------------------------------------------ */}
+  <section style="margin-block-end: var(--space-24);">
+    <h2>Colour</h2>
+    <p style="color: var(--text-muted); margin-block: var(--space-4) var(--space-8); max-width: var(--width-prose);">
+      All eight text pairs clear WCAG AAA (7:1) against both
+      <code>--bg</code> and <code>--surface</code>, in both themes. Changing any
+      value means recomputing contrast.
+    </p>
+    <ul style="list-style: none; padding: 0; display: grid; gap: var(--space-3);">
+      {colours.map((c) => (
+        <li style="display: flex; align-items: center; gap: var(--space-4); border: var(--border-width) solid var(--border); border-radius: var(--radius-md); padding: var(--space-3);">
+          <span
+            style={`display:block; inline-size:56px; block-size:56px; border-radius:var(--radius-sm); border:1px solid var(--border-strong); background-color: var(${c.token}); flex: none;`}
+            aria-hidden="true"
+          />
+          <span>
+            <code style="font-size: var(--text-sm);">{c.token}</code>
+            <span style="display:block; color: var(--text-muted); font-size: var(--text-sm);">
+              {c.role}
+            </span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
 
-        {/* --- Colour ------------------------------------------------------ */}
-        <section style="margin-block-end: var(--space-24);">
-          <h2>Colour</h2>
-          <p style="color: var(--text-muted); margin-block: var(--space-4) var(--space-8); max-width: var(--width-prose);">
-            All eight text pairs clear WCAG AAA (7:1) against both
-            <code>--bg</code> and <code>--surface</code>, in both themes.
-            Changing any value means recomputing contrast.
-          </p>
-          <ul style="list-style: none; padding: 0; display: grid; gap: var(--space-3);">
-            {
-              colours.map((c) => (
-                <li style="display: flex; align-items: center; gap: var(--space-4); border: var(--border-width) solid var(--border); border-radius: var(--radius-md); padding: var(--space-3);">
-                  <span
-                    style={`display:block; inline-size:56px; block-size:56px; border-radius:var(--radius-sm); border:1px solid var(--border-strong); background-color: var(${c.token}); flex: none;`}
-                    aria-hidden="true"
-                  />
-                  <span>
-                    <code style="font-size: var(--text-sm);">{c.token}</code>
-                    <span style="display:block; color: var(--text-muted); font-size: var(--text-sm);">
-                      {c.role}
-                    </span>
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+  {/* --- Type -------------------------------------------------------- */}
+  <section style="margin-block-end: var(--space-24);">
+    <h2>Typography</h2>
+    <p style="color: var(--text-muted); margin-block: var(--space-4) var(--space-8); max-width: var(--width-prose);">
+      Geist Sans and Geist Mono, self-hosted — the browser never contacts a
+      third party. Weights 400, 500 and 700 only.
+    </p>
+    {typeScale.map((t) => (
+      <div style="border-block-end: var(--border-width) solid var(--border); padding-block: var(--space-4);">
+        <div style="display:flex; gap: var(--space-4); align-items:baseline; flex-wrap: wrap;">
+          <code style="font-size: var(--text-xs); color: var(--text-muted);">
+            {t.token}
+          </code>
+          <span style="font-size: var(--text-xs); color: var(--text-muted);">
+            {t.px} · {t.use}
+          </span>
+        </div>
+        <p
+          style={`font-size: var(${t.token}); line-height: var(--leading-tight); margin-block-start: var(--space-2);`}
+        >
+          Requirements to release, and everything after
+        </p>
+      </div>
+    ))}
 
-        {/* --- Type -------------------------------------------------------- */}
-        <section style="margin-block-end: var(--space-24);">
-          <h2>Typography</h2>
-          <p style="color: var(--text-muted); margin-block: var(--space-4) var(--space-8); max-width: var(--width-prose);">
-            Geist Sans and Geist Mono, self-hosted — the browser never contacts
-            a third party. Weights 400, 500 and 700 only.
-          </p>
-          {
-            typeScale.map((t) => (
-              <div style="border-block-end: var(--border-width) solid var(--border); padding-block: var(--space-4);">
-                <div style="display:flex; gap: var(--space-4); align-items:baseline; flex-wrap: wrap;">
-                  <code style="font-size: var(--text-xs); color: var(--text-muted);">
-                    {t.token}
-                  </code>
-                  <span style="font-size: var(--text-xs); color: var(--text-muted);">
-                    {t.px} · {t.use}
-                  </span>
-                </div>
-                <p style={`font-size: var(${t.token}); line-height: var(--leading-tight); margin-block-start: var(--space-2);`}>
-                  Requirements to release, and everything after
-                </p>
-              </div>
-            ))
-          }
+    <div style="margin-block-start: var(--space-8);">
+      <p style="font-weight: var(--weight-normal);">Weight 400 — body text</p>
+      <p style="font-weight: var(--weight-medium);">
+        Weight 500 — emphasis, UI labels
+      </p>
+      <p style="font-weight: var(--weight-bold);">Weight 700 — headings</p>
+      <p style="font-family: var(--font-mono); margin-block-start: var(--space-4);">
+        Geist Mono — code, metadata, the delivery thread
+      </p>
+    </div>
 
-          <div style="margin-block-start: var(--space-8);">
-            <p style="font-weight: var(--weight-normal);">Weight 400 — body text</p>
-            <p style="font-weight: var(--weight-medium);">Weight 500 — emphasis, UI labels</p>
-            <p style="font-weight: var(--weight-bold);">Weight 700 — headings</p>
-            <p style="font-family: var(--font-mono); margin-block-start: var(--space-4);">
-              Geist Mono — code, metadata, the delivery thread
-            </p>
-          </div>
+    <div
+      class="prose"
+      style="margin-block-start: var(--space-12); border: var(--border-width) solid var(--border); border-radius: var(--radius-md); padding: var(--space-6);"
+    >
+      <h3>Prose measure</h3>
+      <p>
+        Body copy is capped at 68 characters. This paragraph exists to show
+        where the line breaks and to confirm the measure holds at every width —
+        a line much longer than roughly this becomes tiring to read, because the
+        eye loses its place on the return sweep.
+      </p>
+      <p>
+        Line height is 1.65. Paragraph rhythm comes from a single spacing token,
+        not from ad-hoc margins.
+      </p>
+    </div>
+  </section>
 
-          <div class="prose" style="margin-block-start: var(--space-12); border: var(--border-width) solid var(--border); border-radius: var(--radius-md); padding: var(--space-6);">
-            <h3>Prose measure</h3>
-            <p>
-              Body copy is capped at 68 characters. This paragraph exists to show
-              where the line breaks and to confirm the measure holds at every
-              width — a line much longer than roughly this becomes tiring to
-              read, because the eye loses its place on the return sweep.
-            </p>
-            <p>
-              Line height is 1.65. Paragraph rhythm comes from a single spacing
-              token, not from ad-hoc margins.
-            </p>
-          </div>
-        </section>
+  {/* --- Spacing ----------------------------------------------------- */}
+  <section style="margin-block-end: var(--space-24);">
+    <h2>Spacing</h2>
+    <p style="color: var(--text-muted); margin-block: var(--space-4) var(--space-8); max-width: var(--width-prose);">
+      A strict 4px scale. No arbitrary values anywhere in the codebase.
+    </p>
+    <ul style="list-style:none; padding:0; display:grid; gap: var(--space-2);">
+      {spacing.map((s) => (
+        <li style="display:flex; align-items:center; gap: var(--space-4);">
+          <code style="font-size: var(--text-xs); color: var(--text-muted); inline-size: 10ch; flex:none;">
+            --space-{s}
+          </code>
+          <span
+            style={`display:block; block-size: var(--space-3); inline-size: var(--space-${s}); background-color: var(--accent);`}
+            aria-hidden="true"
+          />
+          <span style="font-size: var(--text-xs); color: var(--text-muted);">
+            {s * 4}px
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
 
-        {/* --- Spacing ----------------------------------------------------- */}
-        <section style="margin-block-end: var(--space-24);">
-          <h2>Spacing</h2>
-          <p style="color: var(--text-muted); margin-block: var(--space-4) var(--space-8); max-width: var(--width-prose);">
-            A strict 4px scale. No arbitrary values anywhere in the codebase.
-          </p>
-          <ul style="list-style:none; padding:0; display:grid; gap: var(--space-2);">
-            {
-              spacing.map((s) => (
-                <li style="display:flex; align-items:center; gap: var(--space-4);">
-                  <code style="font-size: var(--text-xs); color: var(--text-muted); inline-size: 10ch; flex:none;">
-                    --space-{s}
-                  </code>
-                  <span
-                    style={`display:block; block-size: var(--space-3); inline-size: var(--space-${s}); background-color: var(--accent);`}
-                    aria-hidden="true"
-                  />
-                  <span style="font-size: var(--text-xs); color: var(--text-muted);">
-                    {s * 4}px
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+  {/* --- Motion & focus ---------------------------------------------- */}
+  <section style="margin-block-end: var(--space-24);">
+    <h2>Motion &amp; focus</h2>
+    <p style="color: var(--text-muted); margin-block: var(--space-4) var(--space-8); max-width: var(--width-prose);">
+      150ms fast, 250ms standard, <code>cubic-bezier(0.2, 0, 0, 1)</code>.
+      Opacity and transform only. One global
+      <code>prefers-reduced-motion</code> kill switch — turn the setting on in
+      your OS and all motion stops, with no content lost, because nothing is
+      ever hidden pending an animation.
+    </p>
+    <p>
+      <a href="#main">Tab to this link to see the focus ring</a> — visible on
+      every interactive element, never removed.
+    </p>
+  </section>
 
-        {/* --- Motion & focus ---------------------------------------------- */}
-        <section style="margin-block-end: var(--space-24);">
-          <h2>Motion &amp; focus</h2>
-          <p style="color: var(--text-muted); margin-block: var(--space-4) var(--space-8); max-width: var(--width-prose);">
-            150ms fast, 250ms standard, <code>cubic-bezier(0.2, 0, 0, 1)</code>.
-            Opacity and transform only. One global
-            <code>prefers-reduced-motion</code> kill switch — turn the setting on
-            in your OS and all motion stops, with no content lost, because
-            nothing is ever hidden pending an animation.
-          </p>
-          <p>
-            <a href="#main">Tab to this link to see the focus ring</a> — visible
-            on every interactive element, never removed.
-          </p>
-        </section>
-
-        {/* --- Surfaces ---------------------------------------------------- */}
-        <section>
-          <h2>Surfaces</h2>
-          <div style="margin-block-start: var(--space-8); background-color: var(--surface); border: var(--border-width) solid var(--border); border-radius: var(--radius-md); padding: var(--space-6); max-width: var(--width-prose);">
-            <h3>Raised surface</h3>
-            <p style="margin-block-start: var(--space-3);">
-              <code>--surface</code> with a <code>--border</code> hairline. No
-              shadows, no gradients, no glass. Text on this background clears
-              AAA in both themes.
-            </p>
-            <p style="color: var(--text-muted); margin-block-start: var(--space-3);">
-              Muted text on a raised surface — the tightest contrast pairing in
-              the system, and it still clears 7:1.
-            </p>
-          </div>
-        </section>
+  {/* --- Surfaces ---------------------------------------------------- */}
+  <section>
+    <h2>Surfaces</h2>
+    <div style="margin-block-start: var(--space-8); background-color: var(--surface); border: var(--border-width) solid var(--border); border-radius: var(--radius-md); padding: var(--space-6); max-width: var(--width-prose);">
+      <h3>Raised surface</h3>
+      <p style="margin-block-start: var(--space-3);">
+        <code>--surface</code> with a <code>--border</code> hairline. No
+        shadows, no gradients, no glass. Text on this background clears AAA in
+        both themes.
+      </p>
+      <p style="color: var(--text-muted); margin-block-start: var(--space-3);">
+        Muted text on a raised surface — the tightest contrast pairing in the
+        system, and it still clears 7:1.
+      </p>
+    </div>
+  </section>
 </BaseLayout>

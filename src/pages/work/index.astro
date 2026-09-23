@@ -32,37 +32,35 @@ const hasProjects = projects.length > 0;
     </p>
   </div>
 
-  {
-    hasProjects ? (
-      <div class="wide">
-        <ProjectGrid>
-          {projects.map((project) => (
-            <li>
-              <ProjectCard
-                slug={project.data.slug}
-                title={project.data.title}
-                clientDescriptor={project.data.clientDescriptor}
-                disclosure={project.data.disclosure}
-                period={project.data.period}
-                problem={project.data.problem}
-                myRole={project.data.myRole}
-                outcome={project.data.outcome}
-                stack={project.data.stack}
-              />
-            </li>
-          ))}
-        </ProjectGrid>
-      </div>
-    ) : (
-      <p class="pending">
-        <strong>[CONTENT REQUIRED]</strong> The content layer is wired and the
-        collection is queryable — it is simply empty. Case study content is
-        CHUNK 07, blocked on CHUNK 00 (content and confidentiality clearance).
-        No placeholder project is committed, because a fabricated case study
-        would be worse than an empty page.
-      </p>
-    )
-  }
+  {hasProjects ? (
+    <div class="wide">
+      <ProjectGrid>
+        {projects.map((project) => (
+          <li>
+            <ProjectCard
+              slug={project.data.slug}
+              title={project.data.title}
+              clientDescriptor={project.data.clientDescriptor}
+              disclosure={project.data.disclosure}
+              period={project.data.period}
+              problem={project.data.problem}
+              myRole={project.data.myRole}
+              outcome={project.data.outcome}
+              stack={project.data.stack}
+            />
+          </li>
+        ))}
+      </ProjectGrid>
+    </div>
+  ) : (
+    <p class="pending">
+      <strong>[CONTENT REQUIRED]</strong> The content layer is wired and the
+      collection is queryable — it is simply empty. Case study content is CHUNK
+      07, blocked on CHUNK 00 (content and confidentiality clearance). No
+      placeholder project is committed, because a fabricated case study would be
+      worse than an empty page.
+    </p>
+  )}
 </BaseLayout>
 
 <style>

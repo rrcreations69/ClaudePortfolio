@@ -25,27 +25,29 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-{
-  items.length > 0 && (
-    <nav class="thread" aria-labelledby="thread-heading">
-      <h2 id="thread-heading" class="thread__heading">
-        Delivery thread
-      </h2>
-      <ol class="thread__list">
-        {items.map((item) => (
-          <li class="thread__item">
-            <a class="thread__link" href={`#${item.slug}`} data-thread-link={item.slug}>
-              {item.stageLabel && (
-                <span class="thread__stage">{item.stageLabel}</span>
-              )}
-              <span class="thread__text">{item.text}</span>
-            </a>
-          </li>
-        ))}
-      </ol>
-    </nav>
-  )
-}
+{items.length > 0 && (
+  <nav class="thread" aria-labelledby="thread-heading">
+    <h2 id="thread-heading" class="thread__heading">
+      Delivery thread
+    </h2>
+    <ol class="thread__list">
+      {items.map((item) => (
+        <li class="thread__item">
+          <a
+            class="thread__link"
+            href={`#${item.slug}`}
+            data-thread-link={item.slug}
+          >
+            {item.stageLabel && (
+              <span class="thread__stage">{item.stageLabel}</span>
+            )}
+            <span class="thread__text">{item.text}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
 
 <style>
   .thread {
@@ -72,7 +74,7 @@ const { items } = Astro.props;
 
   .thread__item {
     /* The line that makes it a thread. Drawn, not typed, so it is never
-       announced by a screen reader. */
+             announced by a screen reader. */
     border-inline-start: 2px solid var(--border);
     transition: border-color var(--duration-fast) var(--ease);
   }
@@ -191,7 +193,9 @@ const { items } = Astro.props;
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDeliveryThread, { once: true });
+    document.addEventListener('DOMContentLoaded', initDeliveryThread, {
+      once: true,
+    });
   } else {
     initDeliveryThread();
   }

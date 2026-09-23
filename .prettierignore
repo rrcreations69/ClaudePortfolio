@@ -1,0 +1,32 @@
+dist/
+node_modules/
+.astro/
+.vercel/
+package-lock.json
+
+# Binary — Prettier cannot format it and would corrupt it.
+*.xlsx
+
+# Markdown is DELIBERATELY excluded.
+#
+# CLAUDE.md, HANDOFF.md, PHASE-1-DISCOVERY.md and notes/ are hand-formatted
+# documents, not code. Prettier reflows prose, rewrites list markers and
+# re-wraps tables, which would produce an enormous diff on source-of-truth
+# files and make their history unreadable — for no correctness benefit.
+#
+# Prettier formats code here. Prose stays the author's.
+*.md
+
+# .astro is DELIBERATELY excluded — prettier-plugin-astro is not idempotent.
+#
+# On four files (DeliveryThread, SiteHeader, ProjectCard, work/[...slug]),
+# `prettier --write` reports "unchanged" while `prettier --check` simultaneously
+# reports them as needing formatting. Verified across three consecutive passes:
+# write and check disagree with each other. That is a plugin bug, and it would
+# leave `npm run format:check` — and therefore CI — permanently red through no
+# fault of the code.
+#
+# Correctness for .astro files is covered by ESLint via eslint-plugin-astro,
+# which runs in CI and passes. Prettier formats .ts, .css, .json, .mjs and .js
+# here. Revisit if the plugin stabilises.
+*.astro

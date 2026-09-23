@@ -21,29 +21,27 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="shell site-footer__inner">
     <p class="site-footer__meta">
-      <span>&copy; {year} {site.name}</span>
+      <span>
+        &copy; {year} {site.name}
+      </span>
     </p>
 
     <nav class="site-footer__nav" aria-label="Footer">
       <ul class="site-footer__list">
-        {
-          site.nav.map((item) => (
-            <li>
-              <Link href={item.href} class="site-footer__link">
-                {item.label}
-              </Link>
-            </li>
-          ))
-        }
-        {
-          showResume && (
-            <li>
-              <Link href={site.resumeHref} class="site-footer__link">
-                Resume
-              </Link>
-            </li>
-          )
-        }
+        {site.nav.map((item) => (
+          <li>
+            <Link href={item.href} class="site-footer__link">
+              {item.label}
+            </Link>
+          </li>
+        ))}
+        {showResume && (
+          <li>
+            <Link href={site.resumeHref} class="site-footer__link">
+              Resume
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   </div>

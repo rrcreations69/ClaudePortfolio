@@ -45,18 +45,16 @@ const { title, clientDescriptor, disclosure, period, problem, myRole, stack } =
     <dd class="head__role">{myRole}</dd>
   </dl>
 
-  {
-    stack.length > 0 && (
-      <>
-        <h2 class="visually-hidden">Stack</h2>
-        <ul class="head__stack">
-          {stack.map((item) => (
-            <Tag label={item} />
-          ))}
-        </ul>
-      </>
-    )
-  }
+  {stack.length > 0 && (
+    <>
+      <h2 class="visually-hidden">Stack</h2>
+      <ul class="head__stack">
+        {stack.map((item) => (
+          <Tag label={item} />
+        ))}
+      </ul>
+    </>
+  )}
 </header>
 
 <style>

@@ -3,7 +3,10 @@
 // Astro's defineCollection accepts any zod schema, and `zod` is declared as a
 // direct dependency pinned to the version Astro itself uses.
 import { z } from 'zod';
-import { containsRestrictedName, findRestrictedNames } from '../lib/confidentiality.ts';
+import {
+  containsRestrictedName,
+  findRestrictedNames,
+} from '../lib/confidentiality.ts';
 
 /**
  * The work collection schema.

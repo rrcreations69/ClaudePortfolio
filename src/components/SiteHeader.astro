@@ -34,31 +34,27 @@ const pathname = Astro.url.pathname;
 
     <nav class="site-header__nav" aria-label="Main">
       <ul class="site-header__list">
-        {
-          site.nav.map((item) => {
-            const current = isCurrentPath(item.href, pathname);
-            return (
-              <li>
-                <Link
-                  href={item.href}
-                  class="site-header__link"
-                  aria-current={current ? 'page' : undefined}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })
-        }
-        {
-          showResume && (
+        {site.nav.map((item) => {
+          const current = isCurrentPath(item.href, pathname);
+          return (
             <li>
-              <Link href={site.resumeHref} class="site-header__resume">
-                Resume
+              <Link
+                href={item.href}
+                class="site-header__link"
+                aria-current={current ? 'page' : undefined}
+              >
+                {item.label}
               </Link>
             </li>
-          )
-        }
+          );
+        })}
+        {showResume && (
+          <li>
+            <Link href={site.resumeHref} class="site-header__resume">
+              Resume
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   </div>
@@ -115,8 +111,8 @@ const pathname = Astro.url.pathname;
     align-items: center;
     justify-content: center;
     /* ≥44×44px touch target at every width — interaction rule 4.
-       Height alone is not enough: "Work" is only 37px wide at its natural
-       size, so min-inline-size carries the other half of the rule. */
+             Height alone is not enough: "Work" is only 37px wide at its natural
+             size, so min-inline-size carries the other half of the rule. */
     min-block-size: 44px;
     min-inline-size: 44px;
     color: var(--text);
