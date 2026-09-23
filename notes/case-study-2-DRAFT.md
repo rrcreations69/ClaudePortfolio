@@ -57,21 +57,36 @@ internal tools." Good as a *third*, shorter entry (**CG-14**).
 **Why it is weaker:** coordination stories are hard to make concrete without naming systems, and the
 technical substance may be thin once sanitised.
 
-**`[CONTENT REQUIRED]` — Raymund picks. Recommendation: A.**
+## ✅ DECIDED 2026-09-23 — Candidate A, the CASECenter work
+
+> **Source (Raymund):** "Go with casecenter"
+
+Candidates B (Retool) and C (API integration) are not discarded — B remains a reasonable third,
+shorter entry — but A is the case study.
 
 ---
 
-## Decision 2 — is this the same as the register's "SBC security work"?
+## ✅ Decision 2 — ANSWERED: SBC is not separate security work
 
-Still open from case study 1. Sheet 15 CG-02 lists *SBC security/troubleshooting work* as a separate
-item, but the VAPT described for case study 1 was on the **mobile** application.
+> **Source (Raymund):** "in SBC its just the same as CTBC i just maintain old mobile app which is
+> build differently using java"
 
-- If the VAPT **is** the SBC work → CG-02 is already spoken for by case study 1, and this document
-  becomes case study 2 outright.
-- If they are **different** → SBC security work is a third candidate, and would publish at
-  `abstracted` like all security content (D17).
+**The register's CG-02 is mis-scoped.** It lists *SBC security/troubleshooting work* as a distinct
+item. It is not: SBC is a **third mobile maintenance engagement** — an older application, built in
+**Java** rather than Kotlin, maintained the same way as the first.
 
-`[CONTENT REQUIRED]`
+**Consequences:**
+- CG-02 cannot be filled by SBC. This CASECenter case study fills it instead.
+- **SBC becomes the strongest candidate for CG-14**, the third and shorter entry: a second
+  maintained mobile application, in a different language, for a different client. It reinforces the
+  maintenance story without needing a full case study.
+- Three engagements, three shapes — which is a genuinely good spread:
+
+| | Engagement | Shape | Tier |
+|---|---|---|---|
+| Case study 1 | Mobile VAPT remediation | Deep technical judgement under constraint | `abstracted` |
+| **Case study 2** | **CASECenter policy system** | **End-to-end delivery, requirements to release** | `sectoral` |
+| Third entry | SBC legacy Java app | Breadth: a second app, a second language | `sectoral` or `abstracted` |
 
 ---
 
