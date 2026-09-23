@@ -1,0 +1,136 @@
+---
+/**
+ * Case study page — CHUNK 06.
+ *
+ * Layout: the delivery thread rail beside the prose on wide screens, stacked
+ * above it on narrow ones. The prose column keeps the 68ch measure; the rail
+ * lives outside it, so a long section title never squeezes the reading width.
+ *
+ * The slug comes from frontmatter rather than the filename, so the file can be
+ * named for a human and the URL can be written for the disclosure tier. The
+ * schema blocks a restricted client name from reaching either.
+ */
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudyHeader from '../../components/casestudy/CaseStudyHeader.astro';
+import CaseStudyNav from '../../components/casestudy/CaseStudyNav.astro';
+import DeliveryThread from '../../components/casestudy/DeliveryThread.astro';
+import { buildThread, STAGE_LABEL } from '../../lib/caseStudy.ts';
+
+export async function getStaticPaths() {
+  const entries = (await getCollection('work')).sort(
+    (a, b) => a.data.order - b.data.order,
+  );
+
+  return entries.map((entry, index) => ({
+    params: { slug: entry.data.slug },
+    props: {
+      entry,
+      // Neighbours are resolved here, in curated order, so the page itself
+      // never needs to know about the rest of the collection.
+      prev: index > 0 ? entries[index - 1] : undefined,
+      next: index < entries.length - 1 ? entries[index + 1] : undefined,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+
+/**
+ * Outcome is rendered from frontmatter rather than from the MDX body, because
+ * the schema requires it — an empty `outcome` fails the build, which a prose
+ * section could never guarantee. That means its heading is not in `headings`,
+ * so it is appended to the thread explicitly. Without this the rail would
+ * quietly omit a section that is visibly on the page.
+ *
+ * It maps to Release, matching "Result" in the Sheet 06 table.
+ */
+const OUTCOME_ID = 'outcome';
+const thread = [
+  ...buildThread(headings),
+  {
+    slug: OUTCOME_ID,
+    text: 'Outcome',
+    stage: 'release' as const,
+    stageLabel: STAGE_LABEL.release,
+  },
+];
+---
+
+<BaseLayout title={d.title} description={d.description}>
+  <CaseStudyHeader
+    title={d.title}
+    clientDescriptor={d.clientDescriptor}
+    disclosure={d.disclosure}
+    period={d.period}
+    problem={d.problem}
+    myRole={d.myRole}
+    stack={d.stack}
+  />
+
+  <div class="cs">
+    <aside class="cs__rail">
+      <DeliveryThread items={thread} />
+    </aside>
+
+    <div class="cs__body prose">
+      <Content />
+
+      <section class="cs__outcome" aria-labelledby={OUTCOME_ID}>
+        <h2 id={OUTCOME_ID}>Outcome</h2>
+        <p>{d.outcome}</p>
+      </section>
+    </div>
+  </div>
+
+  <CaseStudyNav
+    prev={prev && { slug: prev.data.slug, title: prev.data.title }}
+    next={next && { slug: next.data.slug, title: next.data.title }}
+  />
+</BaseLayout>
+
+<style>
+  .cs {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .cs__body > :global(* + *) {
+    margin-block-start: var(--space-6);
+  }
+
+  /* Section headings get room above them so the thread's jump target lands
+     with the heading near the top of the viewport rather than flush to it. */
+  .cs__body > :global(* + h2) {
+    margin-block-start: var(--space-16);
+    scroll-margin-block-start: var(--space-8);
+  }
+
+  .cs__body :global(h2) {
+    scroll-margin-block-start: var(--space-8);
+  }
+
+  .cs__outcome {
+    margin-block-start: var(--space-16);
+  }
+
+  .cs__outcome h2 {
+    scroll-margin-block-start: var(--space-8);
+  }
+
+  .cs__outcome p {
+    margin-block-start: var(--space-6);
+  }
+
+  @media (min-width: 1024px) {
+    .cs {
+      /* Rail beside the prose. The prose column is capped at its own measure,
+         so the rail takes the remainder rather than stretching the text. */
+      grid-template-columns: minmax(0, 16rem) minmax(0, var(--width-prose));
+      gap: var(--space-16);
+      align-items: start;
+    }
+  }
+</style>

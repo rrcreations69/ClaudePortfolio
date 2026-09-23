@@ -1,0 +1,58 @@
+---
+/**
+ * Callout — a note, a constraint, or a lesson.
+ *
+ * For use inside MDX. Three tones, all rendered the same way apart from the
+ * label: the point is to mark a passage as set apart, not to colour-code it.
+ * No icons, no coloured backgrounds, no warning triangles — those belong to
+ * documentation UI, and this is prose.
+ *
+ * The label is real text inside the element, so it is read aloud in order
+ * rather than being a decorative ::before a screen reader skips.
+ */
+interface Props {
+  type?: 'note' | 'constraint' | 'lesson';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+
+const DEFAULT_LABEL: Record<string, string> = {
+  note: 'Note',
+  constraint: 'Constraint',
+  lesson: 'Lesson',
+};
+
+const label = title ?? DEFAULT_LABEL[type];
+---
+
+<aside class="callout" aria-label={label}>
+  <p class="callout__label">{label}</p>
+  <div class="callout__body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout {
+    margin-block: var(--space-8);
+    padding: var(--space-6);
+    border: var(--border-width) solid var(--border);
+    border-inline-start: 2px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background-color: var(--surface);
+  }
+
+  .callout__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-block-end: var(--space-3);
+  }
+
+  .callout__body > :global(* + *) {
+    margin-block-start: var(--space-4);
+  }
+</style>

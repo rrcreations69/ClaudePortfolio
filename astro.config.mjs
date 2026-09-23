@@ -25,6 +25,20 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      // Force every script to be emitted as an external file.
+      //
+      // By default Astro inlines small island scripts straight into the HTML
+      // as <script type="module">…</script>. That is faster, but our CSP sets
+      // `script-src 'self'` with no 'unsafe-inline', so the browser refuses to
+      // run them — the island dies silently in production while working
+      // perfectly on localhost, where vercel.json's headers never apply.
+      //
+      // Emitting real files keeps the strict CSP honest. The alternative was
+      // adding per-script hashes to the policy, which would need updating on
+      // every build and would rot the first time someone forgot.
+      assetsInlineLimit: 0,
+    },
   },
 
   // Fonts are downloaded at build time and served from our own origin, so the

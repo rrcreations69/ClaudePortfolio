@@ -1,0 +1,87 @@
+---
+/**
+ * CaseStudyNav — previous and next case study.
+ *
+ * Renders only what exists: with a single case study it renders nothing at
+ * all, rather than a disabled control or a link back to the same page.
+ */
+import Link from '../Link.astro';
+
+interface Props {
+  prev?: { slug: string; title: string };
+  next?: { slug: string; title: string };
+}
+
+const { prev, next } = Astro.props;
+const hasEither = Boolean(prev || next);
+---
+
+{
+  hasEither && (
+    <nav class="csnav" aria-label="Other case studies">
+      {prev && (
+        <Link href={`/work/${prev.slug}`} class="csnav__link csnav__link--prev">
+          <span class="csnav__dir">Previous</span>
+          <span class="csnav__title">{prev.title}</span>
+        </Link>
+      )}
+      {next && (
+        <Link href={`/work/${next.slug}`} class="csnav__link csnav__link--next">
+          <span class="csnav__dir">Next</span>
+          <span class="csnav__title">{next.title}</span>
+        </Link>
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .csnav {
+    display: grid;
+    gap: var(--space-4);
+    margin-block-start: var(--space-16);
+    padding-block-start: var(--space-8);
+    border-block-start: var(--border-width) solid var(--border);
+  }
+
+  .csnav__link {
+    display: block;
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color var(--duration-fast) var(--ease);
+  }
+
+  .csnav__link:hover {
+    opacity: 1;
+    border-color: var(--border-strong);
+  }
+
+  .csnav__dir {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-block-end: var(--space-2);
+  }
+
+  .csnav__title {
+    display: block;
+    font-weight: var(--weight-medium);
+  }
+
+  @media (min-width: 768px) {
+    .csnav {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .csnav__link--next {
+      grid-column: 2;
+      text-align: end;
+    }
+  }
+</style>

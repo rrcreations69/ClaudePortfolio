@@ -1,0 +1,112 @@
+---
+/**
+ * CaseStudyHeader — title, meta, and MY ROLE elevated.
+ *
+ * "My role" sits here, near the top, rather than as a section the reader has
+ * to find. It is the single question a recruiter most needs answered — what
+ * did *this* person actually do — and burying it halfway down a case study
+ * means it is read last or not at all.
+ *
+ * The problem statement sits beside it, because a role without the problem it
+ * addressed is a job description rather than evidence.
+ */
+import ProjectMeta from '../work/ProjectMeta.astro';
+import Tag from '../work/Tag.astro';
+import type { DISCLOSURE_TIERS } from '../../content/schema.ts';
+
+interface Props {
+  title: string;
+  clientDescriptor: string;
+  disclosure: (typeof DISCLOSURE_TIERS)[number];
+  period: { start: string; end?: string };
+  problem: string;
+  myRole: string;
+  stack: readonly string[];
+}
+
+const { title, clientDescriptor, disclosure, period, problem, myRole, stack } =
+  Astro.props;
+---
+
+<header class="head">
+  <h1 class="head__title">{title}</h1>
+
+  <ProjectMeta
+    clientDescriptor={clientDescriptor}
+    period={period}
+    disclosure={disclosure}
+  />
+
+  <dl class="head__evidence">
+    <dt>Problem</dt>
+    <dd>{problem}</dd>
+
+    <dt>My role</dt>
+    <dd class="head__role">{myRole}</dd>
+  </dl>
+
+  {
+    stack.length > 0 && (
+      <>
+        <h2 class="visually-hidden">Stack</h2>
+        <ul class="head__stack">
+          {stack.map((item) => (
+            <Tag label={item} />
+          ))}
+        </ul>
+      </>
+    )
+  }
+</header>
+
+<style>
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-block-end: var(--space-8);
+    border-block-end: var(--border-width) solid var(--border);
+    margin-block-end: var(--space-12);
+  }
+
+  .head__title {
+    max-width: var(--width-prose);
+  }
+
+  .head__evidence {
+    display: grid;
+    gap: var(--space-4);
+    margin: 0;
+    margin-block-start: var(--space-2);
+    max-width: var(--width-prose);
+  }
+
+  .head__evidence dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-block-end: var(--space-1);
+  }
+
+  .head__evidence dd {
+    margin: 0;
+  }
+
+  /* The one line a recruiter is looking for. Given weight through size, not
+     through colour or a box — accent is not decoration. */
+  .head__role {
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+  }
+
+  .head__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>
