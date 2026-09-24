@@ -44,9 +44,12 @@ stack, and that you maintain rather than authored it.*
 One sentence. This is what makes the dependency situation credible rather than
 sounding like an excuse. If you do not know, say so and I will cut it.
 
-❓ **Decision 3 — may I say the app is for "appraisals"?** My recommendation is
-**no**: "field staff collecting data offline" says everything the engineering
-story needs and identifies nobody. Confirm and I will leave it as drafted.
+✅ **DECIDED 2026-09-24 — keep it generic.** Raymund: *"keep it generic"*.
+The word "appraisal" and the business function it implies do **not** appear
+anywhere in the published case study. "Field staff collecting data offline"
+carries the whole engineering story and identifies nobody. Do not reintroduce
+the function in a later edit — at `abstracted` tier it is exactly the kind of
+detail that narrows an industry.
 
 ---
 
@@ -80,8 +83,9 @@ app, it never claims the web team's work, and it drops your word *"just"*. Sole
 ownership of a production application that field staff depend on is not a
 "just" — the copy states the scope plainly, neither inflated nor diminished.
 
-❓ **Does this read as accurate to you?** This is the line recruiters read most
-closely, so it should be yours.
+✅ **CONFIRMED ACCURATE by Raymund 2026-09-24.** This wording is signed off and
+should not be re-edited without asking him again — it is the line recruiters
+read most closely, and it is now his.
 
 ---
 
