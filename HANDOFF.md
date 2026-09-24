@@ -560,25 +560,35 @@ Nothing is guessed, approximated or inferred.
 
 ## 8. Next actions
 
-**Raymund — in this order**
-1. 🔴 **`git push origin main`** — one commit (`1e54c93`). Until it lands, the
-   live site shows a `[CONTENT REQUIRED]` positioning marker and an
-   unconfirmed-stage note to every visitor. **The push itself now works** — see
-   the correction below.
-2. 🔴 **Answer the nine case-study-2 questions** in `notes/ANSWERS-NEEDED.md`.
-   Largest remaining gap; rough notes are enough.
-3. **Write the About story** — or give rough notes for it.
-4. **Supply the CV PDF** → `public/raymund-bermudes-cv.pdf`.
+**Everything is pushed and deployed.** `origin/main` and `HEAD` match; both case
+studies are publicly live; CHUNKS 14–16 have been verified against production.
 
-**Claude Code (next session)**
-1. Write case study 2 from his answers. Tier it **before** drafting, not after
-   — confidentiality clearance is a pre-commit gate (D23).
-2. Write the About story from his notes.
-3. Once the push lands: re-verify CHUNKS 14–16 against production, not localhost.
-4. **Delete `/styleguide`** before launch — it is excluded from the sitemap but
-   still builds and is still publicly reachable.
-5. Re-run the recruiter test (Sheet 13). It last scored 2 Pass / 3 Partial /
-   5 Fail; every failure was content, and most of that content now exists.
+### 🔴 Raymund — TWO items, and they are the only things left
+
+1. **The About story** (CG-15). `/about` renders a visible `[CONTENT REQUIRED]`
+   and is `noindex` because of it. Rough notes are enough — prose is Claude's
+   job. Prompts: how he got from Junior Android Developer to Solutions Analyst ·
+   what kind of problem he enjoys most · what he does differently from someone
+   who only writes code.
+2. **The CV PDF file** (CG-04). Approved (D29), never supplied. Drop it at
+   `public/raymund-bermudes-cv.pdf` and the Resume button appears in the header
+   and on `/contact` on the next build — **no code change needed.**
+
+**Nothing else is blocked on him, and nothing else is blocked on code.**
+
+### Claude Code (next session)
+
+1. Write the About story from his notes. That lifts `/about`'s `noindex` and
+   resolves the sitemap/noindex mismatch in one move.
+2. **Deferred by D34, do NOT do early:** delete `/styleguide`, and re-run the
+   Sheet 13 recruiter test. Both wait until the two content items land.
+3. Then, to close CHUNKS 14–16: Lighthouse against production, rich-results
+   test, and the Sheet 13 walkthrough.
+
+⚠️ **`/styleguide` is a known, accepted exposure (D34), not an oversight.** It
+returns 200 in production. It is excluded from the sitemap and Disallowed in
+robots, and it **must still be deleted before the site is treated as launched**
+— D34 defers that task, it does not cancel it.
 
 **Done 2026-09-22**
 - Node v24.19.0 + npm 11.17.0 verified working; `npm ping` → `PONG`. B1 closed.
