@@ -56,10 +56,16 @@ detail that narrows an industry.
 ## Problem
 
 > The client commissioned a vulnerability assessment and penetration test
-> against the mobile application. It returned findings that had to be closed
-> before the application could continue in production.
+> against the mobile application. It returned findings that had to be
+> remediated.
 
 *Sourced: "it was the VAPT security scanned by the client".*
+
+⚠️ **Edited for provenance 2026-09-24.** The earlier draft read "had to be
+closed **before the application could continue in production**". That framing
+was Claude's, not Raymund's — he never said the findings blocked a release or
+gated production. It has been removed rather than left in as a plausible
+assumption. ❓ If there WAS such a gate, say so and it goes back in.
 
 ❓ **Roughly how many findings, and at what severities?** Counts and severities
 are safe at this tier — they describe scale, not attack paths. If you would
@@ -196,30 +202,33 @@ or genuinely different problems needing different approaches?
 
 ---
 
-## Validation
+## Validation — ✅ SOURCED 2026-09-24
 
-**🔴 Nothing sourced yet.** Both clearance gates are already passed — the work is
-complete, released and closed off — so this section is safe to write.
+> The client re-ran the assessment against the updated build. It passed.
 
-❓ **How did you verify each fix actually worked, rather than just looked right?**
+*Sourced: "Yes they re-scanned and it passed."*
 
-❓ **Did the client re-scan and confirm closure?** *A clean re-scan is the
-strongest evidence in the whole case study. If it happened, it belongs here.*
+**This is the strongest sentence in the case study and it should stay short.**
+It is external verification: the findings were confirmed closed by the party
+who raised them, not by the person who fixed them. Padding it would weaken it.
 
-❓ **Was there a UAT cycle or a controlled release?**
+❓ **Was there a UAT cycle or a controlled release as well?** Only if it
+happened — the re-scan already carries this section.
 
 ---
 
-## Outcome
+## Outcome — ✅ SOURCED 2026-09-24
 
-**🔴 Nothing sourced yet.** Schema-enforced: an empty `outcome` fails the build.
+> Every finding was closed, and closure was confirmed by the client's own
+> re-scan rather than by my say-so. The remediated build was released.
 
-❓ **What changed once it was done?**
+*Sourced: the re-scan passing, plus his earlier confirmation that the
+remediation is complete, released and closed off.*
 
-"The findings were closed and the application stayed in production" is already a
-real outcome and is enough. **If there is no number, we publish no number** —
-there is no metric slot anywhere in this design system, precisely so an empty
-box never invites one.
+**No number appears here, and none is needed.** "Closed and confirmed by the
+client's re-scan" is a stronger claim than any percentage, because it is
+verifiable by someone other than the author. There is no metric slot anywhere
+in this design system precisely so an empty box never invites one.
 
 ---
 
