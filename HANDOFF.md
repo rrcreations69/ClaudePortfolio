@@ -8,8 +8,8 @@ PRD workbook, or it did not change. Do not let this file drift — a stale hando
 
 - **Last updated:** 2026-09-23
 - **Updated by:** Claude Code (session 3 — alignment review, tracker reconciliation, CHUNK 00 draft)
-- **Phase:** Per the tracker (source of truth): **CHUNKS 01–05 Complete** · **06
-  Review** (Disclosure, CodeBlock, ArchitectureFigure not built) · **CHUNK 00 In Progress**, and the
+- **Phase:** Per the tracker (source of truth): **CHUNKS 01–06 Complete** · **07
+  blocked on content** · **CHUNK 00 In Progress**, and the
   critical path.
 - **Build state:** 6 routes building. `astro check` 0/0/0, build clean.
   Output is **zero JavaScript, 102.3 KB** total including both fonts.
@@ -441,7 +441,7 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 | 03 | Global shell | **COMPLETE** | — |
 | 04 | Content layer | **COMPLETE** | — |
 | 05 | Work index + ProjectCard | **COMPLETE** | — |
-| 06 | Case study system + Delivery Thread | **Review** | Disclosure, CodeBlock, ArchitectureFigure not built |
+| 06 | Case study system + Delivery Thread | **Complete** | — |
 | 07 | Real case study content | Not Started | **00** |
 | 08 | Home — hero | Not Started | 03, positioning line |
 | 09 | Home — thread, selected work, experience teaser | Not Started | 05, 06 |

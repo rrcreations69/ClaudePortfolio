@@ -68,5 +68,20 @@ export default defineConfig({
     },
   ],
 
+  markdown: {
+    // Dual-theme syntax highlighting. `defaultColor: false` makes Shiki emit
+    // BOTH themes as CSS custom properties rather than baking one in, so code
+    // follows the site's light/dark switch instead of being stuck in whichever
+    // theme was chosen at build time. The switching rule lives in global.css.
+    shikiConfig: {
+      themes: {
+        light: 'github-light-high-contrast',
+        dark: 'github-dark-high-contrast',
+      },
+      defaultColor: false,
+      wrap: false,
+    },
+  },
+
   integrations: [mdx()],
 });

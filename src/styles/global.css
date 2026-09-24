@@ -242,3 +242,46 @@ video {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* --- Code blocks ---------------------------------------------------------
+   Shiki is configured with `defaultColor: false`, so it emits both themes as
+   custom properties (--shiki-light, --shiki-dark) and leaves the choice to
+   CSS. These rules make that choice follow the same signal as every other
+   token: OS preference, overridable by data-theme. */
+
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .astro-code,
+  :root:not([data-theme='light']) .astro-code span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+:root[data-theme='dark'] .astro-code,
+:root[data-theme='dark'] .astro-code span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+.astro-code {
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  /* Long lines scroll rather than wrap, and the region is focusable so a
+     keyboard user can scroll it — an unfocusable scroll container is a
+     WCAG 2.1.1 failure that is very easy to ship by accident. */
+  overflow-x: auto;
+}
+
+.astro-code:focus-visible {
+  outline: var(--focus-width) solid var(--accent);
+  outline-offset: var(--focus-offset);
+}

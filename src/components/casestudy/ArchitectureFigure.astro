@@ -1,0 +1,79 @@
+---
+/**
+ * ArchitectureFigure — an inline SVG diagram with a caption and a text
+ * alternative.
+ *
+ * Inline SVG rather than an image file: it inherits the design tokens, so the
+ * diagram follows light and dark mode automatically, stays sharp at any zoom,
+ * and costs no extra request. Draw strokes and text with `currentColor` or
+ * `var(--text)` and it will simply work in both themes.
+ *
+ * THE TEXT ALTERNATIVE IS REQUIRED, not optional — the `alt` prop has no
+ * default. A diagram is usually carrying the part of the explanation that is
+ * hardest to put in a sentence, which is exactly why leaving it inaccessible
+ * is worse than leaving it out. Writing it is also a useful check: a diagram
+ * you cannot describe in a sentence is usually a diagram that is not saying
+ * anything.
+ *
+ * The alternative is a real <p>, visually hidden, rather than an aria-label:
+ * it can be a full sentence, it is translated by page translation tools, and
+ * it survives with CSS disabled.
+ *
+ * ⚠️ CONFIDENTIALITY. A diagram is a public string like any other. At
+ * `sectoral` or `abstracted` tiers it must not show client names, internal
+ * hostnames, real endpoints or anything identifying (D5, D17). Architecture
+ * detail is content-register item CG-12, and is sanitised before it is drawn.
+ */
+interface Props {
+  /**
+   * The text alternative. Required. Describe what the diagram SHOWS, not that
+   * it is a diagram — "Field device writes to a local store, which syncs to
+   * the platform API when connectivity returns", not "architecture diagram".
+   */
+  alt: string;
+  /** Visible caption. Note any sanitisation here. */
+  caption?: string;
+}
+
+const { alt, caption } = Astro.props;
+---
+
+<figure class="figure">
+  <div class="figure__canvas" role="img" aria-label={alt}>
+    <slot />
+  </div>
+
+  {/* Also present as real text, so it survives CSS being off and can be
+      translated — an aria-label would do neither. */}
+  <p class="visually-hidden">{alt}</p>
+
+  {caption && <figcaption class="figure__caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .figure {
+    margin: var(--space-12) 0;
+  }
+
+  .figure__canvas {
+    padding: var(--space-6);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    /* The SVG inherits this, so `currentColor` in the diagram resolves to the
+       body text colour and follows the theme with no extra work. */
+    color: var(--text);
+  }
+
+  .figure__canvas > :global(svg) {
+    inline-size: 100%;
+    block-size: auto;
+    display: block;
+  }
+
+  .figure__caption {
+    margin-block-start: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+</style>

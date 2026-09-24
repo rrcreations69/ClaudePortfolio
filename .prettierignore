@@ -17,6 +17,11 @@ package-lock.json
 # Prettier formats code here. Prose stays the author's.
 *.md
 
+# .mdx too — case studies are prose, not code. Reflowing a case study's
+# paragraphs would fight the author for the same reason it would in .md, and
+# these files are the most carefully worded content on the site.
+*.mdx
+
 # .astro is DELIBERATELY excluded — prettier-plugin-astro is not idempotent.
 #
 # On four files (DeliveryThread, SiteHeader, ProjectCard, work/[...slug]),

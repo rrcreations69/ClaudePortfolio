@@ -1,0 +1,74 @@
+---
+/**
+ * CodeBlock — a fenced code block with a caption.
+ *
+ * Usage in MDX: wrap an ordinary fenced block, so Shiki still highlights it.
+ *
+ *   <CodeBlock caption="Sanitised — illustrative only">
+ *   ```kotlin
+ *   // ...
+ *   ```
+ *   </CodeBlock>
+ *
+ * The component supplies the <figure>/<figcaption> semantics; Astro's markdown
+ * pipeline supplies the highlighting. Passing code in as a prop would lose the
+ * highlighting entirely, which is why it is a slot.
+ *
+ * ⚠️ CONFIDENTIALITY. Any code shown here is public. At `sectoral` or
+ * `abstracted` tiers it must be sanitised before it is written — no client
+ * identifiers, no internal URLs, no real endpoints, no credentials, and for
+ * security case studies no library names or versions (D17). The schema cannot
+ * check the inside of a code fence; only the CHUNK 16 review can.
+ */
+interface Props {
+  /** What this code is, and any sanitisation the reader should know about. */
+  caption?: string;
+  /** Optional file or module name, shown above the code. */
+  filename?: string;
+}
+
+const { caption, filename } = Astro.props;
+---
+
+<figure class="codeblock">
+  {filename && <p class="codeblock__filename">{filename}</p>}
+  <div class="codeblock__code">
+    <slot />
+  </div>
+  {caption && <figcaption class="codeblock__caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .codeblock {
+    margin: var(--space-8) 0;
+  }
+
+  .codeblock__filename {
+    padding: var(--space-2) var(--space-3);
+    border: var(--border-width) solid var(--border);
+    border-block-end: none;
+    border-start-start-radius: var(--radius-sm);
+    border-start-end-radius: var(--radius-sm);
+    background-color: var(--surface);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  /* The <pre> inside carries .astro-code and is styled globally, including
+     its dual-theme colours. Only the outer chrome belongs here. */
+  .codeblock__code > :global(pre) {
+    margin: 0;
+  }
+
+  .codeblock__filename + .codeblock__code > :global(pre) {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+  }
+
+  .codeblock__caption {
+    margin-block-start: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+</style>
