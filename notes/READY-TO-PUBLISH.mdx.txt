@@ -1,0 +1,123 @@
+This is the exact file that becomes
+src/content/work/security-remediation-legacy-android.mdx
+
+It is complete except for ONE value: period.start.
+Supply the year and this moves across unchanged.
+
+Kept as .txt inside notes/ so Astro cannot pick it up early — a half-filled
+case study must never be buildable.
+
+────────────────────────────────────────────────────────────────────────────
+
+---
+title: 'Which upgrades are safe: remediating security findings without breaking the build'
+slug: 'remediating-security-findings-without-breaking-the-build'
+order: 1
+featured: true
+
+disclosure: 'abstracted'
+clientDescriptor: 'A production enterprise mobile application'
+confidentialityReview:
+  reviewedBy: 'Raymund Ryan Bermudes'
+  reviewedOn: 2026-09-24
+  tierConfirmed: 'abstracted'
+
+problem: 'A client security assessment returned findings against a long-lived Android application, in a codebase where not every dependency could safely be upgraded.'
+myRole: 'Sole developer on the mobile application, maintaining an application I did not originally build. The remediation was mine end to end.'
+outcome: "Every finding was closed, and closure was confirmed by the client's own re-scan rather than by my say-so. The remediated build was released."
+
+stack: ['Kotlin', 'Room', 'SQLite', 'REST']
+domain: ['enterprise-mobility']
+workType: ['security', 'maintenance', 'android-development']
+
+period:
+  start: '<<<YEAR>>>'
+
+stages: ['analysis', 'development', 'testing', 'release']
+
+description: 'Closing client security findings in a legacy Android codebase where not every dependency could safely be upgraded.'
+updated: 2026-09-24
+---
+
+## Context
+
+A production Android application used by field staff who regularly work in
+areas with no network connectivity. Data is captured on the device, stored
+locally in SQLite via Room, and synchronised with a server-side workflow
+platform through its API when a connection returns.
+
+It is a long-lived enterprise application, not a greenfield build — which turns
+out to be the whole story.
+
+## Problem
+
+The client commissioned a vulnerability assessment and penetration test against
+the mobile application. It returned findings that had to be remediated.
+
+## Investigation
+
+I started by upgrading the flagged libraries and seeing what broke. In a
+long-lived codebase that is the quickest way to find out what it can actually
+absorb: some upgrades moved cleanly, others failed outright or broke behaviour
+that other parts of the application depended on.
+
+That split the findings into two groups — the ones a version bump could close,
+and the ones that would have to be closed in the application's own code
+instead. For the second group I worked through what each finding meant in
+context and how to address it without moving the dependency, researching each
+one as I went.
+
+## Technical Challenge
+
+The ordinary remedy for a flagged dependency is to upgrade it. In a long-lived
+application that remedy is not uniformly available: some upgrades would have
+broken the existing codebase.
+
+So the findings could not all be closed the same way. Each one had to be
+assessed on its own terms — was this dependency safe to move, and if not, what
+could change in the application's own code to close the finding without moving
+it?
+
+## Solution
+
+The findings were closed along two tracks. Where a library could be moved
+without breaking the existing codebase, it was upgraded. Where it could not,
+the application's own code was changed instead, so the finding was closed
+without touching the dependency.
+
+One finding concerned data held on the device without adequate protection. An
+application built to work offline necessarily keeps more on the device than one
+that does not, so this is the kind of finding that design invites. It was
+closed by changing how that data was written.
+
+## Validation
+
+The client re-ran the assessment against the updated build. It passed.
+
+## Lessons
+
+Not to treat a dependency upgrade as the whole answer. This was a legacy
+codebase — written before I took it on, and not by me — and in that situation
+upgrading is often the option you cannot take. Closing a finding then means
+changing your own code rather than reaching for a newer version of someone
+else's.
+
+────────────────────────────────────────────────────────────────────────────
+
+NOTES ON STRUCTURE
+
+"My role" and "Outcome" are NOT body sections. They come from frontmatter,
+because the schema enforces them — myRole and outcome are .min(1) and an empty
+value fails the build. A prose section could never guarantee that. The page
+renders My Role in the header (elevated, per Flow B) and Outcome as its own
+section appended after the body.
+
+The delivery thread will therefore show six entries:
+  Context (Requirement) · Problem (Requirement) · Investigation (Analysis)
+  Technical Challenge (Design) · Solution (Development) · Validation (Testing)
+  + Outcome (Release), appended from frontmatter
+
+Note "Technical Challenge" maps to the DESIGN stage in lib/caseStudy.ts. That
+is the open 8-vs-7 question (B1). If Design is dropped, change that one line
+and this section takes a different stage label. The frontmatter `stages` array
+deliberately does NOT claim design.
