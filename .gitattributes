@@ -1,0 +1,23 @@
+# Binary files must never be line-ending converted.
+#
+# This repo is on Windows with core.autocrlf=true. Git's own binary heuristic
+# caught the resume PDF (the stored blob is byte-identical to the original),
+# but it emitted a "LF will be replaced by CRLF" warning while doing so, and
+# relying on a heuristic for file types we already know are binary is the kind
+# of thing that works until it silently does not. A corrupted PDF would not
+# fail the build — it would simply refuse to open for whoever downloaded it.
+#
+# `-text` means: never convert, in either direction, on commit or checkout.
+
+*.pdf   -text
+*.png   -text
+*.jpg   -text
+*.jpeg  -text
+*.gif   -text
+*.webp  -text
+*.ico   -text
+*.woff  -text
+*.woff2 -text
+*.ttf   -text
+*.otf   -text
+*.xlsx  -text
