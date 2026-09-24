@@ -12,9 +12,33 @@ PRD workbook, or it did not change. Do not let this file drift — a stale hando
   CHUNK 07 is half done — one case study published, the second unwritten.
 - **Build state:** 7 routes building. `npm run verify` exits 0 — lint, format,
   22/22 schema guards, `astro check` 0 errors / 0 warnings / 1 hint, build clean.
-- **Live:** https://raymundbermudes.vercel.app — ⚠️ **STALE.** 22 commits
-  unpushed; production predates CHUNK 08. Blocks production verification of 14–16.
+- **Live:** https://raymundbermudes.vercel.app — **current through `941af35`,
+  verified 2026-09-24 against the deployed page.** The push problem that ran
+  through sessions 1–3 is **RESOLVED**: `origin/main` is at the CHUNK 07 commit
+  and Vercel has deployed it. Case study 1 is publicly live.
+  **One commit is unpushed** — today's (`1e54c93`).
+  ⚠️ **Until it lands, production still shows the pre-today state: the
+  `[CONTENT REQUIRED]` positioning marker and the 8-stage strip with its
+  `[VERIFY INFORMATION]` note are visible to anyone visiting right now.**
+  One push removes both.
 - **Repo:** `rrcreations69/ClaudePortfolio` (private), branch `main`.
+
+### ✅ CORRECTION — the push was never actually broken
+
+Sessions 1–3 recorded that `git push` "never lands" and that `origin/main` was
+stuck at `2f40096`. **That was wrong**, and it was wrong because this file was
+never re-checked with `git fetch`: `origin/main` is a *remote-tracking* ref and
+only moves on fetch or push, so Raymund's pushes from his own terminal were
+invisible here and read as failures.
+
+Verified 2026-09-24: `git fetch` moved `origin/main` to `941af35`, and the
+deployed page at https://raymundbermudes.vercel.app renders case study 1.
+**The repo, the remote, the credential and the deploy hook all work.**
+
+**Standing rule for future sessions: run `git fetch` before making any claim
+about what is or is not pushed.** Also noted on that fetch: Dependabot has
+opened two branches (`actions/checkout-7`, `actions/setup-node-7`) that are not
+yet reviewed.
 
 ### What changed 2026-09-24
 
@@ -537,11 +561,10 @@ Nothing is guessed, approximated or inferred.
 ## 8. Next actions
 
 **Raymund — in this order**
-1. 🔴 **`git push origin main`.** 22 commits unpushed. Production predates
-   CHUNK 08, so nothing landed in the last two sessions is live, and CHUNKS
-   14–16 cannot be verified in production until it lands. Four previous
-   attempts reported success while `origin/main` stayed at `2f40096` — **run it
-   in the terminal panel beside the chat so the error is visible.**
+1. 🔴 **`git push origin main`** — one commit (`1e54c93`). Until it lands, the
+   live site shows a `[CONTENT REQUIRED]` positioning marker and an
+   unconfirmed-stage note to every visitor. **The push itself now works** — see
+   the correction below.
 2. 🔴 **Answer the nine case-study-2 questions** in `notes/ANSWERS-NEEDED.md`.
    Largest remaining gap; rough notes are enough.
 3. **Write the About story** — or give rough notes for it.

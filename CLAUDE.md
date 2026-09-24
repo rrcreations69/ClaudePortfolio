@@ -30,7 +30,7 @@ If this file and `PHASE-1-DISCOVERY.md` disagree, the discovery report wins and 
 
 The site builds seven routes at **https://raymundbermudes.vercel.app** — Astro 7 on Vercel Hobby, from the private repo `rrcreations69/ClaudePortfolio`. Two JavaScript islands ship (`deliveryThread`, `ThemeToggle`); all nine security headers verified against live responses.
 
-⚠️ **The deployed site is stale.** 22 commits are unpushed, so production predates CHUNK 08. Production verification of CHUNKS 14–16 is blocked until they land.
+**Production is current through `941af35`**, verified 2026-09-24 against the deployed page. Earlier sessions recorded that `git push` "never lands" — that was wrong, and it was wrong because `origin/main` was never re-fetched. **Run `git fetch` before claiming anything is unpushed.**
 
 **One case study is published** — the VAPT remediation, at `abstracted` tier. The home page carries its positioning line and is indexable.
 
