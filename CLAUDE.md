@@ -4,7 +4,7 @@ Operating instructions for Claude Code on this repository. Read this before doin
 
 ## What this is
 
-A production portfolio website for **Raymund Ryan Bermudes**, positioned as a **Solutions Analyst & Enterprise Systems Developer** — specifically, someone who spans *Requirement → Analysis → Design → Development → Testing → UAT → Release → Support*, not someone who only writes code.
+A production portfolio website for **Raymund Ryan Bermudes**, positioned as a **Solutions Analyst & Enterprise Systems Developer** — specifically, someone who spans *Requirement → Analysis → Development → Testing → UAT → Release → Support*, not someone who only writes code.
 
 **Positioning confirmed 2026-09-23 (D15)** to match his CV and LinkedIn. It was previously "Solution Analyst & Android Developer"; that was changed because a portfolio must not contradict the CV attached to it, and because Android was his *previous* role (Junior Android Developer, Jul 2022 – Dec 2023) rather than his current one (Solutions Analyst, Jan 2024 – present). Android remains genuine, current work — he is still the sole maintainer of a production mobile application — but it is one strand of the story, not the headline.
 
@@ -14,7 +14,7 @@ Audience: recruiters, hiring managers, technical leads, potential clients. It is
 
 | Document | Role |
 |---|---|
-| **`HANDOFF.md`** | **Read this first, every session.** Current state, blockers, decisions D1–D16, chunk board, what's next. |
+| **`HANDOFF.md`** | **Read this first, every session.** Current state, blockers, decisions D1–D30, chunk board, what's next. |
 | `Raymund_Portfolio_PRD_Progress_Tracker.xlsx` | The PRD, roadmap, QA checklist, risk register, decision log and progress tracker. 19 sheets. **Update it as work completes.** |
 | `PHASE-1-DISCOVERY.md` | The full architecture, IA, UX strategy, design system and chunk plan. Every decision below is argued there. |
 | `notes/` | CHUNK 00 raw content and CV findings. **Private working notes — never published, never built.** |
@@ -26,22 +26,23 @@ If this file and `PHASE-1-DISCOVERY.md` disagree, the discovery report wins and 
 
 ## Current status
 
-**Phase 1: COMPLETE. CHUNKS 01–05: COMPLETE. CHUNK 00: in progress.**
+**Phase 1: COMPLETE. CHUNKS 01–16: built. Remaining work is CONTENT, not code.**
 
-The site is live at **https://raymundbermudes.vercel.app** — Astro 7 on Vercel Hobby, from the private repo `rrcreations69/ClaudePortfolio`. Six routes build; zero JavaScript ships; all nine security headers verified against live responses.
+The site builds seven routes at **https://raymundbermudes.vercel.app** — Astro 7 on Vercel Hobby, from the private repo `rrcreations69/ClaudePortfolio`. Two JavaScript islands ship (`deliveryThread`, `ThemeToggle`); all nine security headers verified against live responses.
 
-Built so far: project foundation and security headers (01) · design system and tokens (02) · global shell, nav, footer, `Link` (03) · content collection and schema guards (04) · work index and `ProjectCard` (05).
+⚠️ **The deployed site is stale.** 22 commits are unpushed, so production predates CHUNK 08. Production verification of CHUNKS 14–16 is blocked until they land.
 
-**Next: CHUNK 06** — case study system and Delivery Thread. Then 07 (real content, blocked on 00), 08–11 (pages), 12–16 (QA).
+**One case study is published** — the VAPT remediation, at `abstracted` tier. The home page carries its positioning line and is indexable.
 
-**Decisions D1–D16 are all settled.** See `HANDOFF.md` §3. Do not re-open one without writing down why.
+**Decisions D1–D30 are all settled.** See `HANDOFF.md` §3. Do not re-open one without writing down why.
 
 ### Still blocked / still needed
 
-1. **CHUNK 07 is blocked on CHUNK 00.** The case study needs Raymund's own account — see `notes/CHUNK-00-content.md`.
-2. **The Delivery Thread stage count is unresolved** — 8 stages or 7. See the Delivery Thread note below. Blocks CHUNK 06's rail.
-3. **The CV PDF is not cleared for publication.** Ask again at CHUNK 11. Until then the Resume button correctly does not render.
+1. **Case study 2 (CASECenter) is unwritten** — content register CG-02. This is the largest remaining gap: every published piece of evidence is Android work from his *previous* role, while the positioning claims enterprise systems delivery. Questions are in `notes/ANSWERS-NEEDED.md`.
+2. **The About story is unwritten** — `/about` renders a visible `[CONTENT REQUIRED]`.
+3. **The CV PDF is approved (D29) but not supplied.** Drop it at `public/raymund-bermudes-cv.pdf` and the Resume button appears on the next build — no code change.
 4. **`git push` is blocked for Claude** by this session's auto-approval. Claude commits; Raymund pushes.
+5. **`/styleguide` must be deleted before launch.** Deliberately retained for now; excluded from the sitemap.
 
 ## The stack (decided, Phase 1)
 
@@ -164,7 +165,9 @@ Accent is used **only** for links, focus rings, active states and the Delivery T
 
 **Schema rules:** `myRole`, `problem`, `outcome`, `clientDescriptor` are `.min(1)` — empty fails the build. `confidentialityReview` is a dated record with a named reviewer, and its `tierConfirmed` must match `disclosure`. The slug refinement blocks client names on non-`named` projects. These are forcing functions, not verification — they make omission loud, they cannot make a false statement true.
 
-**The signature element — the Delivery Thread.** The 8 delivery stages are the site's navigation spine: a compact CSS-only strip on the home page, and on a case study a sticky rail where each section maps to a stage. It is a `<nav>` of anchor links with `aria-current`; with JS off it degrades to a plain table of contents. **`[VERIFY INFORMATION]` — "Design" is not in Raymund's stated experience. Confirm he owns design work or drop the spine to seven stages.**
+**The signature element — the Delivery Thread.** The **7** delivery stages are the site's navigation spine: a compact CSS-only strip on the home page, and on a case study a sticky rail where each section maps to a stage. It is a `<nav>` of anchor links with `aria-current`; with JS off it degrades to a plain table of contents.
+
+**Design is not one of the stages (D24, 2026-09-24).** Raymund confirmed he does not own design work — his CV has him collaborating *with* UI/UX and resolving UI inconsistencies through engineering review. `design` was removed from `DELIVERY_STAGES` **entirely**, not merely filtered out of the home strip, so the false claim is unrepresentable: the type system rejects `stages: ['design']`. "Technical Challenge" maps to `analysis`.
 
 **Security (CHUNK 01, not QA):** CSP, HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` in `vercel.json`. `rel="noopener noreferrer"` enforced in the `Link` component. `npm audit` + Dependabot in CI. `.env*` git-ignored from the first commit. Zero third-party origins.
 

@@ -8,19 +8,20 @@ import { DELIVERY_STAGES } from '../content/schema.ts';
  * someone who spans requirement to support, not someone who only writes code.
  *
  * ────────────────────────────────────────────────────────────────────────────
- * ⚠️ OPEN QUESTION — "Design" (CLAUDE.md, unresolved)
+ * ✅ RESOLVED 2026-09-24 (D24) — the spine is SEVEN stages. Design is not one.
  *
- * "Technical Challenge" is the ONLY section mapped to the Design stage, and
- * "Design" is not in Raymund's stated experience. His CV says he collaborated
- * *with* UI/UX teams and resolved UI inconsistencies through engineering
- * review, which reads as working alongside designers rather than owning
- * design.
+ * Raymund confirmed he does not own design work. His CV describes
+ * collaborating *with* UI/UX and resolving UI inconsistencies through
+ * engineering review — working alongside designers, not owning the design.
  *
- * If he confirms he does not own design work, change that one entry below to
- * `'analysis'` (technical constraint analysis) and the spine becomes seven
- * stages. **Do not make that change on inference — it needs his answer.**
+ * `design` was removed from DELIVERY_STAGES entirely rather than merely
+ * filtered out of the home page strip. Leaving it in the enum would have left
+ * a stage that no project could honestly claim but every project could still
+ * select — a trap for a future edit. Removing it makes the false claim
+ * unrepresentable: the type system now rejects `stages: ['design']`.
  *
- * Nothing else in the codebase hard-codes this. It is deliberately one line.
+ * "Technical Challenge" therefore maps to `analysis` — technical constraint
+ * analysis, which is what that section actually documents.
  * ────────────────────────────────────────────────────────────────────────────
  */
 
@@ -30,7 +31,6 @@ export type DeliveryStage = (typeof DELIVERY_STAGES)[number];
 export const STAGE_LABEL: Record<DeliveryStage, string> = {
   requirement: 'Requirement',
   analysis: 'Analysis',
-  design: 'Design',
   development: 'Development',
   testing: 'Testing',
   uat: 'UAT',
@@ -53,7 +53,7 @@ export const SECTION_STAGE: Record<string, DeliveryStage> = {
   context: 'requirement',
   problem: 'requirement',
   investigation: 'analysis',
-  'technical challenge': 'design', // ← the single line the open question turns on
+  'technical challenge': 'analysis', // was 'design' until D24 — see the note above
   solution: 'development',
   validation: 'testing',
   'validation and uat': 'uat',
@@ -108,21 +108,11 @@ export function buildThread(
  * The stages shown on the home page strip.
  *
  * ⚠️ THIS IS A PUBLIC CLAIM, not a diagram. The strip says "these are the
- * stages I work across". If Raymund does not own design work, listing Design
- * here is a false claim about him — which is why the open question matters
- * more on the home page than it does on a case study, where stages are per
- * project and simply go unlit.
+ * stages I work across", so every stage listed here must be one Raymund
+ * actually owns. It matters more on the home page than on a case study, where
+ * stages are per project and an unclaimed one simply goes unlit.
  *
- * Derived from DELIVERY_STAGES so there is one list, not two. To drop to
- * seven stages, filter 'design' out here — one line, one place.
+ * Confirmed at seven stages 2026-09-24 (D24). Derived from DELIVERY_STAGES so
+ * there is one list, not two.
  */
 export const HOME_THREAD_STAGES: readonly DeliveryStage[] = DELIVERY_STAGES;
-
-/**
- * Is the stage list still awaiting confirmation?
- *
- * While this is true the home page renders a visible [VERIFY INFORMATION]
- * note beside the strip. Set it to false once Raymund confirms — and remove
- * 'design' above if the answer is that he does not own design work.
- */
-export const HOME_THREAD_UNCONFIRMED = true;

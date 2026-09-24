@@ -15,7 +15,6 @@
  */
 import {
   HOME_THREAD_STAGES,
-  HOME_THREAD_UNCONFIRMED,
   STAGE_LABEL,
 } from '../../lib/caseStudy.ts';
 ---
@@ -35,18 +34,6 @@ import {
     }
   </ol>
 
-  {
-    HOME_THREAD_UNCONFIRMED && (
-      <p class="strip__pending">
-        <strong>[VERIFY INFORMATION]</strong> Stage list unconfirmed (question
-        B1). "Design" is the only stage not in Raymund's stated experience — his
-        CV describes collaborating <em>with</em> UI/UX and resolving UI
-        inconsistencies through engineering review. This strip is a public claim
-        about what he does, so it must not list a stage he does not own. Drop to
-        seven stages, or confirm.
-      </p>
-    )
-  }
 </section>
 
 <style>
@@ -97,16 +84,5 @@ import {
     content: counter(stage);
     color: var(--text-muted);
     font-variant-numeric: tabular-nums;
-  }
-
-  .strip__pending {
-    max-width: var(--width-prose);
-    margin-block-start: var(--space-8);
-    padding: var(--space-4);
-    border: var(--border-width) solid var(--border);
-    border-radius: var(--radius-md);
-    background-color: var(--surface);
-    font-size: var(--text-sm);
-    color: var(--text-muted);
   }
 </style>

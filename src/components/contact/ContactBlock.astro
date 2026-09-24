@@ -67,21 +67,9 @@ const hasAny = Boolean(email || linkedin || github || hasResume);
   {
     !email && (
       <p class="contact__pending">
-        <strong>[CONTENT REQUIRED]</strong> No email address is published yet
-        (question B5). D7 chose a new dedicated address, but the CV already
-        circulates a personal one — publishing an address is irreversible, so
-        nothing is published until Raymund says which.
-      </p>
-    )
-  }
-
-  {
-    !github && (
-      <p class="contact__pending">
-        <strong>[VERIFY INFORMATION]</strong> No GitHub link (question B6). The
-        CV lists none and this repo is private (D14), so a profile may show
-        little. An empty profile is worse than no link — omit deliberately, or
-        supply one.
+        <strong>[CONTENT REQUIRED]</strong> No email address is published.
+        Publishing one is irreversible — it will be harvested — so this page
+        will not invent or infer an address.
       </p>
     )
   }
@@ -89,7 +77,8 @@ const hasAny = Boolean(email || linkedin || github || hasResume);
   {
     !hasResume && (
       <p class="contact__pending">
-        <strong>[CONTENT REQUIRED]</strong> No resume PDF (CG-04, question B7).
+        <strong>[CONTENT REQUIRED]</strong> No resume PDF (CG-04). Publication
+        is <strong>approved</strong> — the file itself has not been supplied.
         Drop <code>raymund-bermudes-cv.pdf</code> into <code>public/</code> and
         the download link and the header button both appear on the next build —
         no code change needed.

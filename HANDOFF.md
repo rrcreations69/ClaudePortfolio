@@ -6,15 +6,26 @@ Its job is to answer, in under a minute: what is true right now, what is blocked
 **Update rule:** whoever ends a session updates this file. A chunk's status changes here *and* in the
 PRD workbook, or it did not change. Do not let this file drift — a stale handoff is worse than none.
 
-- **Last updated:** 2026-09-23
-- **Updated by:** Claude Code (session 3 — alignment review, tracker reconciliation, CHUNK 00 draft)
-- **Phase:** Per the tracker (source of truth): **CHUNKS 01–06 Complete** · **07
-  blocked on content** · **CHUNK 00 In Progress**, and the
-  critical path.
-- **Build state:** 6 routes building. `astro check` 0/0/0, build clean.
-  Output is **zero JavaScript, 102.3 KB** total including both fonts.
-- **Live:** https://raymundbermudes.vercel.app — deployed, security headers verified.
+- **Last updated:** 2026-09-24
+- **Updated by:** Claude Code (session 4 — case study 1 published, answer sheet cleared: D24–D30)
+- **Phase:** **All chunks 01–16 built. What remains is CONTENT, not code.**
+  CHUNK 07 is half done — one case study published, the second unwritten.
+- **Build state:** 7 routes building. `npm run verify` exits 0 — lint, format,
+  22/22 schema guards, `astro check` 0 errors / 0 warnings / 1 hint, build clean.
+- **Live:** https://raymundbermudes.vercel.app — ⚠️ **STALE.** 22 commits
+  unpushed; production predates CHUNK 08. Blocks production verification of 14–16.
 - **Repo:** `rrcreations69/ClaudePortfolio` (private), branch `main`.
+
+### What changed 2026-09-24
+
+1. **Case study 1 published** — `remediating-security-findings-without-breaking-the-build`,
+   `abstracted` tier. Disclosure audited against the built HTML: no client, no
+   sector, no tool, no business function, no geography. CG-01 closed.
+2. **The answer sheet was cleared** (`notes/ANSWER-SHEET.md`) — Parts A, Q10,
+   Q11 and D answered in one reply, producing **D24–D30**.
+3. **The home page is indexable** for the first time: it now carries the
+   positioning line and a real case study, so `noindex` lifted automatically.
+   **Zero `[CONTENT REQUIRED]` markers remain on `/` and `/work`.**
 
 ---
 
@@ -225,11 +236,37 @@ sector (fintech / credit decisioning). **Individual clients remain restricted.**
 
 ### 3.5 Still open — not part of D1–D13
 
-- **Positioning line (A1).** Three drafts in `PHASE-1-DISCOVERY.md` §10.1; Option 1 recommended.
-  Blocks CHUNK 08.
-- **The Delivery Thread's 8th stage.** `CLAUDE.md` carries a standing `[VERIFY INFORMATION]`:
-  *"Design"* is not in Raymund's stated experience. Confirm he owns design work, or the spine drops
-  to seven stages. Blocks CHUNK 06.
+~~Positioning line~~ → **D25.** ~~The Delivery Thread's 8th stage~~ → **D24.**
+Both closed 2026-09-24. Nothing from this section remains open.
+
+### 3.8 D24–D30 — the answer sheet, cleared 2026-09-24
+
+Raymund answered `notes/ANSWER-SHEET.md` in one reply. Seven decisions.
+
+| # | Decision | Why it went this way |
+|---|---|---|
+| **D24** | **The Delivery Thread is SEVEN stages. Design is not one.** | He confirmed he does not own design work. `design` was removed from `DELIVERY_STAGES` **entirely**, not filtered out of the home strip — leaving it in the enum would have left a stage no project could honestly claim but every project could still select. Removal makes the false claim unrepresentable; the type system now rejects `stages: ['design']`. "Technical Challenge" → `analysis`. |
+| **D25** | **Positioning line chosen** — *"I turn business requirements into enterprise systems — and stay with them through testing, UAT, release and production support."* | Claims the span, which is the one thing distinguishing him from a developer who only writes code. Deliberately contains no seniority label, no years, no metric and no technology — each of those dates, and each would need sourcing. Closes CG-09; **lifts the home page `noindex`.** |
+| **D26** | **Publish `raymund.bermudes21@gmail.com`** — reverses D7's "new dedicated address" | It is already on the CV he circulates, so it is already public and already the address recruiters will use. Creating a new one to avoid reusing a public address would have protected nothing. |
+| **D27** | **No GitHub link.** `github: null` by decision, not omission | His CV lists none and this repo is private (D14). A link would send a recruiter somewhere showing less than the page they are already on. |
+| **D28** | **All 24 skills confirmed.** `SKILLS_CONFIRMED = true` | He reviewed against "only what you would defend in an interview" and struck nothing. ⚠️ **The confirmation covers the entries present on 2026-09-24. Adding a skill later is a new claim and needs his word again.** Closes CG-06. |
+| **D29** | **CV PDF approved for publication** | Closes the B7 question. **The file has not been supplied**, so the Resume button still correctly does not render anywhere. |
+| **D30** | **No headshot** | Nothing in the codebase referenced one; no change was needed. |
+
+**Also settled, no code change:** case study 1's `stack` stays generic (`REST`,
+not CASECenter) · its 4-of-8 stage claim stands · SBC does not become a third
+case study · the six optional case-study-1 additions stay cut.
+
+### 3.9 Case study 1 — one published sentence, provenance closed
+
+The Solution section's on-device storage sentence was **written by Claude and
+confirmed by Raymund**, which is the one pattern CHUNK 00 exists to avoid. He
+has now described the finding in his own words, closing the provenance gap.
+
+⚠️ **His description names the business function and the sync target, neither of
+which may be published.** The live sentence therefore **deliberately did not
+change**. Full record in `notes/case-study-1-PROVENANCE.md` (private). **Do not
+"improve" that sentence by adding his detail back in.**
 
 ---
 
@@ -460,23 +497,37 @@ Status values: `Not Started` · `In Progress` · `Blocked` · `Review` · `Compl
 
 ## 7. Content register — what cannot be invented
 
-Full detail in `PHASE-1-DISCOVERY.md` §10.2 (14 items). What is still missing:
+Full detail in `PHASE-1-DISCOVERY.md` §10.2 (14 items).
 
-- Case study 1 and 2 raw notes → blocks 07 *(critical path)*
-- ~~Disclosure tier per engagement (D5)~~ → **RESOLVED 2026-09-22**, see §3.1
-- Current resume PDF → blocks 11
-- Employment history: employers, exact titles, exact dates → blocks 10
-- Skills list, only what would be defended in an interview → blocks 10
-- **The new dedicated email address (D7) — to be created** → blocks 11
-- Public LinkedIn URL, GitHub URL — confirm each is public and current → blocks 11
-- Location and availability → blocks 08, 11
-- Positioning line (A1) → blocks 08
-- Headshot: yes or no → blocks 10
-- ~~Domain (D9)~~ → **RESOLVED 2026-09-22** — `*.vercel.app`, see §3.2
-- Sanitised architecture/flow detail per case study → blocks 07
-- Whether any screenshots can be cleared *(default assumption: none)* → blocks 07, 16
-- Whether CASECenter warrants its own case study → blocks 05, 07
-- Whether the string "CASECenter" may be published at all (§3.1) → blocks 07
+### 🔴 Still missing — three items, and only one is a question
+
+- **Case study 2 (CASECenter) raw notes** → CG-02. **The largest remaining gap
+  on the site.** Every published piece of evidence is Android security work
+  from his *previous* role, while the positioning claims enterprise systems
+  delivery. Nine questions in `notes/ANSWERS-NEEDED.md`.
+- **The About story and "how I work"** → `/about` renders a visible
+  `[CONTENT REQUIRED]`. Nobody else can write it.
+- **The resume PDF file** → approved (D29), not supplied. Drop it at
+  `public/raymund-bermudes-cv.pdf` and the button appears on the next build.
+
+### ✅ Resolved
+
+- ~~Case study 1~~ → **PUBLISHED 2026-09-24**, CG-01 closed
+- ~~Disclosure tier per engagement (D5)~~ → 2026-09-22, see §3.1
+- ~~Employment history~~ → sourced from the CV, D16
+- ~~Skills list~~ → **D28**, confirmed unfiltered-but-defensible
+- ~~Email address~~ → **D26**, the CV address, reversing D7
+- ~~GitHub URL~~ → **D27**, omitted by decision
+- ~~LinkedIn~~ → public on the CV, live
+- ~~Location and availability~~ → sourced from the CV
+- ~~Positioning line~~ → **D25**
+- ~~Headshot~~ → **D30**, no
+- ~~Domain (D9)~~ → 2026-09-22, `*.vercel.app`, see §3.2
+- ~~Whether CASECenter warrants its own case study~~ → yes, it is case study 2
+- ~~Whether "CASECenter" may be published~~ → **D18**, yes; it appears on `/about`
+- **Screenshots: none cleared, and none are used.** Default assumption stands.
+- **Sanitised architecture detail:** case study 1 needed none — the story is
+  dependency judgement, not topology.
 
 Anything absent is written `[CONTENT REQUIRED]` or `[VERIFY INFORMATION]` and the work stops there.
 Nothing is guessed, approximated or inferred.
@@ -485,20 +536,26 @@ Nothing is guessed, approximated or inferred.
 
 ## 8. Next actions
 
-**Raymund**
-1. Create an empty **private** GitHub repo (D14) — needed by D12, deploy-from-CHUNK-01.
-2. Add `node_modules` to OneDrive's sync exclusions once CHUNK 01 creates it (§5.1).
-4. Create the dedicated email address (D7) — needed by CHUNK 11, not before.
-5. **CHUNK 00 is the critical path and needs none of the above.** D5 is settled, so case-study
-   writing can begin at any time.
+**Raymund — in this order**
+1. 🔴 **`git push origin main`.** 22 commits unpushed. Production predates
+   CHUNK 08, so nothing landed in the last two sessions is live, and CHUNKS
+   14–16 cannot be verified in production until it lands. Four previous
+   attempts reported success while `origin/main` stayed at `2f40096` — **run it
+   in the terminal panel beside the chat so the error is visible.**
+2. 🔴 **Answer the nine case-study-2 questions** in `notes/ANSWERS-NEEDED.md`.
+   Largest remaining gap; rough notes are enough.
+3. **Write the About story** — or give rough notes for it.
+4. **Supply the CV PDF** → `public/raymund-bermudes-cv.pdf`.
 
 **Claude Code (next session)**
-1. Re-verify `node -v` before scaffolding — do not trust this file's recorded value alone.
-2. Verify the current stable Astro major and its actual Node floor — do not assume "7" or "22".
-3. Propose the Vercel project name for confirmation (§3.2) before creating the deployment.
-4. Confirm the GitHub repo is **private** before adding it as a remote (D14).
-5. Check Vercel preview-deployment protection (§3.4).
-6. Then CHUNK 01.
+1. Write case study 2 from his answers. Tier it **before** drafting, not after
+   — confidentiality clearance is a pre-commit gate (D23).
+2. Write the About story from his notes.
+3. Once the push lands: re-verify CHUNKS 14–16 against production, not localhost.
+4. **Delete `/styleguide`** before launch — it is excluded from the sitemap but
+   still builds and is still publicly reachable.
+5. Re-run the recruiter test (Sheet 13). It last scored 2 Pass / 3 Partial /
+   5 Fail; every failure was content, and most of that content now exists.
 
 **Done 2026-09-22**
 - Node v24.19.0 + npm 11.17.0 verified working; `npm ping` → `PONG`. B1 closed.

@@ -6,11 +6,10 @@
  * already claims is not fabrication — it is his attestation, and the same
  * reasoning that widened the CLAUDE.md experience list (D16) applies here.
  *
- * ⚠️ STILL PENDING HIS FILTER — content register CG-06, question B3.
- * A CV keyword list and a defensible skills list are NOT the same thing.
- * **Only technologies he would defend in an interview belong here**, and he
- * has not yet struck anything. Until he does, this is CV-accurate but
- * unfiltered. Remove, do not add.
+ * ✅ FILTERED AND CONFIRMED 2026-09-24 (D28, closing CG-06). He reviewed the
+ * list against the standard "only what you would defend in an interview" and
+ * struck nothing. A CV keyword list and a defensible skills list are not the
+ * same thing — this one has now been checked as both. Remove, do not add.
  * ────────────────────────────────────────────────────────────────────────────
  *
  * NO PROFICIENCY LEVELS. No percentages, no star ratings, no "advanced /
@@ -102,8 +101,13 @@ export const skills: readonly SkillCategory[] = [
 ];
 
 /**
- * Has Raymund confirmed this list? While false, `/about` renders a visible
- * note saying the list is CV-accurate but not yet filtered. Set to true once
- * he has struck anything he would not want to be questioned on (CG-06).
+ * Has Raymund confirmed this list?
+ *
+ * TRUE as of 2026-09-24 (D28, closing CG-06). He reviewed the list and struck
+ * nothing — every entry is one he is willing to be questioned on.
+ *
+ * That confirmation covers exactly the entries present at that date. **Adding
+ * a skill here later is a new claim and needs his word again** — this flag is
+ * not a standing licence to extend the list.
  */
-export const SKILLS_CONFIRMED = false;
+export const SKILLS_CONFIRMED = true;

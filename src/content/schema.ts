@@ -37,7 +37,6 @@ export const DISCLOSURE_TIERS = ['named', 'sectoral', 'abstracted'] as const;
 export const DELIVERY_STAGES = [
   'requirement',
   'analysis',
-  'design',
   'development',
   'testing',
   'uat',

@@ -31,19 +31,14 @@ export interface SiteConfig {
 
 export interface ContactDetails {
   /**
-   * NULL until question B5 is answered. D7 chose "a new dedicated address",
-   * but his CV already circulates raymund.bermudes21@gmail.com, which weakens
-   * that argument. Publishing an address is irreversible — it will be
-   * harvested — so nothing is published until he says which.
+   * Published address. Nullable because publishing one is irreversible — it
+   * will be harvested — so the type forces the decision to be explicit rather
+   * than letting an empty string ship by accident.
    */
   readonly email: string | null;
   /** Public on his CV already. */
   readonly linkedin: string | null;
-  /**
-   * NULL. His CV lists no GitHub, and this portfolio's repo is private (D14),
-   * so a profile link may show very little. An empty profile is worse than no
-   * link — see question B6.
-   */
+  /** Null by decision (D27), not by omission. See the value below. */
   readonly github: string | null;
 }
 
@@ -52,10 +47,15 @@ export const site: SiteConfig = {
   shortName: 'Raymund Bermudes',
   role: 'Solutions Analyst & Enterprise Systems Developer',
 
-  // [CONTENT REQUIRED] CG-09. Three drafts in notes/ANSWERS-NEEDED.md §B2.
-  // The originals in PHASE-1-DISCOVERY.md all led with Android and are stale
-  // after D15. Stays null until Raymund chooses; nothing is invented here.
-  positioning: null,
+  // CHOSEN by Raymund 2026-09-24 (D25), closing CG-09. Drafted from D15's
+  // positioning and his own CV — it claims the span, which is the one thing
+  // that distinguishes him from a developer who only writes code, and it
+  // claims nothing his experience list does not already support.
+  //
+  // Note what it does NOT say: no seniority label, no years, no metric, no
+  // technology. Those all date, and every one of them would need sourcing.
+  positioning:
+    'I turn business requirements into enterprise systems — and stay with them through testing, UAT, release and production support.',
 
   // Sourced verbatim in substance from his CV: "Cavite, Philippines" and
   // "Open to full relocation to Europe, UK, or the US." Not paraphrased into
@@ -85,11 +85,18 @@ export const site: SiteConfig = {
   resumeFile: 'public/raymund-bermudes-cv.pdf',
 
   contact: {
-    // [CONTENT REQUIRED] B5. Deliberately null — see the type above.
-    email: null,
+    // CONFIRMED 2026-09-24 (D26). D7 had chosen "a new dedicated address", but
+    // this one is already on the CV he circulates, so it is already public and
+    // already the address recruiters will use. Setting one up purely to avoid
+    // reusing a public address would have protected nothing.
+    email: 'raymund.bermudes21@gmail.com',
     // Sourced from his CV, where it is already public.
     linkedin: 'https://www.linkedin.com/in/raymundbermudes',
-    // [CONTENT REQUIRED] B6.
+    // DELIBERATELY NULL 2026-09-24 (D27), closing B6 — not pending.
+    // His CV lists no GitHub and this portfolio's repo is private (D14), so a
+    // profile link would send a recruiter somewhere that shows less than the
+    // page they are already on. Set this only if there is public work worth
+    // arriving at.
     github: null,
   },
 } as const;
