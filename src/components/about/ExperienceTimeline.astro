@@ -1,0 +1,116 @@
+---
+/**
+ * ExperienceTimeline — the full employment history.
+ *
+ * A semantic ordered list, static, no JavaScript. The visual "timeline" is a
+ * drawn rule and a marker; the meaning is carried entirely by the list and its
+ * headings, so it reads correctly with CSS disabled.
+ */
+import type { Role } from '../../data/experience';
+import Link from '../Link.astro';
+
+interface Props {
+  roles: readonly Role[];
+}
+
+const { roles } = Astro.props;
+
+/** Exactly as recorded. Never computed, never estimated. */
+function period(role: Role): string {
+  return role.end ? `${role.start} – ${role.end}` : `${role.start} – present`;
+}
+---
+
+<ol class="timeline">
+  {
+    roles.map((role) => (
+      <li class="timeline__item">
+        <p class="timeline__period">{period(role)}</p>
+        <h3 class="timeline__title">{role.title}</h3>
+        <p class="timeline__org">
+          {role.org} · {role.location}
+        </p>
+
+        <ul class="timeline__duties">
+          {role.responsibilities.map((duty) => (
+            <li>{duty}</li>
+          ))}
+        </ul>
+
+        {role.relatedWork && role.relatedWork.length > 0 && (
+          <p class="timeline__evidence">
+            Evidence:{' '}
+            {role.relatedWork.map((slug, i) => (
+              <>
+                {i > 0 && ', '}
+                <Link href={`/work/${slug}`}>{slug}</Link>
+              </>
+            ))}
+          </p>
+        )}
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: var(--width-prose);
+  }
+
+  .timeline__item {
+    position: relative;
+    padding-inline-start: var(--space-8);
+    padding-block-end: var(--space-12);
+    /* The drawn line. Decoration only — the <ol> carries the meaning. */
+    border-inline-start: var(--border-width) solid var(--border);
+  }
+
+  .timeline__item:last-child {
+    padding-block-end: 0;
+    border-inline-start-color: transparent;
+  }
+
+  .timeline__item::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: -4px;
+    inset-block-start: 6px;
+    inline-size: 7px;
+    block-size: 7px;
+    border-radius: 50%;
+    background-color: var(--border-strong);
+  }
+
+  .timeline__period {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  .timeline__title {
+    margin-block-start: var(--space-1);
+    font-size: var(--text-lg);
+  }
+
+  .timeline__org {
+    margin-block-start: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .timeline__duties {
+    margin-block-start: var(--space-4);
+    padding-inline-start: var(--space-4);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .timeline__evidence {
+    margin-block-start: var(--space-4);
+    font-size: var(--text-sm);
+  }
+</style>

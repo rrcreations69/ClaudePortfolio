@@ -1,23 +1,169 @@
 ---
 /**
- * About — CHUNK 03 placeholder.
- * The real page — story, timeline, skills-with-evidence — is CHUNK 10.
+ * About — CHUNK 10.
+ *
+ * Timeline and skills are generated from src/data/, which is transcribed from
+ * the CV. One source, two outputs: the page and the resume cannot drift apart.
+ *
+ * The personal story is still [CONTENT REQUIRED] — it is the one part of this
+ * page nobody but Raymund can write.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ExperienceTimeline from '../components/about/ExperienceTimeline.astro';
+import SkillGroup from '../components/about/SkillGroup.astro';
+import { experience, education } from '../data/experience';
+import { skills, SKILLS_CONFIRMED } from '../data/skills';
+import { site } from '../data/site';
+
+// [CONTENT REQUIRED] The story and the how-I-work section. Nobody else can
+// write these, and a generated version would be worse than nothing.
+const story: string | null = null;
+
+const hasStory = story !== null;
 ---
 
-<BaseLayout title="About" noindex prose>
-  <h1>About</h1>
-  <p class="pending">
-    <strong>[CONTENT REQUIRED]</strong> Employment history with exact titles and
-    dates (CG-05), skills Raymund would defend in an interview (CG-06), location
-    and availability (CG-08), headshot decision (CG-10). Nothing here will be
-    approximated or inferred. This page is built in CHUNK 10.
-  </p>
+<BaseLayout
+  title="About"
+  description={`${site.role}. Enterprise systems delivery, Android maintenance and production support.`}
+  noindex={!hasStory}
+>
+  <div class="about">
+    <header class="about__intro">
+      <h1>About</h1>
+      {
+        hasStory ? (
+          <p class="about__story">{story}</p>
+        ) : (
+          <p class="pending">
+            <strong>[CONTENT REQUIRED]</strong> The professional story and the
+            "how I work" section. This is the one part of the page nobody but
+            Raymund can write, and a generated version would read as exactly
+            that. Everything below is transcribed from his CV and is live.
+          </p>
+        )
+      }
+      {site.availability && <p class="about__where">{site.availability}</p>}
+    </header>
+
+    <section class="about__section" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
+      <ExperienceTimeline roles={experience} />
+    </section>
+
+    <section class="about__section" aria-labelledby="education-heading">
+      <h2 id="education-heading">Education</h2>
+      <ul class="about__education">
+        {
+          education.map((e) => (
+            <li>
+              <p class="about__eduPeriod">
+                {e.start}&#8202;–&#8202;{e.end}
+              </p>
+              <p class="about__eduQual">{e.qualification}</p>
+              <p class="about__eduOrg">{e.institution}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="about__section" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Skills</h2>
+      <p class="about__skillsNote">
+        No proficiency ratings. Where a skill has a published case study behind
+        it, it links to the evidence.
+      </p>
+
+      {
+        !SKILLS_CONFIRMED && (
+          <p class="pending">
+            <strong>[VERIFY INFORMATION]</strong> This list is accurate to
+            Raymund's CV but he has not yet filtered it (CG-06, question B3).
+            Only technologies he would defend in an interview should remain —
+            a CV keyword list and a defensible skills list are not the same
+            thing. Strike, do not add.
+          </p>
+        )
+      }
+
+      <div class="about__skills">
+        {skills.map((group) => <SkillGroup group={group} />)}
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
 <style>
+  .about__intro {
+    max-width: var(--width-prose);
+  }
+
+  .about__story {
+    margin-block-start: var(--space-6);
+    font-size: var(--text-lg);
+  }
+
+  .about__where {
+    margin-block-start: var(--space-4);
+    color: var(--text-muted);
+  }
+
+  .about__section {
+    margin-block-start: var(--space-24);
+  }
+
+  .about__section > h2 {
+    font-size: var(--text-xl);
+    margin-block-end: var(--space-8);
+  }
+
+  .about__education {
+    list-style: none;
+    padding: 0;
+    max-width: var(--width-prose);
+  }
+
+  .about__eduPeriod {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  .about__eduQual {
+    margin-block-start: var(--space-1);
+    font-weight: var(--weight-medium);
+  }
+
+  .about__eduOrg {
+    margin-block-start: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .about__skillsNote {
+    max-width: var(--width-prose);
+    margin-block-start: calc(var(--space-8) * -1 + var(--space-4));
+    margin-block-end: var(--space-8);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .about__skills {
+    display: grid;
+    gap: var(--space-8);
+    max-width: var(--width-wide);
+  }
+
+  @media (min-width: 768px) {
+    .about__skills {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-12) var(--space-8);
+    }
+  }
+
   .pending {
+    max-width: var(--width-prose);
+    margin-block-start: var(--space-6);
     padding: var(--space-4);
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-md);
