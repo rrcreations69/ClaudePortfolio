@@ -1,0 +1,144 @@
+---
+/**
+ * ContactBlock — the contact routes, reused on /contact and anywhere else.
+ *
+ * Links only (D6). No form, no form backend, no analytics — which means zero
+ * third-party origins, a CSP that stays strict, no spam handling, and no
+ * consent UI. Recruiters email or use LinkedIn anyway.
+ *
+ * Each route renders only if it actually exists. A contact page listing a
+ * channel that goes nowhere fails the recruiter test at its very last step,
+ * which is the most expensive place to fail it.
+ */
+import { existsSync } from 'node:fs';
+import Link from '../Link.astro';
+import { site } from '../../data/site';
+
+const { email, linkedin, github } = site.contact;
+const hasResume = existsSync(site.resumeFile);
+const hasAny = Boolean(email || linkedin || github || hasResume);
+---
+
+<div class="contact">
+  {
+    hasAny ? (
+      <ul class="contact__list">
+        {email && (
+          <li class="contact__item">
+            <span class="contact__label">Email</span>
+            {/* mailto, not a form. Works on mobile, works offline, works
+                without JavaScript. */}
+            <Link href={`mailto:${email}`} class="contact__value">
+              {email}
+            </Link>
+          </li>
+        )}
+
+        {linkedin && (
+          <li class="contact__item">
+            <span class="contact__label">LinkedIn</span>
+            <Link href={linkedin} class="contact__value">
+              {linkedin.replace(/^https?:\/\/(www\.)?/, '')}
+            </Link>
+          </li>
+        )}
+
+        {github && (
+          <li class="contact__item">
+            <span class="contact__label">GitHub</span>
+            <Link href={github} class="contact__value">
+              {github.replace(/^https?:\/\/(www\.)?/, '')}
+            </Link>
+          </li>
+        )}
+
+        {hasResume && (
+          <li class="contact__item">
+            <span class="contact__label">Resume</span>
+            <Link href={site.resumeHref} class="contact__value">
+              Download PDF
+            </Link>
+          </li>
+        )}
+      </ul>
+    ) : null
+  }
+
+  {
+    !email && (
+      <p class="contact__pending">
+        <strong>[CONTENT REQUIRED]</strong> No email address is published yet
+        (question B5). D7 chose a new dedicated address, but the CV already
+        circulates a personal one — publishing an address is irreversible, so
+        nothing is published until Raymund says which.
+      </p>
+    )
+  }
+
+  {
+    !github && (
+      <p class="contact__pending">
+        <strong>[VERIFY INFORMATION]</strong> No GitHub link (question B6). The
+        CV lists none and this repo is private (D14), so a profile may show
+        little. An empty profile is worse than no link — omit deliberately, or
+        supply one.
+      </p>
+    )
+  }
+
+  {
+    !hasResume && (
+      <p class="contact__pending">
+        <strong>[CONTENT REQUIRED]</strong> No resume PDF (CG-04, question B7).
+        Drop <code>raymund-bermudes-cv.pdf</code> into <code>public/</code> and
+        the download link and the header button both appear on the next build —
+        no code change needed.
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .contact__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--width-prose);
+  }
+
+  .contact__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-4);
+  }
+
+  .contact__label {
+    flex: none;
+    inline-size: 7rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  .contact__value {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+  }
+
+  .contact__pending {
+    max-width: var(--width-prose);
+    margin-block-start: var(--space-6);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+</style>

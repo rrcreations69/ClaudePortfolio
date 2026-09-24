@@ -26,6 +26,25 @@ export interface SiteConfig {
   readonly nav: readonly NavItem[];
   readonly resumeHref: string;
   readonly resumeFile: string;
+  readonly contact: ContactDetails;
+}
+
+export interface ContactDetails {
+  /**
+   * NULL until question B5 is answered. D7 chose "a new dedicated address",
+   * but his CV already circulates raymund.bermudes21@gmail.com, which weakens
+   * that argument. Publishing an address is irreversible — it will be
+   * harvested — so nothing is published until he says which.
+   */
+  readonly email: string | null;
+  /** Public on his CV already. */
+  readonly linkedin: string | null;
+  /**
+   * NULL. His CV lists no GitHub, and this portfolio's repo is private (D14),
+   * so a profile link may show very little. An empty profile is worse than no
+   * link — see question B6.
+   */
+  readonly github: string | null;
 }
 
 export const site: SiteConfig = {
@@ -64,6 +83,15 @@ export const site: SiteConfig = {
   // fail the recruiter test at the last step.
   resumeHref: '/raymund-bermudes-cv.pdf',
   resumeFile: 'public/raymund-bermudes-cv.pdf',
+
+  contact: {
+    // [CONTENT REQUIRED] B5. Deliberately null — see the type above.
+    email: null,
+    // Sourced from his CV, where it is already public.
+    linkedin: 'https://www.linkedin.com/in/raymundbermudes',
+    // [CONTENT REQUIRED] B6.
+    github: null,
+  },
 } as const;
 
 /**

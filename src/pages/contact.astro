@@ -1,29 +1,51 @@
 ---
 /**
- * Contact — CHUNK 03 placeholder.
- * The real page is CHUNK 11. Per D6: links only. No form, no form backend,
- * no analytics — zero third-party origins.
+ * Contact — CHUNK 11.
+ *
+ * Per D6: links only. No form, no form backend, no analytics, and therefore
+ * zero third-party origins — which is what keeps the CSP strict and means
+ * there is no consent UI, no spam handling and no API key to leak.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactBlock from '../components/contact/ContactBlock.astro';
+import { site } from '../data/site';
+
+// Indexable only once there is at least one way to actually reach him.
+const reachable = site.contact.email !== null || site.contact.linkedin !== null;
 ---
 
-<BaseLayout title="Contact" noindex prose>
+<BaseLayout
+  title="Contact"
+  description={`Get in touch with ${site.name}, ${site.role}.`}
+  noindex={!reachable}
+  prose
+>
   <h1>Contact</h1>
-  <p class="pending">
-    <strong>[CONTENT REQUIRED]</strong> Published email address (D7 — a
-    dedicated address, not yet created), LinkedIn and GitHub URLs confirmed
-    public and current (CG-07), and the resume PDF (CG-04). This page is built
-    in CHUNK 11.
+
+  <p class="lead">
+    The quickest way to reach me is below. I read everything, and I reply to
+    anything specific.
   </p>
+
+  {site.availability && <p class="where">{site.availability}</p>}
+
+  <ContactBlock />
 </BaseLayout>
 
 <style>
-  .pending {
-    padding: var(--space-4);
-    border: var(--border-width) solid var(--border);
-    border-radius: var(--radius-md);
-    background-color: var(--surface);
-    font-size: var(--text-sm);
+  .lead {
+    margin-block-start: var(--space-6);
+    font-size: var(--text-lg);
     color: var(--text-muted);
+  }
+
+  .where {
+    margin-block-start: var(--space-4);
+    color: var(--text-muted);
+  }
+
+  /* The block manages its own spacing; this just separates it from the intro. */
+  :global(.contact) {
+    margin-block-start: var(--space-12);
   }
 </style>
