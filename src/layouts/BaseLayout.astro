@@ -11,6 +11,7 @@
  */
 import { existsSync } from 'node:fs';
 import { Font } from 'astro:assets';
+import SEO from '../components/SEO.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { site } from '../data/site';
@@ -23,9 +24,17 @@ interface Props {
   noindex?: boolean;
   /** Prose pages get the 68ch measure; index pages manage their own width. */
   prose?: boolean;
+  /** 'article' for case studies, 'website' for everything else. */
+  ogType?: 'website' | 'article';
 }
 
-const { title, description, noindex = false, prose = false } = Astro.props;
+const {
+  title,
+  description,
+  noindex = false,
+  prose = false,
+  ogType = 'website',
+} = Astro.props;
 
 // The Resume button appears only when the CV actually exists. Until Raymund
 // supplies it (content register CG-04) the button is simply absent, because a
@@ -44,7 +53,14 @@ const fullTitle = title === site.name ? title : `${title} — ${site.shortName}`
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     {description && <meta name="description" content={description} />}
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <SEO
+      title={title}
+      fullTitle={fullTitle}
+      description={description}
+      noindex={noindex}
+      ogType={ogType}
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     {/* Applies a stored theme override BEFORE first paint, so someone who

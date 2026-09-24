@@ -1,0 +1,16 @@
+# robots.txt — CHUNK 15
+#
+# The site is small and entirely public; there is nothing to hide from a
+# crawler that is not already excluded per page with a noindex meta tag.
+# Pages that are unfinished carry noindex and are excluded from the sitemap,
+# which is the reliable signal. Disallow here would be the WRONG tool: a
+# disallowed page cannot be crawled, so its noindex is never seen, and it can
+# still end up indexed from an external link.
+
+User-agent: *
+Allow: /
+
+# Dev-only route. Removed entirely at CHUNK 16; excluded here meanwhile.
+Disallow: /styleguide
+
+Sitemap: https://raymundbermudes.vercel.app/sitemap-index.xml

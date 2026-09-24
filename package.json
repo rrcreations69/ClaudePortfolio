@@ -18,10 +18,13 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "serve:headers": "node scripts/serve-with-headers.ts",
+    "make:og": "node scripts/make-og-image.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.2",
+    "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.3",
     "tailwindcss": "^4.3.3",

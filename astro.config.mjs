@@ -3,6 +3,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -83,5 +84,32 @@ export default defineConfig({
     },
   },
 
-  integrations: [mdx()],
+  integrations: [
+    mdx(),
+    sitemap({
+      // Routes that must NEVER be advertised: /styleguide is a dev-only route
+      // deleted at CHUNK 16, and an error page is not a destination.
+      //
+      // Note what this does NOT do. Pages currently carrying `noindex` because
+      // they await content (home, /work, /about) ARE still listed. That is
+      // deliberate: their noindex is temporary and lifts as soon as the content
+      // lands, whereas these two exclusions are permanent. A crawler arriving
+      // early simply reads the noindex and moves on. Re-check at CHUNK 16 that
+      // every listed URL is by then genuinely indexable.
+      filter: (page) => !page.includes('/styleguide') && !page.includes('/404'),
+
+      // Strip the trailing slash so sitemap URLs match the canonical exactly.
+      // Astro emits /about/ while the canonical declares /about; left alone, a
+      // crawler has to work out for itself that they are the same page. Making
+      // them identical removes the ambiguity instead of relying on it being
+      // resolved correctly.
+      serialize: (item) => ({
+        ...item,
+        url:
+          item.url.endsWith('/') && new URL(item.url).pathname !== '/'
+            ? item.url.slice(0, -1)
+            : item.url,
+      }),
+    }),
+  ],
 });

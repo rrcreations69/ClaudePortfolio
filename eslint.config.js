@@ -68,6 +68,19 @@ export default ts.config(
     // Build-time scripts run in Node and legitimately write to stdout — that
     // is their entire output channel.
     files: ['scripts/**/*.ts', '*.config.{js,mjs,ts}'],
+    languageOptions: {
+      globals: {
+        // Node globals. Declared explicitly rather than pulling in the
+        // `globals` package for a handful of names — a typo in one of these
+        // is then still an error rather than silently allowed.
+        process: 'readonly',
+        console: 'readonly',
+        URL: 'readonly',
+        URLSearchParams: 'readonly',
+        Buffer: 'readonly',
+        fetch: 'readonly',
+      },
+    },
     rules: {
       'no-console': 'off',
     },

@@ -1,0 +1,100 @@
+---
+/**
+ * SEO — canonical URL, Open Graph, Twitter card and JSON-LD.
+ *
+ * Every route gets a unique title, description and canonical. Sitewide values
+ * come from src/data/site.ts, so they cannot drift between pages.
+ *
+ * ⚠️ CONFIDENTIALITY. Everything this component emits is public, and page
+ * titles and OG metadata are explicitly named in CLAUDE.md's disclosure rules.
+ * A case study's title and description come from frontmatter, which the schema
+ * already guards against restricted client names — so the guard reaches these
+ * tags too. Nothing here may be assembled from anything the schema has not
+ * seen.
+ *
+ * NOINDEX PAGES EMIT NO OG OR JSON-LD. A page not fit to index is not fit to
+ * share, and structured data describing an unfinished page is worse than none:
+ * it tells a search engine to trust something we have said is not ready.
+ */
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  /** The full, rendered <title>, including the name suffix. */
+  fullTitle: string;
+  description?: string;
+  noindex?: boolean;
+  /** 'website' for pages, 'article' for case studies. */
+  ogType?: 'website' | 'article';
+}
+
+const { title, fullTitle, description, noindex = false, ogType = 'website' } =
+  Astro.props;
+
+// Canonical must be absolute and must come from the configured site origin,
+// not from the request — otherwise a preview deployment would declare itself
+// canonical and compete with production in search results.
+const canonical = new URL(Astro.url.pathname, site.url);
+// Trailing slashes are removed so /about and /about/ never both index.
+const canonicalHref =
+  canonical.pathname === '/'
+    ? canonical.href
+    : canonical.href.replace(/\/$/, '');
+
+const ogImage = new URL('/og-default.png', site.url).href;
+
+/**
+ * Person schema. Deliberately minimal: only facts already published on this
+ * site and on Raymund's own CV. No invented affiliations, no job titles he
+ * has not held, no skills claimed beyond the page itself.
+ */
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  jobTitle: site.role,
+  ...(site.contact.linkedin ? { sameAs: [site.contact.linkedin] } : {}),
+  ...(site.contact.email ? { email: `mailto:${site.contact.email}` } : {}),
+};
+---
+
+<link rel="canonical" href={canonicalHref} />
+
+{
+  noindex ? (
+    <meta name="robots" content="noindex, nofollow" />
+  ) : (
+    <>
+      <meta name="robots" content="index, follow" />
+
+      {/* Open Graph */}
+      <meta property="og:type" content={ogType} />
+      <meta property="og:site_name" content={site.name} />
+      <meta property="og:title" content={fullTitle} />
+      {description && <meta property="og:description" content={description} />}
+      <meta property="og:url" content={canonicalHref} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={`${site.name} — ${site.role}`} />
+      <meta property="og:locale" content="en_GB" />
+
+      {/* Twitter. summary_large_image, since the card is a 1200x630 banner. */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={fullTitle} />
+      {description && <meta name="twitter:description" content={description} />}
+      <meta name="twitter:image" content={ogImage} />
+
+      <script
+        type="application/ld+json"
+        is:inline
+        set:html={JSON.stringify(personSchema)}
+      />
+    </>
+  )
+}
+
+{/* Present regardless: a page can be unindexed and still be read. */}
+<meta name="author" content={site.name} />
+<meta name="title" content={title} />
