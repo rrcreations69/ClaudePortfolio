@@ -451,7 +451,7 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 | 13 | Accessibility | **COMPLETE** | — |
 | 14 | Performance | **Review** | Targets met locally; production URL is 9 commits stale |
 | 15 | SEO | **Review** | Verified locally; production URL still stale. No custom domain (D9) |
-| 16 | Security, confidentiality & recruiter review | Not Started | all |
+| 16 | Security, confidentiality & recruiter review | **Review** | Audits pass; recruiter test fails on content |
 
 Status values: `Not Started` · `In Progress` · `Blocked` · `Review` · `Complete`.
 **Code existing is not done. Untested is `Review`, not `Complete`.**
