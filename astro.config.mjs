@@ -87,16 +87,18 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      // Routes that must NEVER be advertised: /styleguide is a dev-only route
-      // deleted at CHUNK 16, and an error page is not a destination.
+      // An error page is not a destination, so it is never advertised.
       //
-      // Note what this does NOT do. Pages currently carrying `noindex` because
-      // they await content (home, /work, /about) ARE still listed. That is
-      // deliberate: their noindex is temporary and lifts as soon as the content
-      // lands, whereas these two exclusions are permanent. A crawler arriving
-      // early simply reads the noindex and moves on. Re-check at CHUNK 16 that
-      // every listed URL is by then genuinely indexable.
-      filter: (page) => !page.includes('/styleguide') && !page.includes('/404'),
+      // The `/styleguide` exclusion that used to sit here is gone because the
+      // route itself is gone — deleted at CHUNK 16 as planned (D34 deferred
+      // that, it did not cancel it). A filter guarding a route that no longer
+      // exists is the kind of line that outlives its reason.
+      //
+      // ✅ Re-checked 2026-09-24: every URL now listed is genuinely indexable.
+      // Home, /work and /about all carried a temporary `noindex` while they
+      // awaited content; all three lifted once the content landed, which was
+      // the outcome this comment previously said to verify.
+      filter: (page) => !page.includes('/404'),
 
       // Strip the trailing slash so sitemap URLs match the canonical exactly.
       // Astro emits /about/ while the canonical declares /about; left alone, a

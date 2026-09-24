@@ -574,22 +574,18 @@ Every other page — `/`, `/work`, `/about`, both case studies — is clean.
 
 ### Claude Code (next session)
 
-**Deferred by D34 on the owner's instruction — do NOT do these early:**
+1. ✅ **`/styleguide` DELETED 2026-09-24.** D34 deferred the task; it did not
+   cancel it, and it is now done. The route, its sitemap filter clause and its
+   `robots.txt` Disallow are all gone — a filter guarding a route that no
+   longer exists is the kind of line that outlives its reason. **The known
+   production exposure recorded under D34 is closed.**
+2. ✅ **Sheet 13 recruiter test re-run 2026-09-24** — see that sheet.
+3. Remaining, to close CHUNKS 14–16: Lighthouse against production, and the
+   rich-results test. Neither is blocked.
 
-1. Delete `/styleguide` (a known, accepted exposure until then — see below).
-2. Re-run the Sheet 13 recruiter test. It last scored 2 Pass / 3 Partial /
-   5 Fail, **and every one of those failures was content that now exists** —
-   two case studies, the positioning line, the About story, the skills list and
-   contact details have all landed since. Expect a very different result.
-3. To finish closing CHUNKS 14–16: Lighthouse against production, and the
-   rich-results test.
-
-Nothing on that list is blocked. They wait only because the owner asked.
-
-⚠️ **`/styleguide` is a known, accepted exposure (D34), not an oversight.** It
-returns 200 in production. It is excluded from the sitemap and Disallowed in
-robots, and it **must still be deleted before the site is treated as launched**
-— D34 defers that task, it does not cancel it.
+**Six routes now build, and the sitemap lists exactly those six**, every one
+genuinely indexable — which is precisely what `astro.config.mjs` carried a
+standing note to verify at CHUNK 16.
 
 **Done 2026-09-22**
 - Node v24.19.0 + npm 11.17.0 verified working; `npm ping` → `PONG`. B1 closed.

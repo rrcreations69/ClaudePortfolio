@@ -10,7 +10,4 @@
 User-agent: *
 Allow: /
 
-# Dev-only route. Removed entirely at CHUNK 16; excluded here meanwhile.
-Disallow: /styleguide
-
 Sitemap: https://raymundbermudes.vercel.app/sitemap-index.xml

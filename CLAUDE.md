@@ -38,11 +38,10 @@ The site builds seven routes at **https://raymundbermudes.vercel.app** — Astro
 
 ### Still blocked / still needed
 
-1. **Case study 2 (CASECenter) is unwritten** — content register CG-02. This is the largest remaining gap: every published piece of evidence is Android work from his *previous* role, while the positioning claims enterprise systems delivery. Questions are in `notes/ANSWERS-NEEDED.md`.
-2. **The About story is unwritten** — `/about` renders a visible `[CONTENT REQUIRED]`.
-3. **The CV PDF is approved (D29) but not supplied.** Drop it at `public/raymund-bermudes-cv.pdf` and the Resume button appears on the next build — no code change.
-4. **`git push` is blocked for Claude** by this session's auto-approval. Claude commits; Raymund pushes.
-5. **`/styleguide` must be deleted before launch.** Deliberately retained for now; excluded from the sitemap.
+1. **The CV PDF is approved (D29) but not supplied.** Drop it at `public/raymund-bermudes-cv.pdf` and the Resume button appears on the next build — no code change. **This is the only outstanding item in the project**, and the last `[CONTENT REQUIRED]` on the live site.
+2. **`git push` is blocked for Claude** by this session's auto-approval. Claude commits; Raymund pushes. **Always `git fetch` before claiming anything is or is not pushed** — a stale `origin/main` caused three sessions of false "the push never lands" reports.
+
+**Closed:** case study 2 (CG-02, published 2026-09-24) · the About story (CG-15, D35) · `/styleguide` (deleted at CHUNK 16, as D34 said it must be).
 
 ## The stack (decided, Phase 1)
 
