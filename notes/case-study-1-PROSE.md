@@ -154,18 +154,41 @@ originally built?
 library that can update that wont affect the base codes." — the two-track shape
 is yours.*
 
-**That structure is the spine of the section. What is missing is what sits
-inside each track.**
+### The concrete example — ✅ SOURCED 2026-09-24
 
-⚠️ **I am not going to hand you a list of standard Android hardening measures to
-tick.** If I suggest them and you agree, you will be defending invented
-specifics in an interview. This has to come from you.
+> One finding concerned data held on the device without adequate protection.
+> An application built to work offline necessarily keeps more on the device
+> than one that does not, so this is the kind of finding that design invites.
+> It was closed by changing how that data was written.
 
-❓ **Pick one finding and walk me through it.** What did the scan flag, and what
-did you change? Rough words are fine — "it complained about X, so I changed Y".
+*Sourced: "One said the app was storing something on the device without
+protecting it properly, so I changed how that data was written." Confirmed by
+Raymund as something that actually happened.*
 
-❓ **Were the code-side fixes mostly one kind of change repeated, or genuinely
-different problems needing different approaches?**
+The middle sentence is **framing, not a claim about Raymund's work** — it is a
+general property of offline-first applications, included so the finding reads
+as a consequence of the design rather than as carelessness. Cut it if it feels
+like editorialising.
+
+### ⚠️ PROVENANCE WARNING — read before this publishes
+
+**Claude supplied that sentence as an EXAMPLE of the right level of vagueness,
+and Raymund returned it and confirmed it was real.** That is the exact pattern
+this project has spent the whole of CHUNK 00 avoiding: offering plausible
+wording and collecting a yes.
+
+It is very probably fine — it is consistent with everything else he has said
+(an offline app storing data locally via Room would plausibly attract exactly
+this finding), and he volunteered the confirmation unprompted. But the words
+originated with Claude, not with him.
+
+**Before this goes live, Raymund must confirm it in his own words**, because an
+interviewer will ask the obvious follow-up: *what was stored, and what did you
+change about how it was written?* He needs to be able to answer that from
+memory, not from this page.
+
+❓ **Still open:** were the code-side fixes mostly one kind of change repeated,
+or genuinely different problems needing different approaches?
 
 ---
 
@@ -222,7 +245,8 @@ you actually believe it, and in your words.
 | 8 | Lessons | one line |
 | 9 | Validation — re-scan, UAT? | two lines |
 | 10 | ~~How you decided which upgrades were safe~~ | ✅ **ANSWERED** |
-| 11 | One concrete finding and fix | **the last big one** |
+| 11 | ~~One concrete finding and fix~~ | ✅ **ANSWERED** (see provenance warning) |
 
-**Investigation is now written.** One substantial answer remains — item 11 —
-plus eight one-liners.
+**All ten sections now have drafted prose or a sourced shape.** Six one-line
+answers remain, plus one confirmation: the concrete finding must be restated in
+Raymund's own words before publication.
