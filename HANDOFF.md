@@ -563,27 +563,28 @@ Nothing is guessed, approximated or inferred.
 **Everything is pushed and deployed.** `origin/main` and `HEAD` match; both case
 studies are publicly live; CHUNKS 14–16 have been verified against production.
 
-### 🔴 Raymund — TWO items, and they are the only things left
+### 🔴 Raymund — ONE item. It is the only thing left in the project.
 
-1. **The About story** (CG-15). `/about` renders a visible `[CONTENT REQUIRED]`
-   and is `noindex` because of it. Rough notes are enough — prose is Claude's
-   job. Prompts: how he got from Junior Android Developer to Solutions Analyst ·
-   what kind of problem he enjoys most · what he does differently from someone
-   who only writes code.
-2. **The CV PDF file** (CG-04). Approved (D29), never supplied. Drop it at
-   `public/raymund-bermudes-cv.pdf` and the Resume button appears in the header
-   and on `/contact` on the next build — **no code change needed.**
+**The CV PDF file** (CG-04). Approved back on 2026-09-24 (D29), never supplied.
+Drop it at `public/raymund-bermudes-cv.pdf` and the Resume button appears in
+the header and on `/contact` on the next build — **no code change needed.**
 
-**Nothing else is blocked on him, and nothing else is blocked on code.**
+It is also the last `[CONTENT REQUIRED]` marker anywhere on the live site.
+Every other page — `/`, `/work`, `/about`, both case studies — is clean.
 
 ### Claude Code (next session)
 
-1. Write the About story from his notes. That lifts `/about`'s `noindex` and
-   resolves the sitemap/noindex mismatch in one move.
-2. **Deferred by D34, do NOT do early:** delete `/styleguide`, and re-run the
-   Sheet 13 recruiter test. Both wait until the two content items land.
-3. Then, to close CHUNKS 14–16: Lighthouse against production, rich-results
-   test, and the Sheet 13 walkthrough.
+**Deferred by D34 on the owner's instruction — do NOT do these early:**
+
+1. Delete `/styleguide` (a known, accepted exposure until then — see below).
+2. Re-run the Sheet 13 recruiter test. It last scored 2 Pass / 3 Partial /
+   5 Fail, **and every one of those failures was content that now exists** —
+   two case studies, the positioning line, the About story, the skills list and
+   contact details have all landed since. Expect a very different result.
+3. To finish closing CHUNKS 14–16: Lighthouse against production, and the
+   rich-results test.
+
+Nothing on that list is blocked. They wait only because the owner asked.
 
 ⚠️ **`/styleguide` is a known, accepted exposure (D34), not an oversight.** It
 returns 200 in production. It is excluded from the sitemap and Disallowed in
