@@ -41,6 +41,10 @@ desktop.ini
 ~$*
 *.tmp
 
+# Lighthouse reports — measurement artefacts, regenerated on demand.
+lh-*.json
+lighthouse-report.*
+
 # Test / tooling output
 coverage/
 playwright-report/
