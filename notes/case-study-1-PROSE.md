@@ -82,20 +82,40 @@ closely, so it should be yours.
 
 ---
 
-## Investigation
+## Investigation — ✅ NOW SOURCED
 
-**🔴 Nothing sourced yet — and this is one of the two sections that decide
-whether the case study shows problem-solving or just reports an outcome.**
+> I started by upgrading the flagged libraries and seeing what broke. In a
+> long-lived codebase that is the quickest way to find out what it can actually
+> absorb: some upgrades moved cleanly, others failed outright or broke
+> behaviour that other parts of the application depended on.
+>
+> That split the findings into two groups — the ones a version bump could
+> close, and the ones that would have to be closed in the application's own
+> code instead. For the second group I worked through what each finding meant
+> in context and how to address it without moving the dependency, researching
+> each one as I went.
 
-A scan report names a problem. It does not tell you where your code touches it,
-which findings are real risks in your context, or which fixes are safe.
+*Sourced: "I tried updating the libraries first and checked what broke. Tried to
+search stackoverflow cause theres no AI/LLM before. Fix VAPT findings by
+refactoring codes and updating some libraries."*
 
-❓ **How did you work out what each finding actually meant in your codebase?**
+**Why this is good material.** It is an empirical method, not a guess: change
+one thing, observe the consequence, let the result decide the approach. That is
+exactly the judgement the Technical Challenge section claims, now evidenced
+rather than asserted.
 
-❓ **How did you establish which upgrades were viable — did you try them and
-watch things break, read changelogs, judge by how deeply the app used each
-library, something else?** *This is the single highest-value answer in the whole
-case study. It is the judgement the story turns on.*
+### ❓ One decision for you — the "no AI" detail
+
+You have mentioned twice that there was no AI or LLM available at the time. It
+is true, and the dates make it obvious to any reader anyway.
+
+**My recommendation: leave it out.** Two reasons. It centres the wrong thing —
+the story is your method, not the tools you lacked. And in 2026 it can read as
+slightly defensive, which undercuts an otherwise confident piece. The work is
+more impressive described plainly.
+
+**Keep it if you disagree** — it is your work and your call. Say the word and
+I will add a line.
 
 ---
 
@@ -203,8 +223,8 @@ you actually believe it, and in your words.
 | 7 | Outcome | one line |
 | 8 | Lessons | one line |
 | 9 | Validation — re-scan, UAT? | two lines |
-| 10 | **How you decided which upgrades were safe** | **the important one** |
-| 11 | One concrete finding and fix | a few lines |
+| 10 | ~~How you decided which upgrades were safe~~ | ✅ **ANSWERED** |
+| 11 | One concrete finding and fix | **the last big one** |
 
-**Ten of these are one-liners. Two carry the case study.** Answer 10 and 11 and
-I can write the rest around them.
+**Investigation is now written.** One substantial answer remains — item 11 —
+plus eight one-liners.
