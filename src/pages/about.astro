@@ -15,9 +15,42 @@ import { experience, education } from '../data/experience';
 import { skills, SKILLS_CONFIRMED } from '../data/skills';
 import { site } from '../data/site';
 
-// [CONTENT REQUIRED] The story and the how-I-work section. Nobody else can
-// write these, and a generated version would be worse than nothing.
-const story: string | null = null;
+/**
+ * The About paragraph.
+ *
+ * ────────────────────────────────────────────────────────────────────────────
+ * WRITTEN 2026-09-24 (D35). Raymund said "I'll let you decide on this."
+ *
+ * ⚠️ WHAT WAS DELIBERATELY NOT WRITTEN: a motivation. He was asked why he
+ * moved from Android development to the Solutions Analyst role, and the only
+ * answer available is a sentence CLAUDE offered as an example and he repeated
+ * back — the same provenance failure as the on-device storage line in case
+ * study 1. A feeling cannot be sourced, so none is claimed here.
+ *
+ * What this paragraph does instead is state what he DOES, which is checkable.
+ * Every clause traces to something he attested:
+ *
+ *   "credit decisioning systems at GDS Link Asia" ....... CV; nameable per D18
+ *   "on CASECenter, from the client's own requirements
+ *    documents" ........................................ case study 2, S1/S2
+ *   "testing, UAT, release and production support" ..... case study 2, S2 and
+ *                                                        his DEV→UAT→Prod
+ *                                                        with sign-off
+ *   "came to this from Android development" ............ CV role history
+ *   "still maintain a production application I did not
+ *    originally build" ................................. case study 1 myRole
+ *   "would rather push back ... than absorb the changes
+ *    later" ............................................ his S3 answer, and
+ *                                                        his "yes push back to
+ *                                                        client" follow-up
+ *
+ * NOTHING here is inferred, and no adjective is applied to him that he did not
+ * earn in an answer. If he later supplies the motivation in his own words, it
+ * belongs as a fourth sentence — not as a rewrite of these three.
+ * ────────────────────────────────────────────────────────────────────────────
+ */
+const story: string | null =
+  "I work on credit decisioning systems at GDS Link Asia, building them on CASECenter from the client's own requirements documents and staying with them through testing, UAT, release and production support. I came to this from Android development, and still maintain a production application I did not originally build. When a requirements document is not settled, I would rather push back and have it resolved than start building and absorb the changes later.";
 
 const hasStory = story !== null;
 ---
