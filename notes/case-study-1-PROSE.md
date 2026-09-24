@@ -15,12 +15,15 @@ Everything not marked ❓ traces to something you actually said. Nothing is inve
 
 ---
 
-## Title
+## Title — ✅ DECIDED 2026-09-24
 
-**Recommended:** *Which upgrades are safe: remediating security findings without breaking the build*
+> **Which upgrades are safe: remediating security findings without breaking the build**
 
-It leads with the judgement rather than the constraint, which is the part that
-reflects well on you. ❓ **Accept, or pick another?**
+Leads with the judgement rather than the constraint, which is the part that
+reflects well on you.
+
+**Slug:** `remediating-security-findings-without-breaking-the-build`
+Checked against the restricted-name guard — clean. No client name in the URL.
 
 ---
 
@@ -104,18 +107,13 @@ one thing, observe the consequence, let the result decide the approach. That is
 exactly the judgement the Technical Challenge section claims, now evidenced
 rather than asserted.
 
-### ❓ One decision for you — the "no AI" detail
+### ✅ DECIDED 2026-09-24 — the "no AI" detail stays OUT
 
-You have mentioned twice that there was no AI or LLM available at the time. It
-is true, and the dates make it obvious to any reader anyway.
+Raymund: *"yes leave out the AI part"*.
 
-**My recommendation: leave it out.** Two reasons. It centres the wrong thing —
-the story is your method, not the tools you lacked. And in 2026 it can read as
-slightly defensive, which undercuts an otherwise confident piece. The work is
-more impressive described plainly.
-
-**Keep it if you disagree** — it is your work and your call. Say the word and
-I will add a line.
+The absence of AI tooling is therefore **not mentioned anywhere** in the
+published case study. The method is described plainly, which is stronger. Do
+not reintroduce it in a later edit.
 
 ---
 
