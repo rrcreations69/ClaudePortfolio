@@ -442,7 +442,7 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 | 04 | Content layer | **COMPLETE** | — |
 | 05 | Work index + ProjectCard | **COMPLETE** | — |
 | 06 | Case study system + Delivery Thread | **Complete** | — |
-| 07 | Real case study content | Not Started | **00** |
+| 07 | Real case study content | **Review** | Case study 1 published; case study 2 outstanding |
 | 08 | Home — hero | Not Started | 03, positioning line |
 | 09 | Home — thread, selected work, experience teaser | Not Started | 05, 06 |
 | 10 | About — story, timeline, skills | Not Started | 03, employment/skills content |

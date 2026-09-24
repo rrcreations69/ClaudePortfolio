@@ -1,14 +1,3 @@
-This is the exact file that becomes
-src/content/work/security-remediation-legacy-android.mdx
-
-It is complete except for ONE value: period.start.
-Supply the year and this moves across unchanged.
-
-Kept as .txt inside notes/ so Astro cannot pick it up early — a half-filled
-case study must never be buildable.
-
-────────────────────────────────────────────────────────────────────────────
-
 ---
 title: 'Which upgrades are safe: remediating security findings without breaking the build'
 slug: 'remediating-security-findings-without-breaking-the-build'
@@ -31,8 +20,11 @@ domain: ['enterprise-mobility']
 workType: ['security', 'maintenance', 'android-development']
 
 period:
-  start: '<<<YEAR>>>'
-  end: '<<<YEAR>>>'   # omit only if the work is genuinely ongoing
+  start: '2023'
+  # Set explicitly. Without `end`, ProjectMeta renders "2023 - present",
+  # which would claim this remediation is ongoing work. It was completed,
+  # re-scanned and released.
+  end: '2023'
 
 stages: ['analysis', 'development', 'testing', 'release']
 
@@ -102,23 +94,3 @@ codebase — written before I took it on, and not by me — and in that situatio
 upgrading is often the option you cannot take. Closing a finding then means
 changing your own code rather than reaching for a newer version of someone
 else's.
-
-────────────────────────────────────────────────────────────────────────────
-
-NOTES ON STRUCTURE
-
-"My role" and "Outcome" are NOT body sections. They come from frontmatter,
-because the schema enforces them — myRole and outcome are .min(1) and an empty
-value fails the build. A prose section could never guarantee that. The page
-renders My Role in the header (elevated, per Flow B) and Outcome as its own
-section appended after the body.
-
-The delivery thread will therefore show six entries:
-  Context (Requirement) · Problem (Requirement) · Investigation (Analysis)
-  Technical Challenge (Design) · Solution (Development) · Validation (Testing)
-  + Outcome (Release), appended from frontmatter
-
-Note "Technical Challenge" maps to the DESIGN stage in lib/caseStudy.ts. That
-is the open 8-vs-7 question (B1). If Design is dropped, change that one line
-and this section takes a different stage label. The frontmatter `stages` array
-deliberately does NOT claim design.
