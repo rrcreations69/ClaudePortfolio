@@ -1,37 +1,44 @@
 ---
 /**
- * Home — CHUNK 03 placeholder.
+ * Home — CHUNK 08 (hero) and CHUNK 09 (thread, selected work, experience).
  *
- * The real home page is CHUNK 08 (hero) and CHUNK 09 (delivery thread,
- * selected work, experience teaser). This exists so the shell has somewhere to
- * live and can be navigated end to end.
+ * The page is `noindex` until it carries real content. Indexing a page full of
+ * [CONTENT REQUIRED] markers would put those markers in search results, which
+ * is a worse first impression than not being indexed at all.
  */
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Link from '../components/Link.astro';
+import Hero from '../components/home/Hero.astro';
+import DeliveryThreadStrip from '../components/home/DeliveryThreadStrip.astro';
+import SelectedWork from '../components/home/SelectedWork.astro';
+import ExperienceTeaser from '../components/home/ExperienceTeaser.astro';
 import { site } from '../data/site';
+import { experience } from '../data/experience';
+
+const projects = (await getCollection('work')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const featured = projects.filter((p) => p.data.featured);
+
+// Fall back to all projects if none are flagged featured — an empty
+// "Selected work" section when projects exist would be a silent bug.
+const selected = featured.length > 0 ? featured : projects;
+
+// The page is ready to index only when it has the positioning line AND at
+// least one case study. Both are content, not code.
+const hasRealContent = site.positioning !== null && projects.length > 0;
 ---
 
-<BaseLayout title={site.name} noindex prose>
-  <h1>{site.name}</h1>
-  <p class="lead">{site.role}</p>
-  <p>
-    Requirements to release, and everything after.
-    <!-- [VERIFY INFORMATION] Positioning line (CG-09) not yet chosen — this is
-         Option 3 from PHASE-1-DISCOVERY.md §10.1, shown as a placeholder only.
-         Replace in CHUNK 08 with whichever option Raymund picks. -->
-  </p>
-  <p>
-    This site is under construction. The foundation, security headers, design
-    system and global shell are in place. Content follows.
-  </p>
-  <p>
-    <Link href="/styleguide">View the design system</Link>
-  </p>
-</BaseLayout>
+<BaseLayout
+  title={site.name}
+  description={site.positioning ?? undefined}
+  noindex={!hasRealContent}
+>
+  <Hero positioning={site.positioning} availability={site.availability} />
 
-<style>
-  .lead {
-    font-size: var(--text-lg);
-    color: var(--text-muted);
-  }
-</style>
+  <DeliveryThreadStrip />
+
+  <SelectedWork projects={selected} totalCount={projects.length} />
+
+  <ExperienceTeaser roles={experience} />
+</BaseLayout>

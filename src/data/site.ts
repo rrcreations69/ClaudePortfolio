@@ -14,6 +14,14 @@ export interface SiteConfig {
   readonly name: string;
   readonly shortName: string;
   readonly role: string;
+  /**
+   * The positioning line (CG-09). NULL until Raymund picks one — the hero
+   * renders a visible [CONTENT REQUIRED] marker rather than inventing copy or
+   * quietly omitting the one sentence it exists to deliver.
+   */
+  readonly positioning: string | null;
+  /** Location and availability (CG-08). Sourced from his CV. */
+  readonly availability: string | null;
   readonly url: string;
   readonly nav: readonly NavItem[];
   readonly resumeHref: string;
@@ -24,6 +32,18 @@ export const site: SiteConfig = {
   name: 'Raymund Ryan Bermudes',
   shortName: 'Raymund Bermudes',
   role: 'Solutions Analyst & Enterprise Systems Developer',
+
+  // [CONTENT REQUIRED] CG-09. Three drafts in notes/ANSWERS-NEEDED.md §B2.
+  // The originals in PHASE-1-DISCOVERY.md all led with Android and are stale
+  // after D15. Stays null until Raymund chooses; nothing is invented here.
+  positioning: null,
+
+  // Sourced verbatim in substance from his CV: "Cavite, Philippines" and
+  // "Open to full relocation to Europe, UK, or the US." Not paraphrased into
+  // anything stronger than he wrote, and no visa claim is made beyond his own
+  // wording — the CV says he is available for sponsorship DISCUSSIONS.
+  availability:
+    'Cavite, Philippines — open to relocation to Europe, the UK or the US.',
 
   // Per D9 the site stays on *.vercel.app permanently. Must match
   // `site` in astro.config.mjs.

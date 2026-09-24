@@ -1,0 +1,116 @@
+---
+/**
+ * ExperienceTeaser — a condensed timeline on the home page.
+ *
+ * Shows the most recent roles only; /about carries the full history. Both read
+ * from the same `experience` array, so the teaser can never disagree with the
+ * full timeline — and neither can disagree with the CV, because the array is
+ * transcribed from it.
+ *
+ * A real <ol>: employment history is ordered, and that ordering is meaningful.
+ */
+import type { Role } from '../../data/experience';
+import Link from '../Link.astro';
+
+interface Props {
+  roles: readonly Role[];
+  /** How many to show before deferring to /about. */
+  limit?: number;
+}
+
+const { roles, limit = 3 } = Astro.props;
+const shown = roles.slice(0, limit);
+const hasMore = roles.length > shown.length;
+
+/** "Jan 2024 – present" — never computed, never estimated. */
+function period(role: Role): string {
+  return role.end ? `${role.start} – ${role.end}` : `${role.start} – present`;
+}
+---
+
+<section class="exp" aria-labelledby="exp-heading">
+  <h2 id="exp-heading" class="exp__heading">Experience</h2>
+
+  {
+    shown.length > 0 ? (
+      <>
+        <ol class="exp__list">
+          {shown.map((role) => (
+            <li class="exp__item">
+              <p class="exp__period">{period(role)}</p>
+              <h3 class="exp__title">{role.title}</h3>
+              <p class="exp__org">
+                {role.org} · {role.location}
+              </p>
+            </li>
+          ))}
+        </ol>
+        <p class="exp__more">
+          <Link href="/about">
+            {hasMore ? 'Full history and skills' : 'More about how I work'}
+          </Link>
+        </p>
+      </>
+    ) : (
+      <p class="exp__pending">
+        <strong>[CONTENT REQUIRED]</strong> Employment history (CG-05). The
+        exact roles, employers and dates are already known from Raymund's CV and
+        recorded in <code>notes/CV-FINDINGS.md</code> — they simply have not been
+        transcribed into <code>src/data/experience.ts</code> yet. This is CHUNK
+        10. Dates will not be approximated.
+      </p>
+    )
+  }
+</section>
+
+<style>
+  .exp {
+    padding-block: var(--space-16);
+    border-block-start: var(--border-width) solid var(--border);
+  }
+
+  .exp__heading {
+    font-size: var(--text-xl);
+  }
+
+  .exp__list {
+    display: grid;
+    gap: var(--space-8);
+    list-style: none;
+    padding: 0;
+    margin-block-start: var(--space-8);
+    max-width: var(--width-prose);
+  }
+
+  .exp__period {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  .exp__title {
+    margin-block-start: var(--space-1);
+    font-size: var(--text-lg);
+  }
+
+  .exp__org {
+    margin-block-start: var(--space-1);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .exp__more {
+    margin-block-start: var(--space-8);
+  }
+
+  .exp__pending {
+    max-width: var(--width-prose);
+    margin-block-start: var(--space-6);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+</style>

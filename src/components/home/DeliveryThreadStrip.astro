@@ -1,0 +1,112 @@
+---
+/**
+ * DeliveryThreadStrip — the home-page half of the signature element.
+ *
+ * A compact, CSS-only strip of the delivery stages. It is the site's whole
+ * thesis in one line: this is someone who spans requirement to support, not
+ * someone who only writes code.
+ *
+ * NO JAVASCRIPT and no links. On a case study the thread navigates; here it
+ * only states the span, and a link per stage would lead nowhere useful. It is
+ * therefore an ordered list, not a nav — <ol> because the order is the point.
+ *
+ * Non-negotiable: nothing here is hidden pending an animation. There is no
+ * entry animation at all, per the plan's rule against animating above the fold.
+ */
+import {
+  HOME_THREAD_STAGES,
+  HOME_THREAD_UNCONFIRMED,
+  STAGE_LABEL,
+} from '../../lib/caseStudy.ts';
+---
+
+<section class="strip" aria-labelledby="strip-heading">
+  <h2 id="strip-heading" class="strip__heading">How I work</h2>
+  <p class="strip__lead">
+    Every engagement below runs the same way. Each case study is labelled with
+    the stages it actually covered — not the ones it could have.
+  </p>
+
+  <ol class="strip__list">
+    {
+      HOME_THREAD_STAGES.map((stage) => (
+        <li class="strip__item">{STAGE_LABEL[stage]}</li>
+      ))
+    }
+  </ol>
+
+  {
+    HOME_THREAD_UNCONFIRMED && (
+      <p class="strip__pending">
+        <strong>[VERIFY INFORMATION]</strong> Stage list unconfirmed (question
+        B1). "Design" is the only stage not in Raymund's stated experience — his
+        CV describes collaborating <em>with</em> UI/UX and resolving UI
+        inconsistencies through engineering review. This strip is a public claim
+        about what he does, so it must not list a stage he does not own. Drop to
+        seven stages, or confirm.
+      </p>
+    )
+  }
+</section>
+
+<style>
+  .strip {
+    padding-block: var(--space-16);
+    border-block-start: var(--border-width) solid var(--border);
+  }
+
+  .strip__heading {
+    font-size: var(--text-xl);
+  }
+
+  .strip__lead {
+    max-width: var(--width-prose);
+    margin-block-start: var(--space-3);
+    color: var(--text-muted);
+  }
+
+  .strip__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin-block-start: var(--space-8);
+    /* Counter drives the numbering, so the visible order cannot drift from
+       the list order. */
+    counter-reset: stage;
+  }
+
+  .strip__item {
+    counter-increment: stage;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+    background-color: var(--surface);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text);
+  }
+
+  /* Drawn, not typed: a screen reader already announces list position, so
+     spoken numbering here would be said twice. */
+  .strip__item::before {
+    content: counter(stage);
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .strip__pending {
+    max-width: var(--width-prose);
+    margin-block-start: var(--space-8);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+</style>

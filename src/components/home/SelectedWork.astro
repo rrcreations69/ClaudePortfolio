@@ -1,0 +1,97 @@
+---
+/**
+ * SelectedWork — featured case studies on the home page.
+ *
+ * Reuses ProjectCard exactly as the /work index does, so the two can never
+ * drift apart in what they show or how they show it. Headings drop to h3
+ * because this section already has an h2.
+ */
+import type { CollectionEntry } from 'astro:content';
+import ProjectCard from '../work/ProjectCard.astro';
+import ProjectGrid from '../work/ProjectGrid.astro';
+import Link from '../Link.astro';
+
+interface Props {
+  projects: CollectionEntry<'work'>[];
+  /** Everything in the collection, so "see all" can be honest about the count. */
+  totalCount: number;
+}
+
+const { projects, totalCount } = Astro.props;
+const hasMore = totalCount > projects.length;
+---
+
+<section class="selected" aria-labelledby="selected-heading">
+  <h2 id="selected-heading" class="selected__heading">Selected work</h2>
+
+  {
+    projects.length > 0 ? (
+      <>
+        <div class="selected__grid">
+          <ProjectGrid>
+            {projects.map((project) => (
+              <li>
+                <ProjectCard
+                  slug={project.data.slug}
+                  title={project.data.title}
+                  clientDescriptor={project.data.clientDescriptor}
+                  disclosure={project.data.disclosure}
+                  period={project.data.period}
+                  problem={project.data.problem}
+                  myRole={project.data.myRole}
+                  outcome={project.data.outcome}
+                  stack={project.data.stack}
+                  headingLevel={3}
+                />
+              </li>
+            ))}
+          </ProjectGrid>
+        </div>
+
+        {hasMore && (
+          <p class="selected__more">
+            <Link href="/work">See all {totalCount} case studies</Link>
+          </p>
+        )}
+      </>
+    ) : (
+      <p class="selected__pending">
+        <strong>[CONTENT REQUIRED]</strong> No case studies exist yet (CG-01,
+        CG-02). This is CHUNK 07, blocked on CHUNK 00. Nothing is placeheld
+        here: a fabricated case study on the home page would be the single most
+        damaging thing this site could contain.
+      </p>
+    )
+  }
+</section>
+
+<style>
+  .selected {
+    padding-block: var(--space-16);
+    border-block-start: var(--border-width) solid var(--border);
+  }
+
+  .selected__heading {
+    font-size: var(--text-xl);
+  }
+
+  .selected__grid {
+    max-width: var(--width-wide);
+    margin-block-start: var(--space-8);
+  }
+
+  .selected__more {
+    margin-block-start: var(--space-8);
+  }
+
+  .selected__pending {
+    max-width: var(--width-prose);
+    margin-block-start: var(--space-6);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+</style>

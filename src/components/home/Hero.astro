@@ -1,0 +1,143 @@
+---
+/**
+ * Hero — CHUNK 08.
+ *
+ * Answers the first three recruiter questions above the fold: who this is,
+ * what he does, and where he is. Nothing else. No decorative graphic, no
+ * scroll cue, no animated entrance — the plan forbids entry animation on the
+ * hero, and a static hero is what makes LCP trivial to hit.
+ *
+ * `[CONTENT REQUIRED]` markers render VISIBLY when content is missing. A
+ * missing positioning line must look broken, because a hero that silently
+ * omits the one sentence it exists to deliver is worse than one that says it
+ * is unfinished.
+ */
+import Link from '../Link.astro';
+import { site } from '../../data/site';
+
+interface Props {
+  /** The positioning line (CG-09). Null until Raymund picks one. */
+  positioning: string | null;
+  /** Location and availability (CG-08), sourced from the CV. */
+  availability: string | null;
+}
+
+const { positioning, availability } = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-name">
+  <h1 id="hero-name" class="hero__name">{site.name}</h1>
+  <p class="hero__role">{site.role}</p>
+
+  {
+    positioning ? (
+      <p class="hero__positioning">{positioning}</p>
+    ) : (
+      <p class="hero__pending">
+        <strong>[CONTENT REQUIRED]</strong> Positioning line (CG-09). Three
+        drafts are in <code>notes/ANSWERS-NEEDED.md</code> §B2. The earlier
+        drafts led with Android and are stale after D15.
+      </p>
+    )
+  }
+
+  {
+    availability ? (
+      <p class="hero__availability">{availability}</p>
+    ) : (
+      <p class="hero__pending">
+        <strong>[CONTENT REQUIRED]</strong> Location and availability (CG-08).
+        Recruiters filter on this first.
+      </p>
+    )
+  }
+
+  <p class="hero__actions">
+    <Link href="/work" class="hero__cta">See the work</Link>
+    <Link href="/contact" class="hero__link">Get in touch</Link>
+  </p>
+</section>
+
+<style>
+  .hero {
+    max-width: var(--width-prose);
+    /* No top padding beyond the layout's own: the name should be visible
+       without scrolling at 375x667, which is the plan's stated bar. */
+    padding-block-end: var(--space-16);
+  }
+
+  .hero__name {
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .hero__role {
+    margin-block-start: var(--space-3);
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+  }
+
+  /* The one sentence a recruiter reads. Given weight by size and measure,
+     not by colour — accent is not decoration. */
+  .hero__positioning {
+    margin-block-start: var(--space-8);
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+  }
+
+  .hero__availability {
+    margin-block-start: var(--space-4);
+    color: var(--text-muted);
+  }
+
+  .hero__pending {
+    margin-block-start: var(--space-6);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-6);
+    margin-block-start: var(--space-8);
+  }
+
+  .hero__cta {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    padding-inline: var(--space-6);
+    border: var(--border-width) solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+  }
+
+  .hero__cta:hover {
+    background-color: var(--surface);
+    border-color: var(--text);
+    text-decoration: none;
+  }
+
+  .hero__link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+  }
+
+  @media (min-width: 768px) {
+    .hero__role {
+      font-size: var(--text-xl);
+    }
+
+    .hero__positioning {
+      font-size: var(--text-xl);
+    }
+  }
+</style>

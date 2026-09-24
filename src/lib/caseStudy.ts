@@ -103,3 +103,26 @@ export function buildThread(
       };
     });
 }
+
+/**
+ * The stages shown on the home page strip.
+ *
+ * ⚠️ THIS IS A PUBLIC CLAIM, not a diagram. The strip says "these are the
+ * stages I work across". If Raymund does not own design work, listing Design
+ * here is a false claim about him — which is why the open question matters
+ * more on the home page than it does on a case study, where stages are per
+ * project and simply go unlit.
+ *
+ * Derived from DELIVERY_STAGES so there is one list, not two. To drop to
+ * seven stages, filter 'design' out here — one line, one place.
+ */
+export const HOME_THREAD_STAGES: readonly DeliveryStage[] = DELIVERY_STAGES;
+
+/**
+ * Is the stage list still awaiting confirmation?
+ *
+ * While this is true the home page renders a visible [VERIFY INFORMATION]
+ * note beside the strip. Set it to false once Raymund confirms — and remove
+ * 'design' above if the answer is that he does not own design work.
+ */
+export const HOME_THREAD_UNCONFIRMED = true;
