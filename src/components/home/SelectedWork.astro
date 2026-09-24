@@ -84,6 +84,13 @@ const hasMore = totalCount > projects.length;
     margin-block-start: var(--space-8);
   }
 
+  /* Standalone navigational link — same >=44px rule as .exp__more. */
+  .selected__more :global(a) {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+  }
+
   .selected__pending {
     max-width: var(--width-prose);
     margin-block-start: var(--space-6);

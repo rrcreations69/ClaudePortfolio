@@ -447,7 +447,7 @@ CHUNK 00 blocks **only** CHUNK 07. Build 01–06 in parallel with the writing.
 | 09 | Home — thread, selected work, experience teaser | Not Started | 05, 06 |
 | 10 | About — story, timeline, skills | Not Started | 03, employment/skills content |
 | 11 | Contact + resume | Not Started | 03, resume PDF, D6, D7 |
-| 12 | Responsive + dark mode | Not Started | 07, 09, 11 |
+| 12 | Responsive + dark mode | **COMPLETE** | — |
 | 13 | Accessibility | Not Started | 12 |
 | 14 | Performance | Not Started | 12 |
 | 15 | SEO + custom domain | Not Started | D9 |

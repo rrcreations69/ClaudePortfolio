@@ -47,6 +47,24 @@ export default ts.config(
   },
 
   {
+    /**
+     * Files under public/ are served straight to the browser — they are not
+     * bundled, so they need browser globals declared. Only the handful
+     * actually used is listed, so a typo in a global name is still an error.
+     */
+    files: ['public/**/*.js'],
+    languageOptions: {
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        localStorage: 'readonly',
+        matchMedia: 'readonly',
+        console: 'readonly',
+      },
+    },
+  },
+
+  {
     // Build-time scripts run in Node and legitimately write to stdout — that
     // is their entire output channel.
     files: ['scripts/**/*.ts', '*.config.{js,mjs,ts}'],

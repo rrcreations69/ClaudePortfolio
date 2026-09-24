@@ -15,6 +15,7 @@
  * reach, so it is not built. The island budget drops from four to three.
  */
 import Link from './Link.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { site, isCurrentPath } from '../data/site';
 
 interface Props {
@@ -32,7 +33,8 @@ const pathname = Astro.url.pathname;
       {site.shortName}
     </Link>
 
-    <nav class="site-header__nav" aria-label="Main">
+    <div class="site-header__end">
+      <nav class="site-header__nav" aria-label="Main">
       <ul class="site-header__list">
         {site.nav.map((item) => {
           const current = isCurrentPath(item.href, pathname);
@@ -56,7 +58,12 @@ const pathname = Astro.url.pathname;
           </li>
         )}
       </ul>
-    </nav>
+      </nav>
+
+      {/* Outside the nav: it is chrome, not a destination, so it must not be
+          announced as a fourth navigation item. */}
+      <ThemeToggle />
+    </div>
   </div>
 </header>
 
@@ -73,6 +80,14 @@ const pathname = Astro.url.pathname;
     justify-content: space-between;
     gap: var(--space-2) var(--space-6);
     padding-block: var(--space-4);
+  }
+
+  /* Nav and theme toggle travel together, so the toggle stays beside the nav
+     at every width instead of becoming a stray third element. */
+  .site-header__end {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
   }
 
   /* The name is the home link. Deliberately not accent-coloured — accent is
@@ -165,8 +180,16 @@ const pathname = Astro.url.pathname;
       gap: var(--space-2);
     }
 
-    .site-header__nav {
+    /* The whole group takes its own row; the nav expands and the toggle sits
+       at its end. This is the entire "mobile menu". */
+    .site-header__end {
       inline-size: 100%;
+      gap: var(--space-2);
+    }
+
+    .site-header__nav {
+      flex: 1;
+      min-inline-size: 0;
     }
 
     .site-header__list {

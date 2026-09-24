@@ -103,6 +103,15 @@ function period(role: Role): string {
     margin-block-start: var(--space-8);
   }
 
+  /* A standalone navigational link, not a link inside a sentence, so it
+     carries the same >=44px target rule as any other control. Found at 22px
+     high during the CHUNK 12 responsive pass. */
+  .exp__more :global(a) {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+  }
+
   .exp__pending {
     max-width: var(--width-prose);
     margin-block-start: var(--space-6);
