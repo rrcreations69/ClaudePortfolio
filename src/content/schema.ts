@@ -103,10 +103,18 @@ const workBase = z.object({
   period: z.object({ start: z.string(), end: z.string().optional() }),
 
   /**
-   * Drives the Delivery Thread rail. Self-reported, and the schema cannot
-   * verify it — but it is *specific* self-reporting, per project, shown side
-   * by side, which is harder to inflate than a paragraph. A project where
-   * only development was owned lights fewer stages than one taken end to end.
+   * Which delivery stages this project covered.
+   *
+   * Rendered by `StageCoverage`, in the case study header. It does NOT drive
+   * the Delivery Thread rail — that is built from the rendered headings. The
+   * original comment here claimed it did, and was wrong; between CHUNK 04 and
+   * 2026-09-24 this field rendered nowhere at all.
+   *
+   * Self-reported, and the schema cannot verify it — but it is *specific*
+   * self-reporting, per project, shown side by side, which is harder to
+   * inflate than a paragraph. A project where only development was owned
+   * lights fewer stages than one taken end to end, and the uncovered stages
+   * stay visible so the difference is legible.
    */
   stages: z.array(z.enum(DELIVERY_STAGES)).default([]),
 

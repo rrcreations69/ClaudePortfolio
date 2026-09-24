@@ -11,8 +11,10 @@
  * addressed is a job description rather than evidence.
  */
 import ProjectMeta from '../work/ProjectMeta.astro';
+import StageCoverage from './StageCoverage.astro';
 import Tag from '../work/Tag.astro';
 import type { DISCLOSURE_TIERS } from '../../content/schema.ts';
+import type { DeliveryStage } from '../../lib/caseStudy.ts';
 
 interface Props {
   title: string;
@@ -22,10 +24,19 @@ interface Props {
   problem: string;
   myRole: string;
   stack: readonly string[];
+  stages: readonly DeliveryStage[];
 }
 
-const { title, clientDescriptor, disclosure, period, problem, myRole, stack } =
-  Astro.props;
+const {
+  title,
+  clientDescriptor,
+  disclosure,
+  period,
+  problem,
+  myRole,
+  stack,
+  stages,
+} = Astro.props;
 ---
 
 <header class="head">
@@ -44,6 +55,11 @@ const { title, clientDescriptor, disclosure, period, problem, myRole, stack } =
     <dt>My role</dt>
     <dd class="head__role">{myRole}</dd>
   </dl>
+
+  {/* Placed after My Role, before Stack: a recruiter reads what the problem
+      was, what he personally did, then how much of the delivery he carried.
+      Stack is the least important of the four and goes last. */}
+  {stages.length > 0 && <StageCoverage stages={stages} />}
 
   {stack.length > 0 && (
     <>
