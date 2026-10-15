@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           # Matches `engines.node` in package.json. Astro 7 requires >=22.12.0.
           node-version: '22.12'
