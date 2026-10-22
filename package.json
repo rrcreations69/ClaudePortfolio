@@ -23,10 +23,10 @@
     "make:og": "node scripts/make-og-image.ts"
   },
   "dependencies": {
-    "@astrojs/mdx": "^8.0.2",
+    "@astrojs/mdx": "^8.1.0",
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.3.3",
+    "astro": "^7.4.1",
     "tailwindcss": "^4.3.3",
     "zod": "^4.6.5"
   },
@@ -34,7 +34,7 @@
     "esbuild": true
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.11",
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.6.2",
     "astro-eslint-parser": "^3.1.0",
